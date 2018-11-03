@@ -1,0 +1,233 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Unit Maintenance Inspection</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-body">
+                                     <div class="table-responsive">
+                                        <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead class=" text-primary">
+                                                <th>Unit Type</th>
+                                                <th>Plate Number</th>
+                                                <th>Schedule</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-default" type="button" data-toggle="modal" data-target="#myModal3" >
+                                                        <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                     <!-- Modal  -->
+                    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Inspection Form</h5>
+                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                    </button>
+                                </div>
+                                <form id="edit_form" action="/admin/maintenance/brand/edit" method="POST">
+                                <div class="modal-body">
+                                    <fieldset>
+                                        <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_1" name="brake">
+                                                            <label for="chk_1">
+                                                                Brake
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_2" name="lights">
+                                                            <label for="chk_2">
+                                                                Lights
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_3" name="mirror">
+                                                            <label for="chk_3">
+                                                                Mirror
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="chk_4" name="horn">
+                                                            <label for="chk_4">
+                                                                Horn
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_5" name="tires">
+                                                            <label for="chk_5">
+                                                                Tires
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_6" name="seatbelts">
+                                                            <label for="chk_6">
+                                                                Seatbelts
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_7" name="cliness">
+                                                            <label for="chk_7">
+                                                                Cleanliness
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_8" name="doors">
+                                                            <label for="chk_8">
+                                                                Doors
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_9" name="bcondition">
+                                                            <label for="chk_9">
+                                                                Body Condition
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input   type="checkbox" id="chk_10" name="smechanism">
+                                                            <label for="chk_10">
+                                                                Steering Mechanism
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input   type="checkbox" id="chk_11" name="aconditioning">
+                                                            <label for="chk_11">
+                                                                Air Conditioning
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </fieldset>
+                                </div>
+                                <hr>
+                                <div class="modal-footer">
+                                    <button type="button"style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal  -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        ajax = new XMLHttpRequest()
+
+        function typedef( par ) {
+            p = document.getElementById( par )
+            el = p.elements
+            ut = el.utype
+            b = el.brand
+            b.innerHTML = ""
+
+            ajax.onreadystatechange = () => {
+                if( ajax.readyState == 4 ) {
+                    res = ajax.responseText.split( ";" )
+                    res.forEach( cur => {
+                        cur = cur.split( ", " )
+                        b.innerHTML += '<option value="' + cur[0] + '">' + cur[1] + '</option>'
+                    })
+                }
+            }
+
+            ajax.open( "GET", "/admin/maintenance/unit/typedef?utype=" + ut.value )
+            ajax.send()
+        }
+
+        function expand_info( par ) {
+            p = document.getElementById( par )
+            f = document.getElementById( "infos" )
+            el = f.elements
+
+            el.chassino.value = p.children.chassino.innerHTML
+            el.engineno.value = p.children.engineno.innerHTML
+            el.bodyno.value = p.children.bodyno.innerHTML
+            el.capt.value = p.children.capt.innerHTML
+            el.rreg.value = p.children.rreg.innerHTML
+        }
+
+        function filter() {
+            d = document.getElementById( "data" ).children
+            f = document.getElementById( "utype" ).value
+            h = document.createAttribute( "hidden" )
+
+            for( x = 0; x < d.length; x ++ ){
+                if( f == "All" ) {
+                    if( d[x].hasAttribute( "hidden" ) )
+                        d[x].removeAttribute( "hidden" )                    
+                } else if( d[x].children.dutype.innerHTML == f ) {
+                    if( d[x].hasAttribute( "hidden" ) )
+                        d[x].removeAttribute( "hidden" )
+                } else {
+                    d[x].setAttribute( "hidden", "true" )
+                }
+            }
+        }
+    </script>
+</body>
+
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        
+        $('#unitmaintenance').addClass('active');
+    })
+</script>

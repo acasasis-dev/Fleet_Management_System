@@ -1,0 +1,223 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+        <div class="panel-header panel-header-sm">
+        </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row"> 
+                                <h2 class="title">&nbsp Staff Information</h2>
+                                 <div class="form-check" style="float:right">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" id="sccb"/>
+                                        <span class="form-check-sign"></span>
+                                        Edit
+                                    </label>
+                                 </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form id="expand_info" method="POST" action="/admin/maintenance/staffinfo">
+                                    <input type="hidden" name="id" value="<%= id %>">
+                                    <% console.log(staff_info) %>
+                                    <% staff_info.forEach( cur => { %>
+                                    <center>
+                                    <h5>Basic Information</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" id="fname" name="fname" disabled="" value="<%= cur.staff_fn %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Middle Name</label>
+                                                <input type="text" id="mname" name="mname" class="form-control" disabled="" value="<%= cur.staff_mn %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" id="lname" name="lname"  class="form-control" disabled="" value="<%= cur.staff_ln %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Birthday</label>
+                                                <% ms = new Date( cur.staff_bday ) %>
+                                                <% bday = String( ms.getFullYear() ) + "-" + String( ms.getMonth() < 10? "0" + ms.getMonth(): ms.getMonth() ) + "-" + String( ms.getDate() < 10? "0" + ms.getDate(): ms.getDate() ) %>
+                                                <input type="date" id="bday" name="bday" class="form-control" disabled="" value="<%= bday %>" onchange="calc_age()">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Age</label>
+                                                <% age = Math.round( Math.round( ( new Date().getTime() - new Date( cur.staff_bday ).getTime() ) / ( 1000 * 60 * 60 * 24 ) ) / 365 ); console.log( age ) %>
+                                                <input type="number" id="age" name="age" class="form-control" disabled="" value="<%= age %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <select id="gender" name="gender" class="form-control" disabled="">
+                                                    <% [ "Male", "Female" ].forEach( s => { %>
+                                                        <% if( s == cur.driver_sex ) { %>
+                                                            <option value="<%= cur.driver_sex %>" selected><%= cur.driver_sex %></option>
+                                                        <% } else { %>
+                                                            <option value="<%= s %>"><%= s %></option>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" id="address" name="address" class="form-control" disabled="" value="<%= cur.staff_address %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contact Number</label>
+                                                <input type="text" id="contact" name="contact" class="form-control" disabled="" value="<%= cur.staff_contact %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <center>
+                                    <h5>Staff Details</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Staff Type</label>
+                                                <select id="stype" name="stype" class="form-control" disabled="">
+                                                    <% staff_types.forEach( st => { %>
+                                                        <% if( st.staff_type_id == cur.staff_type_id ) { %>
+                                                            <option value="<%= cur.staff_type_id %>" selected><%= cur.staff_type_desc %></option>
+                                                        <% } else { %>
+                                                            <option value="<%= st.staff_type_id %>"><%= st.staff_type_desc %></option>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <center>
+                                    <% }) %>
+                                    <button id="submit" type="submit" style="float:right" class="btn btn-info" disabled="">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="image">
+                                <!-- <img src="/assets/img//bg5.jpg" alt="..."> -->
+                            </div>
+                            <div class="card-body">
+                                <div class="author">
+                                    <a href="#">
+                                        <img class="" src="/assets/img/KP.jpg" alt="...">
+                                        <h5 class="title"></h5>
+                                    </a>
+                                    <p class="description">
+                                      
+                                    </p>
+                                </div>
+                                <p class="description text-center">
+                                    
+                                </p>
+                            </div>
+                            <!-- <hr>
+                            <div class="button-container">
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <% include templates/functions %>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#sccb').click(function(){
+            if (this.checked) {
+                $('#fname').removeAttr("disabled");
+                $('#mname').removeAttr("disabled");
+                $('#lname').removeAttr("disabled");
+                $('#bday').removeAttr("disabled");
+                $('#gender').removeAttr("disabled");
+                $('#address').removeAttr("disabled");
+                $('#contact').removeAttr("disabled");
+                $('#stype').removeAttr("disabled");
+                $('#submit').removeAttr("disabled");                
+            } else {
+                $('#fname').attr("disabled", true);
+                $('#mname').attr("disabled", true);
+                $('#lname').attr("disabled", true);
+                $('#bday').attr("disabled", true);
+                $('#gender').attr("disabled", true);
+                $('#address').attr("disabled", true);
+                $('#contact').attr("disabled", true);
+                $('#stype').attr("disabled", true);
+                $('#submit').attr("disabled", true);
+            }
+        });
+    });
+
+    function calc_age() {
+        el = document.getElementById( "expand_info" ).elements
+        age = Math.round( Math.round( ( new Date().getTime() - new Date( el.bday.value ).getTime() ) / ( 1000 * 60 * 60 * 24 ) ) / 365 )
+        el.age.value = age
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#maintenance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#maintenance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#maintenance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesMaintenance.collapse').addClass('show');
+        
+        $('#staff').addClass('active');
+    })
+</script>
+<script>
+    <%if( edited == 1 ) { %>
+        document.getElementById( "sccb" ).click()
+        swal({
+            title: "Staff Successfully Edited!",
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            type: "success"
+        }).catch(swal.noop)
+        <% } %>
+</script>
+</body>

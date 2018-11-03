@@ -1,0 +1,602 @@
+<% include templates/footer %>
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="utf-8" />
+    <link  sizes="76x76" href="/assets/img/matt-logo.png">
+    <link rel="icon" type="image/png" href="../../assets/img/matt logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Fleet Management System</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+         <!-- Fonts and icons     -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">   -->
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome-free-5.2.0-web/css/fontawesome.min">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+     <link href="/assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" /> 
+    <link href="/assets/css/now-ui-dashboard.min69ea.css" rel="stylesheet" />
+       <link href="/assets/css/now-ui-kit.css?v=1.0.1" rel="stylesheet" />   
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/assets/demo/demo.css" rel="stylesheet" />
+    <link href="/assets/css/fullcalendar.min.css" rel="stylesheet" />
+    <link href="/assets/css/schedule.css" rel="stylesheet" />
+
+    <link href="/assets/css/use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+</head>
+        <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary ">
+	<div class="container-fluid">
+    <div class="navbar-wrapper">
+			<div class="navbar-toggle">
+				<button type="button" class="navbar-toggler">
+					<span class="navbar-toggler-bar bar1"></span>
+					<span class="navbar-toggler-bar bar2"></span>
+					<span class="navbar-toggler-bar bar3"></span>
+				</button>
+			</div>
+			<a class="navbar-brand" href="#pablo">Renting Page</a>
+		</div>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-bar navbar-kebab"></span>
+			<span class="navbar-toggler-bar navbar-kebab"></span>
+			<span class="navbar-toggler-bar navbar-kebab"></span>
+		</button>
+
+	    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+      
+        
+          <ul class="navbar-nav">
+    <li class="nav-item">
+        <a href="../dashboard.html" class="nav-link">
+            <i class="now-ui-icons design_app"></i>
+            Dashboard
+        </a>
+    </li>
+    <li class= "nav-item  active ">
+        <a href="register.html" class="nav-link">
+            <i class="now-ui-icons tech_mobile"></i>
+            Register
+        </a>
+    </li>
+    <li class= "nav-item ">
+        <a href="login.html" class="nav-link">
+            <i class="now-ui-icons users_circle-08"></i>
+            Login
+        </a>
+    </li>
+
+    <li class= "nav-item ">
+        <a href="pricing.html" class="nav-link">
+            <i class="now-ui-icons now-ui-icons business_money-coins"></i>
+            Pricing
+        </a>
+    </li>
+
+    <li class= "nav-item ">
+        <a href="lock.html" class="nav-link">
+            <i class="now-ui-icons ui-1_lock-circle-open"></i>
+            Lock
+        </a>
+    </li>
+</ul>
+
+        
+      
+
+      
+	    </div>
+	</div>
+</nav>
+<!-- End Navbar -->
+<div class="wrapper wrapper-full-page">
+<div class="full-page register-page section-image" filter-color="blue" style="background-image:url(../assets/img/pup.jpg)">
+    <div class="content">
+        <div class="col-md-8 mr-auto ml-auto">
+        <div class="wizard-container">
+            <div class="card card-wizard" data-color="orange" id="wizardProfile">
+                <form action="#" method="">
+        <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+
+                <div class="card-header text-center" data-background-color="black">
+                    <h3 class="card-title">
+                       Rent a Vehicle
+                    </h3>
+                  
+                    <h3 class="description"></h5>
+                      <div class="wizard-navigation">
+                          <ul class="nav nav-pills">
+                              <li class="nav-item">
+                                  <a class="nav-link active" href="#basicinfo" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                    Basic Information
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="#rentingdetails" data-toggle="tab" data-toggle="tab" role="tab" aria-controls="account" aria-selected="false">
+                                    <i class="now-ui-icons ui-1_settings-gear-63"></i>
+                                    Renting Details
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="#assignment" data-toggle="tab" data-toggle="tab" role="tab" aria-controls="address" aria-selected="false">
+                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                    Assignment
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                </div>
+                <form id="add_form" method="POST" action="/admin/maintenance/driver" enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="basicinfo">
+                        <h5 class="info-text">Basic Information</h5>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label class="col-md-12 control-label">First Name*</label>
+                                <div class="input-group form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <i class="now-ui-icons users_circle-08"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="First Name (required)" name="fname" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="col-md-12 control-label">Middle Name</label>
+                                <div class="input-group form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <i class="now-ui-icons users_circle-08"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Middle Name " name="mname">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <label class="col-md-12 control-label">Last Name*</label>
+                                <div class="input-group form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <i class="now-ui-icons text_caps-small"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" placeholder="Last Name (required)" class="form-control" name="lname" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label class="col-md-12 control-label">Age*</label>
+                                <div class="input-group form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <i class="now-ui-icons text_caps-small"></i>
+                                        </div>
+                                    </div>
+                                    <input type="number" placeholder="Age" class="form-control" name="age" required/>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <label class="col-md-12 control-label">Sex</label>
+                                <div class="input-group form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <i class="now-ui-icons text_caps-small"></i>
+                                        </div>
+                                    </div>
+                                    <input type="number" placeholder="Age" class="form-control" name="age" required/>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <label class="col-md-12 control-label">Home Address*</label>
+                                <div class="input-group form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <i class="now-ui-icons text_caps-small"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" placeholder="Address" class="form-control" name="address" required/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label class="col-md-12 control-label">Contact Number*</label>
+                                <div class="input-group form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <i class="now-ui-icons text_caps-small"></i>
+                                        </div>
+                                    </div>
+                                    <input type="number" placeholder="Contact" class="form-control" name="contact" required/>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label class="col-md-12 control-label">Email*</label>
+                                <div class="input-group form-control-lg">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                        <i class="now-ui-icons text_caps-small"></i>
+                                        </div>
+                                    </div>
+                                    <input type="email" placeholder="Email" class="form-control" name="email" required/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="tab-pane fade" id="rentingdetails">
+                            <h5 class="info-text"> Renting Details</h5>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 mt-3">
+                                        <div class="col-lg-4">
+                                            <label class="col-lg-12 control-label">Unit Type Type</label>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="radio">
+                                                        <input type="radio" name="dtype" id="unitname2" value="1" onclick="showHideUnitInfo()">
+                                                        <label for="unitname2">
+                                                            Jeep
+                                                        </label>
+                                                    </div>  
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="radio">
+                                                        <input type="radio" name="dtype" id="unitname1" value="2" onclick="showHideUnitInfo()">
+                                                        <label for="unitname1">
+                                                            Taxi
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="radio">
+                                                        <input type="radio" name="dtype" id="unitname3" value="3" onclick="showHideUnitInfo()">
+                                                        <label for="unitname3">
+                                                            FX
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="radio">
+                                                        <input type="radio" name="dtype" id="unitname4" value="4" onclick="showHideUnitInfo()">
+                                                        <label for="unitname4">
+                                                            UV
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     <!-- <div class="row justify-content-center">
+                                        <fieldset id="unit">
+                                            
+                                        </fieldset>
+                                    </div>  -->
+                                    <fieldset id="unitinfo1" style="display: none;">
+                                    <div class="row justify-content-center">
+                                        <h5>Available Units</h5>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>SWE 1235</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>ETN 5131</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>OTH 1235</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <h5>Available Drivers</h5>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Angelita Sisa</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Dante Wilab</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Jerevon Zulueta</h6>
+                                        </div>
+                                    </div>
+                                    </fieldset>
+                                    <fieldset id="unitinfo2" style="display: none;">
+                                    <div class="row justify-content-center">
+                                        <h5>Available Units</h5>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>ITF 6661</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>PUP 1221</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>ANG 8776</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <h5>Available Drivers</h5>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Roberto Carreon</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Pio Obs</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Joshua Tan</h6>
+                                        </div>
+                                    </div>
+                                    </fieldset>
+                                    <fieldset id="unitinfo3" style="display: none;">
+                                    <div class="row justify-content-center">
+                                        <h5>Available Units</h5>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>JCP 7771</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>PRM 1765</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>DRK 177</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <h5>Available Drivers</h5>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Yanie Exiomo</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Pepsi Cola</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Sir Jose</h6>
+                                        </div>
+                                    </div>
+                                    </fieldset>
+                                    <fieldset id="unitinfo4" style="display: none;">
+                                    <div class="row justify-content-center">
+                                        <h5>Available Units</h5>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>MAY 6125</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>DAS 6131</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>DXS 1284</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <h5>Available Drivers</h5>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Angelito Casasis</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Kristofer Hebrew</h6>
+                                        </div>
+                                        <div class="choice" data-toggle="wizard-checkbox">
+                                            <input type="checkbox" name="jobb" value="Design">
+                                            <div class="icon">
+                                                <img src="/assets/img/matt logo.png"/>
+                                            </div>
+                                            <h6>Rizal Sir</h6>
+                                        </div>
+                                    </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="assignment">
+                            <h5 class="info-text"> Driver Type and Unit Assignment</h5>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 mt-3">
+                                    <label class="col-md-12 control-label">Driver Type</label>
+                                    <div class="radio">
+                                        <input type="radio" name="dtype" id="unitname2" value="1" checked="" onclick="showHideUnitInfo()">
+                                        <label for="unitname2">
+                                            Regular
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="dtype" id="unitname1" value="2" onclick="showHideUnitInfo()">
+                                        <label for="unitname1">
+                                            Reliever
+                                        </label>
+                                    </div>
+                                        <div class="">
+                                            <center>
+                                            <fieldset id="unitinfo"><h5>Unit</h5>
+                                                <div class="col-md-12" >
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Unit Type</label>
+                                                        <div class="col-lg-12">
+                                                            <select id="utype" class="form-control">
+                                                                <option disabled="" selected=""></option>
+                                                                    <option value=""></option>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Route</label>
+                                                        <div class="col-lg-12">
+                                                            <select id="route" class="form-control">
+                                                                <option disabled="" selected=""></option>
+                                                                    <option value=""></option>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Unit</label>
+                                                        <div class="col-lg-12">
+                                                            <select name="unit" id="unit" class="form-control">
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            </center>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <div class="card-footer">
+                    <div class="pull-right">
+                        <input type='button' class='btn btn-next btn-fill btn-rose btn-wd' name='next' value='Next' />
+                        <input type='button' class='btn btn-finish btn-fill btn-rose btn-wd' name='finish' value='Finish' />
+                    </div>
+
+                    <div class="pull-left">
+                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </form>
+        </div>
+    </div> <!-- wizard container -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    function showHideUnitInfo() {
+        if(document.getElementById('unitname2') ) {
+            document.getElementById('unitinfo1').style.display='block';
+        }
+        else if(document.getElementById('unitname1') ) {
+            document.getElementById('unitinfo2').style.display='block';
+        }
+        else if(document.getElementById('unitname3') ) {
+            document.getElementById('unitinfo3').style.display='block';
+        }
+        else if(document.getElementById('unitname4') ) {
+            document.getElementById('unitinfo4').style.display='block';
+        }
+    }
+</script>
+<script>
+  $(document).ready(function(){
+    // Initialise the wizard
+    demo.initNowUiWizard();
+    setTimeout(function(){
+      $('.card.card-wizard').addClass('active');
+    },600);
+  });
+</script> 
+        
+        
+
+</html>

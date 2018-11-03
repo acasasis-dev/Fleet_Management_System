@@ -1,0 +1,428 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Inspection Result</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            Unit Type
+                                        </button>
+                                        <div class="col-lg-3">
+                                            <select class="form-control">
+                                                <option value="" disabled="" selected="">Unit Type</option>
+                                                <option value=""></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>Routes  </th>
+                                            <th>Unit</th>
+                                            <th>Driver</th>
+                                            <th>Result</th>
+                                        </thead>
+                                        <tr>
+                                            <td>Pasig-Quiapo</td>
+                                            <td>ABCD 1234</td>
+                                            <td>Angelito Casasis</td>
+                                            <td>
+                                                <button class="btn btn-success" type="button" data-toggle="modal" data-target="#myModal2">
+                                                    <!-- <i class="now-ui-icons ui-1_zoom-bold"></i>  -->
+                                                    Passed
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Pasig-Quiapo</td>
+                                            <td>ABV 1268</td>
+                                            <td>Sugar Baby</td>
+                                            <td>
+                                                <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#myModal3">
+                                                    <!-- <i class="now-ui-icons ui-1_zoom-bold"></i>  -->
+                                                    Failed
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Inspection Form</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" method="POST" action="" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                        <center>
+                                            <h5>Inspection Result</h5>
+                                        </center>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox1" type="checkbox">
+                                                            <label for="checkbox1">
+                                                                Brake
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox2" type="checkbox">
+                                                            <label for="checkbox2">
+                                                                Lights
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox3" type="checkbox">
+                                                            <label for="checkbox3">
+                                                                Mirror
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox4" type="checkbox">
+                                                            <label for="checkbox4">
+                                                                Horn
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox5" type="checkbox">
+                                                            <label for="checkbox5">
+                                                                Tires
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox6" type="checkbox">
+                                                            <label for="checkbox6">
+                                                                Seatbelts
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox7" type="checkbox">
+                                                            <label for="checkbox7">
+                                                                Cleanliness
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox8" type="checkbox">
+                                                            <label for="checkbox8">
+                                                                Doors
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox9" type="checkbox">
+                                                            <label for="checkbox9">
+                                                                Body Condition
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox10" type="checkbox">
+                                                            <label for="checkbox10">
+                                                                Steering Mechanism
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox11" type="checkbox">
+                                                            <label for="checkbox11">
+                                                                Air Conditioning
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                        <hr>
+                                    </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" style="margin-left:80%" onclick="check( 'edit_form' )">Back</button>
+                                        </div>
+                                        </form>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Inspection Result</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form id="edit_form" method="POST" action="/admin/maintenance/driver/edit" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <fieldset>
+                                            <center>
+                                                <h5>Inspection</h5>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox1" type="checkbox">
+                                                            <label for="checkbox1">
+                                                                Brake
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox2" type="checkbox">
+                                                            <label for="checkbox2">
+                                                                Lights
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox3" type="checkbox">
+                                                            <label for="checkbox3">
+                                                                Mirror
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox4" type="checkbox">
+                                                            <label for="checkbox4">
+                                                                Horn
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox5" type="checkbox">
+                                                            <label for="checkbox5">
+                                                                Tires
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox6" type="checkbox">
+                                                            <label for="checkbox6">
+                                                                Seatbelts
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox7" type="checkbox">
+                                                            <label for="checkbox7">
+                                                                Cleanliness
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox8" type="checkbox">
+                                                            <label for="checkbox8">
+                                                                Doors
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox9" type="checkbox">
+                                                            <label for="checkbox9">
+                                                                Body Condition
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox10" type="checkbox">
+                                                            <label for="checkbox10">
+                                                                Steering Mechanism
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input id="checkbox11" type="checkbox">
+                                                            <label for="checkbox11">
+                                                                Air Conditioning
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <div class="form-group">
+                                                        <label class="col-md-12 control-label">Comment</label>
+                                                        <div class="col-md-12">
+                                                        <textarea rows="4"class="form-control" placeholder="Comment"></textarea>
+                                                        </div></br>
+                                                    </div>
+                                        </fieldset>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal4" >Dispatch</button>
+                                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal5">Repair</button>
+                                                <button type="button" class="btn btn-primary">Back</button>
+                                            </div>
+                                            </form>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5></h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form id="edit_form" method="POST" action="/admin/maintenance/driver/edit" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <fieldset>
+                                                <center>
+                                                <h5 class="text-warning">WARNING!</h5>
+                                                <p class="">Are you sure you want to dispatch?</p>
+                                                </center>
+                                            </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success" >Yes</button>
+                                            <button type="button" class="btn btn-warning">No</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5></h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form id="edit_form" method="POST" action="/admin/maintenance/driver/edit" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <center><h5>Repairing Deadling</h5></center>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <label>Send to:</label>
+                                                    <select class="form-control">
+                                                        <option></option>
+                                                        <option></option>
+                                                        <option></option>
+                                                        <option></option>
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-12 control-label">Date</label>
+                                                    <div class="col-lg-12">
+                                                        <input type="date" class="form-control" placeholder="">
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Comment</label>
+                                                    <div class="col-md-12">
+                                                    <textarea rows="4"class="form-control" placeholder="Comment"></textarea>
+                                                    </div></br>
+                                                </div>
+                                        </fieldset>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success" >Ok</button>
+                                                <button type="button" class="btn btn-primary">Back</button>
+                                            </div>
+                                            </form>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    <!-- End of Modal -->
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+    });
+</script>
+<script src="/assets/js/plugins/bootstrap-switch.js"></script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        // the body of this function is in assets/js/now-ui-kit.js
+        nowuiKit.initSliders();
+    });
+
+    function scrollToDownload() {
+
+        if ($('.section-download').length != 0) {
+            $("html, body").animate({
+                scrollTop: $('.section-download').offset().top
+            }, 1000);
+        }
+    }
+</script>
+
+</html>

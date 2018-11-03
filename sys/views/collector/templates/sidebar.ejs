@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    <meta charset="utf-8" />
+    <link  sizes="76x76" href="/assets/img/matt-logo.png">
+    <link rel="icon" type="image/png" href="/assets/img/matt logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Fleet Management System</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+         <!-- Fonts and icons     -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">   -->
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome-free-5.2.0-web/css/fontawesome.min">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/css/now-ui-dashboard.min69ea.css" rel="stylesheet" />
+    <link href="/assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+    <link href="/assets/css/now-ui-kit.css?v=1.0.1" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/assets/demo/demo.css" rel="stylesheet" />
+    <link href="/assets/css/fullcalendar.min.css" rel="stylesheet" />
+    <link href="/assets/css/schedule.css" rel="stylesheet" />
+    <script>
+        ax = new XMLHttpRequest()
+
+        function check() {
+            ax.onreadystatechange = () => {
+                if( ax.readyState == 4 ) {
+                    if( Number( ax.responseText ) > 0 )
+                        document.getElementById( "ucount" ).innerHTML = ax.responseText
+                }
+            }
+
+            ax.open( "GET", "/collector/notifs/check" )
+            ax.send()
+        }
+
+        function check_notifs() {
+            setInterval( check, 1000 )
+        }        
+    </script>
+</head>
+
+<body class="" onload="check_notifs()">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="white">
+            <div class="logo">
+                <a href="#" class="simple-text logo-normal">
+                    <img src="/assets/img/matt logo.png" alt="Rounded Image" class="rounded" style="width:20%; height:20%;">
+                    Fleet
+                </a>
+                <div class="navbar-minimize">
+                <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round">
+                    <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
+                    <i class="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini"></i>
+                </button>
+            </div>
+            </div>
+
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                     <li id="dash">
+                        <a href="/collector">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li id="dashboard">
+                        <a href="/collector/notifs">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Notifications &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id="ucount" class="badge bg-theme" style="color: white"></span></p>
+                        </a>
+                    </li>  
+                    <li id="recs">
+                        <a data-toggle="collapse" href="#pagesRecords" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons files_box"></i>                  
+                                <p>Records<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesRecords">
+                            <ul class="nav">                       
+                                <li id="boundrec">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/collector/records/boundary">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Boundary Record
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="penrecs">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/collector/records/penalty">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Penalty Record
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="remitpen">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/collector/records/remittance/penalty">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Remittance Penalty
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="remitbound">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/collector/records/remittance/boundary">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Remittance Boundary
+                                            </span>
+                                        </a>
+                                </li> 
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="collec">
+                        <a data-toggle="collapse" href="#pagesCollection" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons business_money-coins"></i>    
+                            <p>Collection<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesCollection">
+                            <ul class="nav">                       
+                                <li id="colbound">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/collector/collections/boundary">
+                                            <i> > </i>            
+                                            <span class="sidebar-normal">
+                                                Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="colpen">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/collector/collections/penalty">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Penalty
+                                            </span>
+                                        </a>
+                                </li> 
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li id="">
+                        <a data-toggle="collapse" href="#pagesLogs" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons business_money-coins"></i>    
+                            <p>Payment Logs<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesLogs">
+                            <ul class="nav">                       
+                                <li id="colbound">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/collector/logs/boundary">
+                                            <i> > </i>            
+                                            <span class="sidebar-normal">
+                                                Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="colpen">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/collector/logs/penalty">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Penalty
+                                            </span>
+                                        </a>
+                                </li> 
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>

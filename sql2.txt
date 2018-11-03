@@ -1,0 +1,20 @@
+drop temporary table if exists plog_temp;
+create temporary table plog_temp as (
+	select
+		sum( a.paid ) as collected,
+		year( b.for_date ) as byear,
+		d.unittype_id
+	from
+		payment_log a join
+		boundary_record b join
+		schedule c join
+		unit d
+	on
+		a.brecord_id=b.brecord_id and
+		b.sched_id=c.sched_id and
+		c.unit_id=d.unit_id
+	group by 
+		d.unittype_id,
+		byear
+);
+select * from plog_temp;

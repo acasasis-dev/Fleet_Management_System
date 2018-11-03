@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#sccb').click(function(){
+        if (this.checked) {
+            $('#cns').removeAttr("disabled");
+            $('#cns2').removeAttr("disabled");
+            $('#cns3').removeAttr("disabled");
+        } else {
+            $("#cns").attr("disabled", true);
+            $("#cns2").attr("disabled", true);
+            $("#cns3").attr("disabled", true);
+        }
+    });
+});
+</script>
+</head>
+<body>
+    <form>
+         <input type="checkbox" id="sccb" name="science" value="science">
+<input type="text" id="cns" name="coornamescience" disabled="disabled" size="30" />
+<input type="text" id="cns2" name="coornamescience" disabled="disabled" size="30" />
+<input type="text" id="cns3" name="coornamescience" disabled="disabled" size="30" />
+    </form>
+</body>
+</html>

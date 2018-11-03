@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Fleet Management System</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+
+    <link href="/assets/css/now-ui-kit.css?v=1.0.1" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../assets/demo/demo.css" rel="stylesheet" />
+</head>
+
+<body class="">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="black" style="color:black;">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+            <div class="logo">
+                <a href="#" class="simple-text logo-mini">
+                    KP
+                </a>
+                <a href="#" class="simple-text logo-normal">
+                    Kingdom Proclaimers
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="">
+                        <a href="../examples/Inspection.html">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Inspection</p>
+                        </a>
+                    </li>  
+                </ul>
+            </div>
+        </div>
+        
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Inspection</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                Shift
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="Dropdown">
+                                            <a class="dropdown-item" href="#">Morning Shift</a>
+                                            <a class="dropdown-item" href="#">Afternoon Shift</a>
+                                            <a class="dropdown-item" href="#">Wholeday Shift</a>
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <button class="btn btn-default dropdown-toggle" style="float:right" data-toggle="dropdown">
+                                            Unit Type
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="Dropdown">
+                                            <a class="dropdown-item" href="#">Jeep</a>
+                                            <a class="dropdown-item" href="#">Taxi</a>
+                                            <a class="dropdown-item" href="#">Bus</a>
+                                            <a class="dropdown-item" href="#">UV</a>
+                                            <a class="dropdown-item" href="#">FX</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>Routes</th>
+                                            <th>Unit</th>
+                                            <th>Driver</th>
+                                            <th>Status</th>
+                                            <th><center>Action</center></th>
+                                        </thead>
+                                        <% inspections.forEach( cur => { %>
+                                        <tr>
+                                            <td><%= cur.route_from + " - " + cur.route_to %></td>
+                                            <td><%= cur.unitplate_no %></td>
+                                            <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                                            <td>
+                                                <% if( cur.u_inspection_status != null ) { %>
+                                                    <% if( cur.u_inspection_status == 1 ) { %>
+                                                        PASSED
+                                                    <% } else { %>
+                                                        FAIL
+                                                    <% } %>
+                                                <% } else { %>
+                                                    UNINSPECTED
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <% if( cur.u_inspection_status == null ) { %>
+                                                <center>
+                                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal2" onclick="put_id( <%= cur.dispatch_inspection_id %> )">
+                                                    <i class="now-ui-icons ui-1_zoom-bold"></i> 
+                                                </button>
+                                                <button class="btn btn-warning" type="button"data-toggle="modal" data-target="#myModal3">
+                                                    <i class="now-ui-icons objects_key-25"></i>
+                                                </button>
+                                                </center>
+                                                <% } else { %>
+                                                    INSPECTED
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    </table>
+                                <button type="submit" class="btn btn-primary" style="float:right">
+                                    Submit
+                                </button>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Inspection Form</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" method="POST" action="/mechanic/dispatch/inspect" enctype="multipart/form-data">
+                                    <input type="hidden" id="diid" name="diid">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                        <center>
+                                            <h5>Inspection</h5>
+                                        </center>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="brake" id="checkbox1" type="checkbox">
+                                                            <label for="checkbox1">
+                                                                Brake
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="lights" id="checkbox2" type="checkbox">
+                                                            <label for="checkbox2">
+                                                                Lights
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="mirror" id="checkbox3" type="checkbox">
+                                                            <label for="checkbox3">
+                                                                Mirror
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="horn" id="checkbox4" type="checkbox">
+                                                            <label for="checkbox4">
+                                                                Horn
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="tires" id="checkbox5" type="checkbox">
+                                                            <label for="checkbox5">
+                                                                Tires
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="seatbelts" id="checkbox6" type="checkbox">
+                                                            <label for="checkbox6">
+                                                                Seatbelts
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="cliness" id="checkbox7" type="checkbox">
+                                                            <label for="checkbox7">
+                                                                Cleanliness
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="doors" id="checkbox8" type="checkbox">
+                                                            <label for="checkbox8">
+                                                                Doors
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="bcondition" id="checkbox9" type="checkbox">
+                                                            <label for="checkbox9">
+                                                                Body Condition
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="smechanism" id="checkbox10" type="checkbox">
+                                                            <label for="checkbox10">
+                                                                Steering Mechanism
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input name="aconditioning" id="checkbox11" type="checkbox">
+                                                            <label for="checkbox11">
+                                                                Air Conditioning
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <hr>
+                                        <center><h5></h5></center>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class=" text-primary">
+                                                    <th></th>
+                                                    <th>High</th>
+                                                    <th>Moderate</th>
+                                                    <th>Low</th>
+                                                </thead>
+                                                <tr>
+                                                    <td>Fuel Level</td>
+                                                    <td><input name="fuel" type="radio" value="High"></td>
+                                                    <td><input name="fuel" type="radio" value="Moderate"></td>
+                                                    <td><input name="fuel" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Engine Oil</td>
+                                                    <td><input name="eoil" type="radio" value="High"></td>
+                                                    <td><input name="eoil" type="radio" value="Moderate"></td>
+                                                    <td><input name="eoil" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Brake Fluid</td>
+                                                    <td><input name="bfluid" type="radio" value="High"></td>
+                                                    <td><input name="bfluid" type="radio" value="Moderate"></td>
+                                                    <td><input name="bfluid" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Battery Charge</td>
+                                                    <td><input name="bcharge" type="radio" value="High"></td>
+                                                    <td><input name="bcharge" type="radio" value="Moderate"></td>
+                                                    <td><input name="bcharge" type="radio" value="Low"></td>
+                                                </tr>
+                                            </table>
+                                            <hr>
+                                            <div class="form-group">
+                                                    <label class="col-md-12 control-label">Comment</label>
+                                                    <div class="col-md-12">
+                                                    <textarea name="comment" rows="4"class="form-control" placeholder="Comment"></textarea>
+                                                    </div></br>
+                                                </div>
+                                        </div>
+                                    </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                        </div>
+                                        </form>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Offenses</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form method="POST" action="" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <fieldset>
+                                            <center>
+                                                <h5>Offenses</h5>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Offense Category</label>
+                                                        <div class="col-lg-12">
+                                                            <select class="form-control">
+                                                                <option disabled="" selected=""></option>
+                                                                <option></option>
+                                                                <option></option>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </center>
+                                                    <div class="col-md-4">
+                                                        <div class="radio">
+                                                            <input type="radio" name="radio1" id="radio1" value="option1">
+                                                            <label for="radio1">
+                                                                1st Offense
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="radio">
+                                                            <input type="radio" name="radio2" id="radio2" value="option2">
+                                                            <label for="radio2">
+                                                                2nd Offense
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="radio">
+                                                            <input type="radio" name="radio3" id="radio3" value="option3">
+                                                            <label for="radio3">
+                                                                3rd Offense
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="radio">
+                                                            <input type="radio" name="radio4" id="radio4" value="option4">
+                                                            <label for="radio4">
+                                                                Final Offense
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                        </fieldset>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" style="margin-left:80%" onclick="check( 'edit_form' )"> Submit </button>
+                                            </div>
+                                            </form>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    <!-- End of Modal -->
+                    
+        </div>
+    </div>
+    <script>
+        function put_id( par ) {
+            ef = document.getElementById( "edit_form" )
+            efel = ef.elements
+
+            efel.diid.value = par
+        }
+    </script>
+</body>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Chart JS -->
+<script src="../assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/demo/demo.js"></script>
+<script>
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+    });
+</script>
+<script src="/assets/js/plugins/bootstrap-switch.js"></script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        // the body of this function is in assets/js/now-ui-kit.js
+        nowuiKit.initSliders();
+    });
+
+    function scrollToDownload() {
+
+        if ($('.section-download').length != 0) {
+            $("html, body").animate({
+                scrollTop: $('.section-download').offset().top
+            }, 1000);
+        }
+    }
+</script>
+
+</html>

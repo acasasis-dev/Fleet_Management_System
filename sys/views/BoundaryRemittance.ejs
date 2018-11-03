@@ -1,0 +1,71 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Boundary Remittance</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    
+                                <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">                                            
+                                            <th>Amount</th>
+                                            <th>Collector</th>
+                                            <th>Date Received</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <% boundary_remittance_records.forEach( cur => { %>
+                                        <tr>
+                                            <td><%= cur.amount %></td>
+                                            <td><%= cur.staff_ln + ", " + cur.staff_fn + " " + cur.staff_mn %></td>
+                                            <% date = !cur.date_received? "Pending" :cur.date_received.toLocaleString() %>
+                                            <td><%= date %></td>
+                                            <td>
+                                                <% if( cur.confirmed != 1 ) { %>
+                                                <form method="POST" action="/admin/remittance/boundary">
+                                                    <input type="hidden" name="id" value="<%= cur.bremittance_id %>">
+                                                    <button class="btn btn-default" type="submit">
+                                                        Collect
+                                                    </button>
+                                                </form>
+                                                <% } else { %>
+                                                    <span class="badge badge-success">Collected</span>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#remittance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#remittance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#remittance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesRemittance.collapse').addClass('show');
+        
+        $('#bound').addClass('active');
+    })
+</script>

@@ -1,0 +1,336 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+        <div class="panel-header panel-header-sm">
+        </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                             <div class="row"> 
+                                <h2 class="title">&nbsp Unit Information</h2>
+                                 <div class="form-check" style="float:right">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" id="sccb"/>
+                                        <span class="form-check-sign"></span>
+                                        Edit
+                                    </label>
+                                </div> 
+                             </div> 
+                            </div>
+                            <div class="card-body">
+                                <form id="expand_info" method="POST" action="/admin/maintenance/unitinfo">
+                                    <input type="hidden" name="id" value="<%= id %>">
+                                    <% unit_info.forEach( cur => { %>
+                                    <% console.log( cur ) %>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Unit Type</label>
+                                                <select id="utype" name="utype" class="form-control" onchange="typedef()" disabled="">
+                                                    <% unit_types.forEach( utype => { %>
+                                                        <% console.log( "UNIT TYPE", utype.unittype_id, utype.unittype_desc, cur.unittype_id, cur.unittype_desc ) %>
+                                                        <% if( utype.unittype_id == cur.unittype_id ) { %>
+                                                            <option value="<%= utype.unittype_id %>" selected><%= utype.unittype_desc %></option>
+                                                        <% } else { %>
+                                                            <option value="<%= utype.unittype_id %>"><%= utype.unittype_desc %></option>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Brand</label>
+                                                <select id="ubrand" name="ubrand" class="form-control" disabled>
+                                                    <option value="<%= cur.brand_id %>"><%= cur.brand_desc %></option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Model</label>
+                                                <input type="text" id="model" name="model"  class="form-control" disabled="" value="<%= cur.unit_model %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Max Capacity</label>
+                                                <input type="number" id="capt" name="capt" class="form-control" disabled="" value="<%= cur.unit_capacity %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Year Acquired</label>
+                                                <input type="number" id="acquired" name="acquired" class="form-control" disabled="" value="<%= cur.unit_acquired %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Warranty Expiration</label>
+                                                <% ms = new Date( cur.unit_warranty ) %>
+                                                <% year = ms.getFullYear() %>
+                                                <% month = ms.getMonth() + 1 %>
+                                                <% month = month < 10? "0" + month: month %>
+                                                <% day = ms.getDate() %>
+                                                <% day = day < 10? "0" + day: day %>
+                                                <% unit_warranty = year + "-" + month + "-" + day %>
+                                                <% console.log( "WARRANTY:", unit_warranty ) %>
+                                                <input type="date" id="warranty" name="warranty" class="form-control" disabled="" value="<%= unit_warranty %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <center>
+                                    <h5>Vehicle Details</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Chassi Number</label>
+                                                <input type="text" id="chassino" name="chassino" class="form-control" disabled="" value="<%= cur.unitchassi_no %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Engine Number</label>
+                                                <input type="text" id="engineno" name="engineno" class="form-control"disabled="" value="<%= cur.unitengine_no %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Body Number</label>
+                                                <input type="text" id="bodyno" name="bodyno" class="form-control" disabled="" value="<%= cur.unitbody_no %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <center>
+                                    <h5>Plate Details</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Plate Number</label>
+                                                <input type="text" id="plateno" name="plateno" class="form-control" disabled="" value="<%= cur.unitplate_no %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Plate Registration</label>
+                                                <% ms = new Date( cur.unit_plate_registration ) %>
+                                                <% year = ms.getFullYear() %>
+                                                <% month = ms.getMonth() + 1 %>
+                                                <% month = month < 10? "0" + month: month %>
+                                                <% day = ms.getDate() %>
+                                                <% day = day < 10? "0" + day: day %>                                                
+                                                <% upregistration = year + "-" + month + "-" + day %>
+                                                <input type="date" id="upregistration" name="upregistration" class="form-control" disabled="" value="<%= upregistration %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <center>
+                                    <h5>Route Details</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Route</label>
+                                                <select id="uroute" name="uroute" class="form-control" disabled="">
+                                                    <% routes.forEach( r => { %>
+                                                        <% if( r.route_id == cur.route_id ) { %>
+                                                            <option value="<%= cur.route_id %>" selected><%= cur.route_from + " - " + cur.route_to %></option>
+                                                        <% } else { %>
+                                                            <option value="<%= r.route_id %>"><%= r.route_from + " - " + r.route_to %></option>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Route Registered</label>                                                
+                                                <% ms = new Date( cur.unitroute_registered ) %>
+                                                <% year = ms.getFullYear() %>
+                                                <% month = ms.getMonth() + 1 %>
+                                                <% month = month < 10? "0" + month: month %>
+                                                <% day = ms.getDate() %>
+                                                <% day = day < 10? "0" + day: day %>
+                                                <% rreg = year + "-" + month + "-" + day %>
+                                                <input type="date" id="rreg" name="rreg" class="form-control" disabled="" value="<%= rreg %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <center>
+                                    <h5>Boundary</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Morning Shift</label>
+                                                <input type="number" id="mbound" name="mbound" class="form-control" disabled="" value="<%= cur.morning_boundary %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Afternoon Shift</label>
+                                                <input type="number" id="abound" name="abound" class="form-control" disabled="" value="<%= cur.afternoon_boundary %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Wholeday Shift</label>
+                                                <input type="number" id="wdbound" name="wdbound" class="form-control" disabled="" value="<%= cur.wholeday_boundary %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <br>
+                                    <% }) %>
+                                    <button id="submit" style="float:right" type="submit" class="btn btn-info" disabled="">Submit</button>
+                                    <br>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="image">
+                                <!-- <img src="/assets/img//bg5.jpg" alt="..."> -->
+                            </div>
+                            <div class="card-body">
+                                <div class="author">
+                                    <a href="#">
+                                        <img class="" src="/assets/img/KP.jpg" alt="...">
+                                        <h5 class="title"></h5>
+                                    </a>
+                                    <p class="description">
+                                      
+                                    </p>
+                                </div>
+                                <p class="description text-center">
+                                    
+                                </p>
+                            </div>
+                            <!-- <hr>
+                            <div class="button-container">
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <% include templates/functions %>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+        aj = new XMLHttpRequest()
+    $(document).ready(function(){
+        $('#sccb').click(function(){
+            if (this.checked) {
+                $('#utype').removeAttr("disabled");
+                $('#ubrand').removeAttr("disabled");
+                $('#model').removeAttr("disabled");
+                $('#capt').removeAttr("disabled");
+                $('#acquired').removeAttr("disabled");
+                $('#warranty').removeAttr("disabled");
+                $('#chassino').removeAttr("disabled");
+                $('#engineno').removeAttr("disabled");
+                $('#bodyno').removeAttr("disabled");
+                $('#plateno').removeAttr("disabled");
+                $('#upregistration').removeAttr("disabled");
+                $('#uroute').removeAttr("disabled");
+                $('#rreg').removeAttr("disabled");
+                $('#mbound').removeAttr("disabled");
+                $('#abound').removeAttr("disabled");
+                $('#wdbound').removeAttr("disabled");
+                $('#submit').removeAttr("disabled");
+            } else {
+                $('#utype').attr("disabled", true);
+                $('#ubrand').attr("disabled", true);
+                $('#model').attr("disabled", true);
+                $('#capt').attr("disabled", true);
+                $('#acquired').attr("disabled", true);
+                $('#warranty').attr("disabled", true);
+                $('#chassino').attr("disabled", true);
+                $('#engineno').attr("disabled", true);
+                $('#bodyno').attr("disabled", true);
+                $('#plateno').attr("disabled", true);
+                $('#upregistration').attr("disabled", true);
+                $('#uroute').attr("disabled", true);
+                $('#rreg').attr("disabled", true);
+                $('#mbound').attr("disabled", true);
+                $('#abound').attr("disabled", true);
+                $('#wdbound').attr("disabled", true);
+                $('#submit').attr("disabled", true);
+            }
+        });
+    });
+
+    function typedef() {
+        afel = document.getElementById( "expand_info" ).elements
+        utype = afel.utype.value
+
+        aj.onreadystatechange = () => {
+            if( aj.readyState == 4 ) {
+                res = aj.responseText
+                res = res.split( ";" )
+
+                afel.ubrand.innerHTML = ""
+                res.forEach( cur => {
+                    cur = cur.split( ", " )
+                    afel.ubrand.innerHTML += "<option value='" + cur[0] + "'>" + cur[1] + "</option>"
+                })                
+            }
+        }
+
+        aj.open( "GET", "/admin/maintenance/unit/typedef?utype=" + utype )
+        aj.send()
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#maintenance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#maintenance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#maintenance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesMaintenance.collapse').addClass('show');
+        
+        $('#unit').addClass('active');
+    })
+</script>
+<script>
+    <%if( edited == 1 ) { %>
+        document.getElementById( "sccb" ).click()
+        swal({
+            title: "Unit Successfully Edited!",
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            type: "success"
+        }).catch(swal.noop)
+        <% } %>
+</script>
+</body>

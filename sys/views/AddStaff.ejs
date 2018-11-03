@@ -1,0 +1,520 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Staff</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <center>
+                                    <h2>Assign Staff</h2>
+                                </center>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label">Staff Name</label>
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="staffname" placeholder="Staff Name">
+                                            </div></br>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label">Staff Type</label>
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="stafftype" placeholder="Staff Type">
+                                            </div></br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <center>
+                                    <h5>Unit Types</h5>
+                                        <label class="col-lg-12">Unit Types</label>
+                                            <div class="row"> 
+                                                <div class="form-check col-lg-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>
+                                                        UV
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col-lg-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>
+                                                        Taxi
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col-lg-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>
+                                                        Jeep
+                                                    </label>
+                                                </div>
+                                                <div class="form-check col-lg-3">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" type="checkbox">
+                                                        <span class="form-check-sign"></span>
+                                                        FX
+                                                    </label>
+                                                </div>
+                                            </div>
+                                </center>
+                                        <hr>
+
+                                                
+                                                 <center>
+                                                    <h5>Route</h5>
+                                                </center>
+                                                <label class="col-md-6 ml-auto mr-auto col-form-label">Jeep</label>
+                                                <div class="row"> 
+                                                    <div class="form-check col-lg-3">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Pasig-Quiapo
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check col-lg-3 ">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Boni-Stop n Shop
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check col-lg-3 ">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Boni-Kalentong
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check col-lg-3 ">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Bacood-Quiapo
+                                                        </label>
+                                                    </div>
+                                                </div> 
+                                                
+                                                <hr>
+                                                 <center>
+                                                    <h5>Scheduling</h5>
+                                                </center>
+                                                <label class="col-md-6 ml-auto mr-auto col-form-label">Day</label>
+                                                <div class="row">
+                                                    <div class="form-check col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Monday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            Wholeday Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM and PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <select id="utype" class="form-control" onchange="unit_filter()">
+                                                            <option value="All" selected="">Route</option>
+                                                            <!-- <option value="1">Bus</option> -->
+                                                            <option value="2">Pasig-Quiapo</option>
+                                                            <option value="3">Boni-Kalentong</option>
+                                                            <option value="4">Boni-Stop n Shop</option>
+                                                            <option value="5">Bacood-Quiapo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-check col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Tuesday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            Wholeday Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM and PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <select id="utype" class="form-control" onchange="unit_filter()">
+                                                            <option value="All" selected="">Route</option>
+                                                            <!-- <option value="1">Bus</option> -->
+                                                            <option value="2">Pasig-Quiapo</option>
+                                                            <option value="3">Boni-Kalentong</option>
+                                                            <option value="4">Boni-Stop n Shop</option>
+                                                            <option value="5">Bacood-Quiapo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-check col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Wednesday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            Wholeday Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM and PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <select id="utype" class="form-control" onchange="unit_filter()">
+                                                            <option value="All" selected="">Route</option>
+                                                            <!-- <option value="1">Bus</option> -->
+                                                            <option value="2">Pasig-Quiapo</option>
+                                                            <option value="3">Boni-Kalentong</option>
+                                                            <option value="4">Boni-Stop n Shop</option>
+                                                            <option value="5">Bacood-Quiapo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-check col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Thursday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            Wholeday Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM and PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <select id="utype" class="form-control" onchange="unit_filter()">
+                                                            <option value="All" selected="">Route</option>
+                                                            <!-- <option value="1">Bus</option> -->
+                                                            <option value="2">Pasig-Quiapo</option>
+                                                            <option value="3">Boni-Kalentong</option>
+                                                            <option value="4">Boni-Stop n Shop</option>
+                                                            <option value="5">Bacood-Quiapo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-check col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Friday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            Wholeday Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM and PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <select id="utype" class="form-control" onchange="unit_filter()">
+                                                            <option value="All" selected="">Route</option>
+                                                            <!-- <option value="1">Bus</option> -->
+                                                            <option value="2">Pasig-Quiapo</option>
+                                                            <option value="3">Boni-Kalentong</option>
+                                                            <option value="4">Boni-Stop n Shop</option>
+                                                            <option value="5">Bacood-Quiapo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-check col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Saturday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            Wholeday Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM and PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <select id="utype" class="form-control" onchange="unit_filter()">
+                                                            <option value="All" selected="">Route</option>
+                                                            <!-- <option value="1">Bus</option> -->
+                                                            <option value="2">Pasig-Quiapo</option>
+                                                            <option value="3">Boni-Kalentong</option>
+                                                            <option value="4">Boni-Stop n Shop</option>
+                                                            <option value="5">Bacood-Quiapo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-check col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox">
+                                                            <span class="form-check-sign"></span>
+                                                            Sunday
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            Wholeday Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-check-radio col-lg-2">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="radio" name="exampleRadio" id="exampleRadios3" value="option1">
+                                                            <span class="form-check-sign"></span>
+                                                            AM and PM Shift
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <select id="utype" class="form-control" onchange="unit_filter()">
+                                                            <option value="All" selected="">Route</option>
+                                                            <!-- <option value="1">Bus</option> -->
+                                                            <option value="2">Pasig-Quiapo</option>
+                                                            <option value="3">Boni-Kalentong</option>
+                                                            <option value="4">Boni-Stop n Shop</option>
+                                                            <option value="5">Bacood-Quiapo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>  
+                            </div>
+                            </div>
+                                            <div class="footer">
+                                                <div class="btn-group" style="margin-left: 80%">
+                                                    <button type="button" class="btn btn-danger">Cancel</button>
+                                                    <button type="button" class="btn btn-primary">Set</button>
+                                                </div>
+                                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <!-- End of Modal -->
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+<% include templates/functions %>
+</body>
+<script>
+    let reSlash =/^matchthis$/i
+    let reConstructor = new RegExp("^matchthis$","i")
+    let pattern = "^matchthis$"
+    let flags = "i"
+    reConstructor = new RegExp(pattern, flags)
+
+    console.log(reConstructor)
+</script>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        
+        $('#staffass').addClass('active');
+    })
+
+    function genpass( p ) {
+        af = document.getElementById( p ).elements
+        alp = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        alpl = alp.length - 1
+        pass = ""
+
+        for( x = 0; x < 8; x ++ )
+            pass += alp[ Math.round( alpl * Math.random() ) ]
+
+        af.password.value = pass
+    }
+
+    function flip( p ) {
+        af = document.getElementById( p ).elements
+        if( af.status.innerHTML == "Show" ) {
+            af.password.setAttribute( "type", "text" )
+            af.status.innerHTML = "Hide"
+        } else {
+            af.password.setAttribute( "type", "password" )
+            af.status.innerHTML = "Show"
+        }
+    }
+</script>
+<script>
+    function showHideUnitInfo() {
+        if(document.getElementById('unitname2') ) {
+            document.getElementById('unitinfo1').style.display='block';
+        }
+        else if(document.getElementById('unitname1') ) {
+            document.getElementById('unitinfo2').style.display='block';
+        }
+        else if(document.getElementById('unitname3') ) {
+            document.getElementById('unitinfo3').style.display='block';
+        }
+        else if(document.getElementById('unitname4') ) {
+            document.getElementById('unitinfo4').style.display='block';
+        }
+    }
+</script>

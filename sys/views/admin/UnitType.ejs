@@ -1,0 +1,202 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Unit Type</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>Unit Type</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tr>
+                                                <% unit_types.forEach( cur => { %>                                        
+                                                <td id="desc"><%= cur.unittype_desc %></td>                                                
+                                                <% if( cur.unittype_status == "0" ) { %>
+                                                    <td><span class="badge badge-danger">Inactive</span></td>
+                                                <% } else { %>
+                                                    <td><span class="badge badge-success">Active</span></td>
+                                                <% } %>
+                                                <td>
+                                                    <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <% if( cur.unittype_status == "0" ) { %>
+                                                        <input type="checkbox" name="checkbox" id="<%= "checkb" + cur.unittype_id %>" onchange="conf( this.id, 1 )">
+                                                        <% } else { %>
+                                                        <input type="checkbox" name="checkbox" id="<%= "checkb" + cur.unittype_id %>" onchange="conf( this.id, 0 )" checked>
+                                                        <% } %>
+                                                    </div>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal  -->
+                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Add a Unit Type</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="add_form" method="POST" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                </div>
+                                </form>
+                            </div>                                                            
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" method="POST" action="/admin/maintenance/unittype/edit" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Status</label>
+                                                        <div class="col-lg-12">
+                                                            <input id='switch' type="checkbox" name="status" class="bootstrap-switch" checked/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" style="margin-left:80%" onclick="check( 'edit_form' )"> Submit </button>
+                                    </div>
+                                </form>
+                                        </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5></h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form id="edit_form" method="POST" action="/admin/maintenance/driver/edit" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <fieldset>
+                                                <center>
+                                                <h5 class="text-warning">WARNING!</h5>
+                                                <p class="">Are you sure you want to dispatch?</p>
+                                                </center>
+                                            </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success" >Yes</button>
+                                            <button type="button" class="btn btn-warning">No</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- End Modal  -->
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        function conf( par, val ) {
+            p = document.getElementById( par )
+            console.log( par )
+
+            if( window.confirm( "Are you sure?" ) ) {
+                window.location = "/admin/maintenance/unittype/change?id=" + par + "&to=" + val
+                console.log( "OK" )
+            }
+            else {
+                console.log( "CANCELED" )
+                if( p.checked ) {
+                    console.log( "TRUE" )
+                    p.checked = ""
+                }
+                else {
+                    console.log( "FALSE" )
+                    p.checked = "true"
+                }
+            }
+        }
+    </script>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+    
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
+ <script src="/assets/js/plugins/bootstrap-switch.js"></script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        // the body of this function is in assets/js/now-ui-kit.js
+        // nowuiKit.initSliders();
+       $('#switch').bootstrapSwitch()
+        $(document).on('switchChange.bootstrapSwitch', '#switch', function(event, state){
+            alert(state)
+        })
+    });
+
+    function scrollToDownload() {
+
+        if ($('.section-download').length != 0) {
+            $("html, body").animate({
+                scrollTop: $('.section-download').offset().top
+            }, 1000);
+        }
+    }
+</script> 
+
+</html>

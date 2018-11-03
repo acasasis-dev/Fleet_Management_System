@@ -1,0 +1,23 @@
+<script>
+    $('#mattpogi').click(function(f){
+        f.preventDefault();
+        swal({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            confirmButtonText: 'Yes',
+            buttonsStyling: false
+        }).then(function() {
+            swal({
+            title: 'Ok!',
+            text: '',
+            type: 'success',
+            confirmButtonClass: "btn btn-success",
+            buttonsStyling: false
+            });
+        })
+    })
+</script>

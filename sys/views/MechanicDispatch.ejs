@@ -1,0 +1,585 @@
+<% include templates/mechanicsidebar %>        
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Inspection</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                                <div class="row">
+                                    <% include templates/sync_filter %>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <% console.log( mdispatches ) %>
+                                <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">
+                                            <th>Routes</th>
+                                            <th>Unit</th>
+                                            <th>Driver</th>
+                                            <th hidden></th>
+                                            <th hidden></th>
+                                            <th hidden></th>
+                                            <th>Shift</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody id="data">
+                                        <% dispatches.forEach( cur => { %>
+                                            <tr id="r<%= cur.dispatch_inspection_id %>">
+                                                <% cur.sctype_id = cur.sctype_id_temp? cur.sctype_id_temp: cur.sctype_id %>
+                                                <td><%= cur.route_from + " - " + cur.route_to %></td>
+                                                <td><%= cur.unitplate_no %></td>
+                                                <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                                                <td><%= cur.sctype_id == 1? "Morning": cur.sctype_id == 2? "Afternoon": "Whole Day" %></td>
+                                                <td id="utype" hidden><%= cur.unittype_id %></td>
+                                                <td id="sctype" hidden><%= cur.sctype_id %></td>
+                                                <td id="sched_id" hidden><%= cur.sched_id %></td>
+                                                <td id="brake" hidden><%= cur.brake %></td> 
+                                                <td id="light" hidden><%= cur.light %></td>
+                                                <td id="mirror" hidden><%= cur.mirror %></td>
+                                                <td id="horn" hidden><%= cur.horn %></td>
+                                                <td id="tires" hidden><%= cur.tires %></td>
+                                                <td id="steer" hidden><%= cur.steer %></td>
+                                                <td id="seatbelt" hidden><%= cur.seatbelt %></td>
+                                                <td id="door" hidden><%= cur.door %></td>
+                                                <td id="air_conditioning" hidden><%= cur.air_conditioning %></td>
+                                                <td id="body_condition" hidden><%= cur.body_condition %></td>
+                                                <td id="cleanliness" hidden><%= cur.cleanliness %></td>
+                                                <td id="fuel" hidden=""><%= cur.fuel %></td>
+                                                <td id="engine_oil" hidden=""><%= cur.engine_oil %></td>
+                                                <td id="brake_fluid" hidden=""><%= cur.brake_fluid %></td>
+                                                <td id="battery_charge" hidden=""><%= cur.battery_charge %></td>
+                                                <td id="comment" hidden><%= cur.u_inspection_comment %></td>
+                                                <td>
+                                                    <% if( cur.u_inspection_status != null ) { %>
+                                                        <% if( cur.u_inspection_status == 1 ) { %>
+                                                            <span class="badge badge-success">Passed</span>
+                                                        <% } else { %>
+                                                            <span class="badge badge-danger">Failed</span>
+                                                        <% } %>
+                                                    <% } else { %>
+                                                        <span class="badge badge-default">Uninspected</span>
+                                                    <% } %>
+                                                </td>
+                                                <td>
+                                                    <% if( cur.u_inspection_status == null ) { %>
+                                                        <% if( cur.repair_availability ) { %>
+                                                            <span class="badge badge-danger"><%= cur.repair_availability %></span>           
+                                                        <% } else { %>
+                                                            <% if( cur.sctype_id == 2 ) { %>
+                                                                <% for( x = 0; x < mdispatches.length; x ++ ) { %>
+                                                                    <% if( cur.unit_id == mdispatches[x].unit ) { %>
+                                                                        <% if( mdispatches[x].available == 1 ) { %>
+                                                                            <button class="btn btn-round btn-icon btn-sm btn-default" type="button" data-toggle="modal" data-target="#myModal2" onclick="put_id( <%= cur.dispatch_inspection_id %> ); utypedet( <%= cur.unittype_id %> )">
+                                                                            <i class="now-ui-icons ui-1_zoom-bold"></i> 
+                                                                            </button>
+                                                                        <% } else { %>
+                                                                            <span class="badge badge-danger">N/A</span>         
+                                                                        <% } %>
+                                                                        <% break %>
+                                                                    <% } %>
+                                                                <% } %>                                                        
+                                                            <% } else { %>
+                                                                <button class="btn btn-round btn-icon btn-sm btn-default" type="button" data-toggle="modal" data-target="#myModal2" onclick="put_id( <%= cur.dispatch_inspection_id %> ); utypedet( <%= cur.unittype_id %> )">
+                                                                    <i class="now-ui-icons ui-1_zoom-bold"></i> 
+                                                                </button>
+                                                            <% } %>
+                                                        <% } %>
+                                                    <% } else { %>
+                                                           <button class="btn btn-round" type="button" data-toggle="modal" data-target="#myModal3" onclick="utypedet( <%= cur.unittype_id %> ); more( 'r<%= cur.dispatch_inspection_id %>' )">
+                                                            Results
+                                                        </button>
+                                                    <% } %>
+                                                </td>
+                                            </tr>
+                                        <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Inspection Form</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" name="frm" method="POST" action="/mechanic/inspections/dispatch/inspect" enctype="multipart/form-data">
+                                    <input type="hidden" id="diid" name="diid">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                        <center>
+                                            <h5>Inspection</h5>
+                                        </center>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_1" name="brake" onchange="cbcheck()">
+                                                            <label for="chk_1">
+                                                                Brake
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_2" name="lights" onchange="cbcheck()">
+                                                            <label for="chk_2">
+                                                                Lights
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_3" name="mirror" onchange="cbcheck()">
+                                                            <label for="chk_3">
+                                                                Mirror
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="chk_4" name="horn" onchange="cbcheck()">
+                                                            <label for="chk_4">
+                                                                Horn
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_5" name="tires" onchange="cbcheck()">
+                                                            <label for="chk_5">
+                                                                Tires
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_6" name="seatbelts" onchange="cbcheck()">
+                                                            <label for="chk_6">
+                                                                Seatbelts
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_7" name="cliness" onchange="cbcheck()">
+                                                            <label for="chk_7">
+                                                                Cleanliness
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_8" name="doors" onchange="cbcheck()">
+                                                            <label for="chk_8">
+                                                                Doors
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input  type="checkbox" id="chk_9" name="bcondition" onchange="cbcheck()">
+                                                            <label for="chk_9">
+                                                                Body Condition
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox">
+                                                        <input   type="checkbox" id="chk_10" name="smechanism" onchange="cbcheck()">
+                                                            <label for="chk_10">
+                                                                Steering Mechanism
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="checkbox" id="acond">
+                                                        <input type="checkbox" id="chk_11" name="aconditioning" onchange="cbcheck()">
+                                                            <label for="chk_11">
+                                                                Air Conditioning
+                                                            </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="checkbox" id="check_all" value="" onchange="checkall()"/> Check All
+                                        <hr>
+                                        <center><h5></h5></center>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class=" text-primary">
+                                                    <th></th>
+                                                    <th>High</th>
+                                                    <th>Moderate</th>
+                                                    <th>Low</th>
+                                                </thead>
+                                                <tr>
+                                                    <td>Fuel Level</td>
+                                                    <td><input name="fuel" type="radio" value="High"></td>
+                                                    <td><input name="fuel" type="radio" value="Moderate"></td>
+                                                    <td><input name="fuel" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Engine Oil</td>
+                                                    <td><input name="eoil" type="radio" value="High"></td>
+                                                    <td><input name="eoil" type="radio" value="Moderate"></td>
+                                                    <td><input name="eoil" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Brake Fluid</td>
+                                                    <td><input name="bfluid" type="radio" value="High"></td>
+                                                    <td><input name="bfluid" type="radio" value="Moderate"></td>
+                                                    <td><input name="bfluid" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Battery Charge</td>
+                                                    <td><input name="bcharge" type="radio" value="High"></td>
+                                                    <td><input name="bcharge" type="radio" value="Moderate"></td>
+                                                    <td><input name="bcharge" type="radio" value="Low"></td>
+                                                </tr>
+                                            </table>
+                                            <hr>
+                                            <div class="form-group">
+                                                    <label class="col-md-12 control-label">Comment</label>
+                                                    <div class="col-md-12">
+                                                    <textarea name="comment" rows="4"class="form-control" placeholder="Comment"></textarea>
+                                                    </div></br>
+                                                </div>
+                                        </div>
+                                    </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                        </div>
+                                        </form>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                            
+        </div>
+    </div>
+    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5>Inspection Result</h5>
+                                                <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                    <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                </button>
+                                        </div>
+                                        <form id="more_info">
+                                            <div class="modal-body">
+                                                <fieldset>
+                                                <center>
+                                                    <h5>Inspection</h5>
+                                                </center>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox1" type="checkbox">
+                                                                <label for="checkbox1">
+                                                                    Brake
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox2" type="checkbox">
+                                                                <label for="checkbox2">
+                                                                    Lights
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox3" type="checkbox">
+                                                                <label for="checkbox3">
+                                                                    Mirror
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox4" type="checkbox">
+                                                                <label for="checkbox4">
+                                                                    Horn
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox5" type="checkbox">
+                                                                <label for="checkbox5">
+                                                                    Tires
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox6" type="checkbox">
+                                                                <label for="checkbox6">
+                                                                    Seatbelts
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox7" type="checkbox">
+                                                                <label for="checkbox7">
+                                                                    Cleanliness
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox8" type="checkbox">
+                                                                <label for="checkbox8">
+                                                                    Doors
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox9" type="checkbox">
+                                                                <label for="checkbox9">
+                                                                    Body Condition
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox10" type="checkbox">
+                                                                <label for="checkbox10">
+                                                                    Steering Mechanism
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4" id="acond2">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox11" type="checkbox">
+                                                                <label for="checkbox11">
+                                                                    Air Conditioning
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                <div class="table-responsive">
+                                            <table class="table">
+                                                <thead class=" text-primary">
+                                                    <th></th>
+                                                    <th>High</th>
+                                                    <th>Moderate</th>
+                                                    <th>Low</th>
+                                                </thead>
+                                                <tr>
+                                                    <td>Fuel Level</td>
+                                                    <td><input name="fuel" id="fuel" type="radio" value="High"></td>
+                                                    <td><input name="fuel" id="fuel" type="radio" value="Moderate"></td>
+                                                    <td><input name="fuel" id="fuel" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Engine Oil</td>
+                                                    <td><input name="eoil" id="eoil" type="radio" value="High"></td>
+                                                    <td><input name="eoil" id="eoil" type="radio" value="Moderate"></td>
+                                                    <td><input name="eoil" id="eoil" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Brake Fluid</td>
+                                                    <td><input name="bfluid" id="bfluid" type="radio" value="High"></td>
+                                                    <td><input name="bfluid" id="bfluid" type="radio" value="Moderate"></td>
+                                                    <td><input name="bfluid" id="bfluid" type="radio" value="Low"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Battery Charge</td>
+                                                    <td><input name="bcharge" id="bcharge" type="radio" value="High"></td>
+                                                    <td><input name="bcharge" id="bcharge" type="radio" value="Moderate"></td>
+                                                    <td><input name="bcharge" id="bcharge" type="radio" value="Low"></td>
+                                                </tr>
+                                            </table>
+                                            <hr>
+                                            <div class="form-group">
+                                                    <label class="col-md-12 control-label">Comment</label>
+                                                    <div class="col-md-12">
+                                                    <textarea name="comment" rows="4"class="form-control" placeholder="Comment"></textarea>
+                                                    </div></br>
+                                                </div>
+                                        </div>
+                                            </fieldset>
+                                                </div>
+                                                </form>
+                                                    </fieldset>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    <script>
+        var ut
+
+        function checkall()
+        {
+            var elements = document.getElementById( "edit_form" ).elements
+            var ch = document.getElementById( "check_all" ).checked == true? 1: 0
+            var length = elements.length;
+            for( x = 0; x < length; x ++ ) {
+                if( elements[x].attributes.length > 0 ) {
+                    if( elements[x].attributes.type.value == "checkbox" ) {
+                        if( elements[x].attributes.id.value != "check_all" ) {
+                            if( ch == 1 ) {
+                                if( elements[x].attributes.id.value == "chk_11" ) {
+                                    if( ut != 3 )
+                                        elements[x].checked = true
+                                } else                                
+                                    elements[x].checked = true
+                            } else
+                                elements[x].checked = false
+                        }
+                    }
+                }
+            }
+        }
+
+        function utypedet( x ) {
+            ut = x
+            if( x == 3 ) {
+                document.getElementById( "acond" ).hidden = true
+                document.getElementById( "acond2" ).hidden = true
+                document.getElementById( "edit_form" ).elements.chk_11.checked = true
+                document.getElementById( "more_info" ).elements.checkbox11.checked = true
+            } else {
+                document.getElementById( "acond" ).hidden = false
+                document.getElementById( "acond2" ).hidden = false
+                document.getElementById( "edit_form" ).elements.chk_11.checked = false
+                document.getElementById( "more_info" ).elements.checkbox11.checked = false
+            }
+        }
+
+        function cbcheck() {
+            var elements = document.getElementById( "edit_form" ).elements
+            var ch = document.getElementById( "check_all" ).checked == true? 1: 0
+            var length = elements.length;
+
+            for( x = 0; x < length; x ++ ) {
+                if( elements[x].attributes.length > 0 ) {
+                    if( elements[x].attributes.type.value == "checkbox" ) {
+                        if( elements[x].attributes.id.value != "check_all" ) {
+                            if( elements[x].attributes.id.value == "chk_11" ) {
+                                if( ut != 3 ) {
+                                    if( !elements[x].checked ) {
+                                        elements.check_all.checked = false
+                                        break
+                                    } else {
+                                        if( x == 12 ) {
+                                            elements.check_all.checked = true
+                                            break
+                                        }                                        
+                                    }
+                                }
+                            } else {                                
+                                if( !elements[x].checked ) {
+                                    elements.check_all.checked = false
+                                    break
+                                } else {
+                                    if( x == 12 ) {
+                                        elements.check_all.checked = true
+                                        break
+                                    }
+                                }
+                            }
+                        } else {
+                            if( !elements[x].checked ) {
+                                elements.check_all.checked = false
+                                break
+                            } else {
+                                if( x == 12 ) {
+                                    elements.check_all.checked = true
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script>
+        function put_id( par ) {
+            ef = document.getElementById( "edit_form" )
+            efel = ef.elements
+
+            efel.diid.value = par
+        }
+
+        function off_rec( par ) {
+            fel = document.getElementById( "offense_form" ).elements
+            fel.id.value = par
+        }
+
+        function more( par ) {
+            tc = document.getElementById( par ).children
+            fel = document.getElementById( "more_info" ).elements
+
+            fel.checkbox1.checked = tc.brake.innerHTML == 1? true: false
+            fel.checkbox2.checked = tc.light.innerHTML == 1? true: false
+            fel.checkbox3.checked = tc.mirror.innerHTML == 1? true: false
+            fel.checkbox4.checked = tc.horn.innerHTML == 1? true: false
+            fel.checkbox5.checked = tc.tires.innerHTML == 1? true: false
+            fel.checkbox6.checked = tc.seatbelt.innerHTML == 1? true: false
+            fel.checkbox7.checked = tc.cleanliness.innerHTML == 1? true: false
+            fel.checkbox8.checked = tc.door.innerHTML == 1? true: false
+            fel.checkbox9.checked = tc.body_condition.innerHTML == 1? true: false
+            fel.checkbox10.checked = tc.steer.innerHTML == 1? true: false
+            fel.checkbox11.checked = tc.air_conditioning.innerHTML == 1? true: false
+            fel.fuel.value = tc.fuel.innerHTML
+            fel.eoil.value = tc.engine_oil.innerHTML
+            fel.bfluid.value = tc.brake_fluid.innerHTML
+            fel.bcharge.value = tc.battery_charge.innerHTML
+            fel.comment.value = tc.comment.innerHTML
+        }
+</script>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#inspection').addClass('active');
+        if($this.hasClass('show')) {
+            $('#inspection.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#inspection.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesInspection.collapse').addClass('show');
+        
+        $('#dispatch').addClass('active');
+    })
+</script>
+    <% include templates/mechanic_functions %>
+    <% include templates/functions %>
+</body>

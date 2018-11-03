@@ -1,0 +1,134 @@
+<% include templates/dispatchersidebar %>
+<% include templates/footer %>
+<% include templates/topbar %>
+
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Schedule</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <select id="shift" class="form-control" onchange="filter()">
+                                            <option value="All" selected="">Shift</option>
+                                            <option value="Morning">Morning Shift</option>
+                                            <option value="Afternoon">Afternoon Shift</option>
+                                            <option value="Wholeday">Wholeday Shift</option>
+                                        </select>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <select id="utype" class="form-control" onchange="filter()">
+                                            <option value="All" selected="">All Unit Types</option>
+                                            <option value="Bus">Bus</option>
+                                            <option value="FX">FX</option>
+                                            <option value="Jeep">Jeep</option>
+                                            <option value="UV">UV</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            <div class="card-body">
+                                <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">
+                                            <th>Routes</th>
+                                            <th>Unit</th>
+                                            <th>Driver</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <% arrivals.forEach( cur => { %>
+                                        <tr>
+                                            <td><%= cur.route_from + " - " + cur.route_to %></td>
+                                            <td><%= cur.unitplate_no %></td>
+                                            <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                                            <td>
+                                                <% if( !cur.time_arrived ) { %>
+                                                <span class="badge badge-danger">On Trip</span>
+                                                <% } else { %>
+                                                    <span class="badge badge-danger">Arrived</span>
+                                                <% } %>
+                                            </td>
+                                            <td>
+                                                <% if( !cur.time_arrived ) { %>
+                                                    <button class="btn btn-round btn-info" type="button" data-toggle="modal" data-target="#myModal3" onclick="put_id( <%= cur.sched_id %>, 'boundary_form' )">
+                                                        <i class="now-ui-icons business_money-coins"></i>
+                                                    </button>
+                                                <% } else { %>
+                                                <span class="badge badge-danger">NONE NEEDED</span>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Set Boundary Type</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form id="boundary_form" method="POST" action="/dispatcher/arrival">
+                                    <input type="hidden" name="id" id="id">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <center>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="radio">
+                                                            <input type="radio" name="boundary_type" id="radio1" value="1" checked="">
+                                                            <label for="radio1">
+                                                                Fixed
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="radio">
+                                                            <input type="radio" name="boundary_type" id="radio2" value="2">
+                                                            <label for="radio2">
+                                                                Short
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </center>
+                                        <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" style="margin-left:70%"> Submit </button>
+                                    </div>
+                                    </form>
+                                </div>                                                            
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Modal -->
+        </div>
+    </div>
+    <script>
+        function put_id( id, form ) {
+            form = document.getElementById( form ).elements.id.value = id
+        }
+</script>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#arrival').addClass('active');
+    })
+    </script>
+</body>

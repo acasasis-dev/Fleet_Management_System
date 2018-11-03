@@ -1,0 +1,434 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Boundary(Special Units)</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>Unit</th>
+                                                <th>Route</th>
+                                                <th>Morning Shift</th>
+                                                <th>Afternoon Shift</th>
+                                                <th>Wholeday</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <button class="btn btn-info" type="button"data-toggle="modal" data-target="#myModal2">
+                                                        <i class="now-ui-icons design_bullet-list-67"></i>
+                                                    </button>
+                                                    <button class="btn btn-default" type="button"data-toggle="modal" data-target="#myModal3">
+                                                        <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                    </button>
+                                                    <button class="btn btn-danger" type="button"data-toggle="modal">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Add a Staff</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                    </div>
+                                    <form id="add_form" method="POST" action="/admin/maintenance/driver" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <center>
+                                                <h5>Name</h5>
+                                            </center>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">First Name</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="First Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Middle Name</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Middle">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Last Name</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Last Name">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            
+                                            <hr>
+                                            <center>
+                                                <h5>Basic Information</h5>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Birthday</label>
+                                                        <div class="col-md-12">
+                                                            <input type="date" class="form-control" placeholder="Matt Pogi">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Contact Number</label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" class="form-control" placeholder="Contact Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Gender</label>
+                                                        <div class="radio">
+                                                            <input type="radio" name="radio1" id="radio1" value="option1">
+                                                                <label for="radio1">
+                                                                    Male
+                                                                </label></br>
+                                                            <input type="radio" name="radio1" id="radio2" value="option2" checked="">
+                                                                <label for="radio2">
+                                                                    Female
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Address</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Last Name">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="inputUnitType" class="col-lg-12 control-label">Staff Type</label>
+                                                    <div class="col-lg-12">
+                                                        <select class="form-control">
+                                                            <option disabled="" selected=""></option>
+                                                            <option>Collector</option>
+                                                            <option>Dispatcher</option>
+                                                            <option>Mechanic</option>
+                                                        </select>
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                            <div class="col-md 12">
+                                                <label class="col-lg-12 control-label">Unit Type</label>
+                                                    <div class="checkbox">
+                                                        <input id="checkbox" type="checkbox">
+                                                        <label for="checkbox">
+                                                        </label>
+                                                    </div></br>
+                                            </div>  
+                                            <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                    </div>
+                                    </form>
+                                </div>                                                            
+                            </div>
+                        </div>
+                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Basic Information</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form id="edit_form" method="POST" action="/admin/maintenance/driver/edit" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <fieldset>
+                                            <center>
+                                                <h5>Basic Information</h5>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Birthday</label>
+                                                        <div class="col-md-12">
+                                                            <input type="date" class="form-control" placeholder="Matt Pogi">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Contact Number</label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" class="form-control" placeholder="Contact Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Gender</label>
+                                                        <div class="radio">
+                                                            <input type="radio" name="radio1" id="radio1" value="option1">
+                                                                <label for="radio1">
+                                                                    Male
+                                                                </label></br>
+                                                            <input type="radio" name="radio1" id="radio2" value="option2" checked="">
+                                                                <label for="radio2">
+                                                                    Female
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Address</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Address">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <center>
+                                                <h5></h5>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Staff Type</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Staff Type">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </fieldset>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary" style="margin-left:80%" onclick="check( 'edit_form' )"> Submit </button>
+                                            </div>
+                                            </form>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Edit a Driver</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                    </div>
+                                    <form id="add_form" method="POST" action="/admin/maintenance/driver" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <center>
+                                                <h5>Name</h5>
+                                            </center>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">First Name</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="First Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Middle Name</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Middle">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Last Name</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Last Name">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            
+                                            <hr>
+                                            <center>
+                                                <h5>Basic Information</h5>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Birthday</label>
+                                                        <div class="col-md-12">
+                                                            <input type="date" class="form-control" placeholder="Matt Pogi">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Contact Number</label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" class="form-control" placeholder="Contact Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Gender</label>
+                                                        <div class="radio">
+                                                            <input type="radio" name="radio1" id="radio1" value="option1">
+                                                                <label for="radio1">
+                                                                    Male
+                                                                </label></br>
+                                                            <input type="radio" name="radio1" id="radio2" value="option2" checked="">
+                                                                <label for="radio2">
+                                                                    Female
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Address</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Address">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <center>
+                                                <h5>License</h5>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">License Number</label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" class="form-control" placeholder="License Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">License Registered</label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" class="form-control" placeholder="License Registered">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <center>
+                                                <h5>Unit</h5>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Unit</label>
+                                                        <div class="col-lg-12">
+                                                            <select class="form-control">
+                                                                <option disabled="" selected=""></option>
+                                                                <option></option>
+                                                                <option></option>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Unit Type</label>
+                                                        <div class="col-lg-12">
+                                                            <select class="form-control">
+                                                                <option disabled="" selected=""></option>
+                                                                <option></option>
+                                                                <option></option>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Route</label>
+                                                        <div class="col-lg-12">
+                                                            <select class="form-control">
+                                                                <option disabled="" selected=""></option>
+                                                                <option>Pasig-Quiapo</option>
+                                                                <option></option>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                    </div>
+                                    </form>
+                                </div>                                                            
+                            </div>
+                        </div>
+                    <!-- End of Modal -->
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+
+</html>

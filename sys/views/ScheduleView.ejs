@@ -1,0 +1,174 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+
+<div class="panel-header">
+<div class="header text-center">
+    <h1 class="title">Schedule</h1>
+</div>
+</div>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h4 class="card-title"></h4>
+                    <div class="row">
+                    <% include templates/sync_filter %>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead class=" text-primary">
+                            <th>Routes</th>                            
+                            <th>Plate Number</th>
+                            <th>Unit Type</th>
+                            <th>Shift</th>
+                            <th>Driver</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody id="data">
+                        <% submitted = "FALSE" %>
+                        <% schedules.forEach( cur => { %>
+                        <tr id="r<%= cur.sched_id %>">
+                            <% console.log( cur.penalty_id ) %>
+                            <% if( cur.sctype_id_temp ) { if( cur.sctype_id_temp == 1 ) { sdesc = "Morning Temporary" } else if( cur.sctype_id_temp == 2 ) { sdesc = "Afternoon Temporary" } else { sdesc = "Whole Day Temporary" } } else { sdesc = cur.sctype_desc } %>
+                            <% if( ( cur.penalty_id <= 7 ) || ( cur.penalty_id <= 3 && cur.penalty_id >= 0 ) ) { %>
+                                <td><%= cur.route_from + " - " + cur.route_to %></td>
+                                <td hidden id="uid"><%= cur.unit_id %></td>
+                                <td><%= cur.unitplate_no %></td>
+                                <td><%= cur.unittype_desc %></td>                            
+                                <td><%= sdesc %></td>                            
+                                <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                            <% } else { %>
+                                <td style="color: red"><%= cur.route_from + " - " + cur.route_to %></td>
+                                <td hidden id="uid"><%= cur.unit_id %></td>
+                                <td style="color: red"><%= cur.unitplate_no %></td>
+                                <td style="color: red"><%= cur.unittype_desc %></td>                            
+                                <td style="color: red"><%= sdesc %></td>                            
+                                <td style="color: red"><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                            <% } %>
+                            <td id="id" hidden><%= cur.sched_id %></td>
+                            <td id="sctype" hidden><%= cur.sctype_id %></td>
+                            <td id="utype" hidden><%= cur.unittype_id %></td>   
+                            <% if( cur.dispatch_inspection_id ) { %>
+                                <% submitted = "TRUE" %>
+                            <% } %>
+                            <td>
+                                <button class="btn btn-round btn-icon btn-sm btn-default" type="button" data-toggle="modal" data-target="#myModal5" onclick="edit( 'r<%= cur.sched_id %>', 'edit_form' )">
+                                    <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                </button>
+                            </td>
+                        </tr>
+                        <% }) %>
+                        <tbody>
+                    </table>
+
+                <% if( submitted == "FALSE" ) { %>
+                <form method="POST" action="/admin/schedule/view/send">
+                    <input type="hidden" name="date" value="<%= sched_date %>">
+                    <button type="submit" class="btn btn-primary" style="float:right">
+                        Submit
+                    </button>
+                </form>
+                <% } %>
+                </div>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Edit Schedule</h5>
+                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                    </button>
+            </div>
+            <form id="edit_form" method="POST" action="/admin/schedule/view/edit">
+                <input type="hidden" name="date" value="<%= sched_date %>">
+                <input type="hidden" id="id" name="id">
+                <input type="hidden" id="uid" name="uid">
+                <div class="modal-body">
+                    <fieldset>
+                    <center>
+                        <h5></h5>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inputDate" class="col-lg-10 control-label">Driver</label>
+                                    <div class="col-lg-10">
+                                        <select name="reliever" class="form-control">
+                                            <option value="" selected=""></option>
+                                            <% relievers.forEach( cur => { %>
+                                                <option value="<%= cur.driver_id %>"><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></option>
+                                            <% }) %>
+                                        </select>
+                                    </div></br>
+                                <label  class="col-lg-10 control-label">Shift Type</label>
+                                    <div class="col-lg-10">
+                                        <select name="sctype" class="form-control">
+                                            <option value="" selected=""></option>
+                                            <option value="1">Morning</option>
+                                            <option value="2">Afternoon</option>
+                                            <option value="3">Whole Day</option>
+                                            <option value="4">Morning Temporary</option>
+                                            <option value="5">Afternoon Temporary</option>
+                                            <option value="6">Whole Day Temporary</option>
+                                        </select>
+                                    </div></br>
+                            </div>
+                        </div>
+                    </center>
+                </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="edit_form_submit" type="button" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                    </div>
+                    </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <!-- End of Modal -->
+</div>
+</div>
+    <% include templates/functions %>
+    <script>
+        $('#edit_form_submit').click(function(f){
+            f.preventDefault();
+            swal({
+                title: 'Are you sure?',
+                text: "If you change schedule, it will be automatically swapped",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                confirmButtonText: 'Yes',
+                buttonsStyling: false
+            }).then(function() {
+                $( "#edit_form" ).submit()
+            })
+        })
+
+        <% if( typeof( cant ) != "undefined" ) { %>
+            swal({
+                title: 'Error',
+                text: "Can't swap shift of a unit with 2 drivers to whole day",
+                type: 'warning'
+            })
+        <% } else if( typeof( edited ) != "undefined" ) { %>
+            swal({
+                title: "Good job!",
+                text: "Schedule successfully edited",
+                buttonsStyling: false,
+                confirmButtonClass: "btn btn-success",
+                type: "success"        
+            })
+        <% } %>
+    </script>
+</body>

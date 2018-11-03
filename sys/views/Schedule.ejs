@@ -1,0 +1,331 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+
+<div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Schedule</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <!-- <section class="content">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="card card-primary ">
+                                                <div class="card-header with-border">
+                                                    <h4 class="card-title text-center">Draggable Events</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="external-events">  
+                                                    <div class="external-event bg-yellow"></div>
+                                                </div>
+                                            </div>
+                                        <div class="card card-primary">
+                                            <div class="card-header with-border">
+                                                <h4 class="card-title text-center">Generate Schedule</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
+                                                    <ul class="fc-color-picker" id="color-chooser">
+                                                    <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-teal" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-orange" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-lime" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-purple" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-fuchsia" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-muted" href="#"><i class="fa fa-square"></i></a></li>
+                                                    <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="input-group mb-2">
+                                                    <input id="new-event" type="text" class="col-lg-12 form-control" placeholder="Event Title">
+                                                        <div class="input-group-append">
+                                                            <button id="add-new-event" type="button" class="btn btn-primary waves-effect">Add</button>
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div> 
+                                        </div>  -->
+                                        <!-- /col -->
+                                        <div class="row">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="card card-primary border-primary">
+                                            <div class="card-header">
+                                                <button type="button" class="btn btn-primary" onclick="javascript: window.location = '/admin/schedule/generate'">
+                                                    Generate Schedule
+                                                </button>
+                                                <button class="btn btn-primary" style="float: right;" type="button"  data-toggle="modal" data-target="#myModal1">  
+                                                    Lift Code
+                                                </button>
+                                                
+                                            </div>
+                                                <div class="card-body no-padding">
+                                                <!-- THE CALENDAR -->
+                                                <div id="calendar"></div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal -->
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5>Code Lifting</h5>
+                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                            </button>
+                        </div>
+                        <form method="POST" action="/admin/schedule/code_lift" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <fieldset>
+                                <center></center>
+                                    <h5></h5>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                        <label class="col-lg-6 control-label">Route</label>
+                                            <select name="routes" class="selectpicker" data-style="btn btn-info btn-round" multiple title="Routes" data-size="7">
+                                                <option disabled> Multiple Options</option>
+                                                <% routes.forEach( cur => { %>
+                                                <option class='addOption' value="<%= cur.route_id %>"><%= cur.route_from + " - " + cur.route_to %></option>
+                                                <% }) %>
+                                            </select>
+                                        <br/><br/>
+                                        </div>
+                                        <div class="col-lg-6">
+                                        <label class="col-lg-6 control-label">Date</label>
+                                            <input type="date" class="form-control" name="date">
+                                        </div>
+                                    </div>
+                            </fieldset>
+                            <hr>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                        </div>
+                        </form>
+                    </div>                                                            
+                </div>
+            </div>
+                    <!-- End of Modal -->
+                    
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(function () {
+    /* initialize the external events
+     ----------------~-------------------------------------------------*/
+    function init_events(ele) {
+      ele.each(function () {
+
+        // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+        // it doesn't need to have a start or end
+        var eventObject = {
+          title: $.trim($(this).text()) // use the element's text as the event title
+        }
+
+        // store the Event Object in the DOM element so we can get to it later
+        $(this).data('eventObject', eventObject)
+
+        // make the event draggable using jQuery UI
+        $(this).draggable({
+          zIndex        : 1070,
+          revert        : true, // will cause the event to go back to its
+          revertDuration: 0  //  original position after the drag
+        })
+
+      })
+    }
+
+    init_events($('#external-events div.external-event'))
+
+    /* initialize the calendar
+     -----------------------------------------------------------------*/
+    //Date for the calendar events (dummy data)
+    
+    var date = new Date()
+    var d    = date.getDate(),
+        m    = date.getMonth(),
+        y    = date.getFullYear()
+    $('#calendar').fullCalendar({
+      selectable: true,
+       dayClick: function(date, jsEvent, view, resourceObj) {
+
+    // alert('Date: ' + date.format());
+    // alert('Resource ID: ' + resourceObj.id);
+
+    window.location = "/admin/schedule/view?date=" + date.format()
+
+    },
+      header    : {
+        left  : 'prev,next today',
+        center: 'title',
+        right : 'month,agendaWeek,agendaDay'
+      },
+      buttonText: {
+        today: 'today',
+        month: 'month',
+        week : 'week',
+        day  : 'day'
+      },
+      //Random default events
+      // events    : [
+      //   {
+      //     title          : 'View',
+      //     start          : new Date(y, m, d - 14),
+      //     end            : new Date(y, m, d - 7),
+      //     url            : 'schedule/view',
+      //     backgroundColor: '#f39c12', //yellow
+      //     borderColor    : '#f39c12' //yellow
+      //   }
+      // ],
+      events    : [
+        <% all_out = [] %>
+
+        <% schedules.forEach( cur => { %>
+        <% out = "" %>
+        <% out += "    {\n" %>
+        <% ms = new Date( cur.sched_from ) %>
+        <% year = ms.getFullYear() %>
+        <% month = ms.getMonth() + 1 %>
+        <% month = month < 10? "0" + month: month %>
+        <% day = ms.getDate() %>
+        <% day = day < 10? "0" + day: day%>
+        <% start = year + "-" + month + "-" + day %>
+        <% ms = new Date( cur.sched_to ) %>
+        <% year = ms.getFullYear() %>
+        <% month = ms.getMonth() + 1 %>
+        <% month = month < 10? "0" + month: month %>
+        <% day = ms.getDate() %>
+        <% day = day < 10? "0" + day: day %>
+        <% end = year + "-" + month + "-" + day %>
+        <% console.log( start, end ) %>
+        <% out += "         title: \"" + start + " - " + end + "\",\n" %>
+        <% out += "         start: new Date( \"" + start + "\" ),\n" %>
+        <% out += "         end: new Date( \"" + end + "\" ),\n" %>
+        <% out += "         url: 'schedule#',\n" %>
+        <% out += "         backgroundColor: '#555',\n" %>
+        <% out += "         borderColor: '#555'\n" %>
+        <% out += "    }\n" %>
+        <% all_out.push( out ) %>
+        <% }) %>
+
+        <%- all_out.join( ",\n" ) %>
+      ],
+      editable  : true,
+      droppable : true, // this allows things to be dropped onto the calendar !!!
+      drop      : function (date, allDay) { // this function is called when something is dropped
+
+        // retrieve the dropped element's stored Event Object
+        var originalEventObject = $(this).data('eventObject')
+
+        // we need to copy it, so that multiple events don't have a reference to the same object
+        var copiedEventObject = $.extend({}, originalEventObject)
+
+        // assign it the date that was reported
+        copiedEventObject.start           = date
+        copiedEventObject.allDay          = allDay
+        copiedEventObject.backgroundColor = $(this).css('background-color')
+        copiedEventObject.borderColor     = $(this).css('border-color')
+
+        // render the event on the calendar
+        // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
+
+        // is the "remove after drop" checkbox checked?
+        if ($('#drop-remove').is(':checked')) {
+          // if so, remove the element from the "Draggable Events" list
+          $(this).remove()
+        }
+
+      }
+    })
+
+    /* ADDING EVENTS */
+    var currColor = '#3c8dbc' //Red by default
+    //Color chooser button
+    var colorChooser = $('#color-chooser-btn')
+    $('#color-chooser > li > a').click(function (e) {
+      e.preventDefault()
+      //Save color
+      currColor = $(this).css('color')
+      //Add color effect to button
+      $('#add-new-event').css({ 'background-color': currColor, 'border-color': currColor })
+    })
+    $('#add-new-event').click(function (e) {
+      e.preventDefault()
+      //Get value and make sure it is not null
+      var val = $('#new-event').val()
+      if (val.length == 0) {
+        return
+      }
+
+      //Create events
+      var event = $('<div />')
+      event.css({
+        'background-color': currColor,
+        'border-color'    : currColor,
+        'color'           : '#fff'
+      }).addClass('external-event')
+      event.html(val)
+      $('#external-events').prepend(event)
+
+      //Add draggable funtionality
+      init_events(event)
+
+      //Remove event from text input
+      $('#new-event').val('')
+    })
+  })
+
+    });
+</script>
+<script type="text/javascript" src="/assets/js/plugins/bootstrap-switch.js"></script>
+ <script type="text/javascript" type="text/javascript">
+    $(document).ready(function() {
+        // the body of this function is in assets/js/now-ui-kit.js
+        nowuiKit.initSliders();
+    });
+
+    function scrollToDownload() {
+
+        if ($('.section-download').length != 0) {
+            $("html, body").animate({
+                scrollTop: $('.section-download').offset().top
+            }, 1000);
+        }
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#schedule').addClass('active');
+    })
+</script>

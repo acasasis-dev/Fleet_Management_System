@@ -1,0 +1,210 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Repair</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            Unit Type
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="Dropdown">
+                                            <a class="dropdown-item" href="#">Jeep</a>
+                                            <a class="dropdown-item" href="#">Taxi</a>
+                                            <a class="dropdown-item" href="#">Bus</a>
+                                            <a class="dropdown-item" href="#">UV</a>
+                                            <a class="dropdown-item" href="#">FX</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            Shft
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="Dropdown">
+                                            <a class="dropdown-item" href="#"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>Unit</th>
+                                            <th>Deadline</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><span class="badge badge-danger">Pending</span></td>
+                                            <td>
+                                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal2">
+                                                     <i class="now-ui-icons design-2_ruler-pencil"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><span class="badge badge-warning">Under Repair</span></td>
+                                            <td>
+                                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal3">
+                                                     <i class="now-ui-icons design-2_ruler-pencil"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" method="POST" action="" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <h5><center></center></h5>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Unit Type</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="" disabled>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Middle Name</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Middle">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Last Name</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" class="form-control" placeholder="Last Name">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            <hr>
+                                        <h5><center>Basic Information</center></h5>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Birthday</label>
+                                                        <div class="col-md-12">
+                                                            <input type="date" class="form-control" placeholder="Matt Pogi">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Gender</label>
+                                                        <div class="radio">
+                                                            <input type="radio" name="radio1" id="radio1" value="option1">
+                                                                <label for="radio1">
+                                                                    Male
+                                                                </label></br>
+                                                            <input type="radio" name="radio1" id="radio2" value="option2" checked="">
+                                                                <label for="radio2">
+                                                                    Female
+                                                                </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <hr>
+                                        <h5><center>Unit</center></h5>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Unit Type</label>
+                                                        <div class="col-lg-12">
+                                                            <select class="form-control">
+                                                                <option disabled="" selected=""></option>
+                                                                <option>Jeep</option>
+                                                                <option></option>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" style="margin-left:80%" onclick="check( 'edit_form' )">Back</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    <!-- End of Modal -->
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="../../assets/js/core/jquery.min.js"></script>
+<script src="../../assets/js/core/popper.min.js"></script>
+<script src="../../assets/js/core/bootstrap.min.js"></script>
+<script src="../../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="../../assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../../assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="../../assets/demo/demo.js"></script>
+<script>
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+    });
+</script>
+<script src="/assets/js/plugins/bootstrap-switch.js"></script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        // the body of this function is in assets/js/now-ui-kit.js
+        nowuiKit.initSliders();
+    });
+
+    function scrollToDownload() {
+
+        if ($('.section-download').length != 0) {
+            $("html, body").animate({
+                scrollTop: $('.section-download').offset().top
+            }, 1000);
+        }
+    }
+</script>
+
+</html>

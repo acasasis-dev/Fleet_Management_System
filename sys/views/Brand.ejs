@@ -1,0 +1,309 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Brand</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <button id="addbutton" class="btn btn-primary" style="float:right" type="button" data-toggle="modal" data-target="#myModal1">
+                                    Add Brand
+                                </button>
+                                <div class="card-body">
+                                     <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead class=" text-primary">
+                                                <th>Brand</th>
+                                                <th hidden></th>
+                                                <% unit_types.forEach( cur => { %>
+                                                <th><%= cur.unittype_desc %></th>
+                                                <% }) %>
+                                                <th>Action</th>
+                                            </thead>
+                                            <% brands.forEach( cur => { %>
+                                                <% b_val = cur %>
+                                                <% b_cur = brand_unit_types[ cur.brand_id ]? brand_unit_types[ cur.brand_id ]: [] %>
+                                            <tr id="rec<%= cur.brand_id %>">
+                                                <td id="id" hidden><%= cur.brand_id %></td>
+                                                <td id="brand"><%= cur.brand_desc %></td>                                                
+                                                <% unit_types.forEach( cur => { %>
+                                                    <% if( b_cur.indexOf( cur.unittype_id ) == -1 ) { %>
+                                                        <td>
+                                                            <div class="checkbox">
+                                                                <input id="d<%= cur.unittype_id %>" type="checkbox" disabled>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    <% } else { %>
+                                                        <td>
+                                                            <div class="checkbox">
+                                                                <input id="d<%= cur.unittype_id %>" type="checkbox" disabled checked>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    <% } %>
+                                                <% }) %>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="">
+                                                            <button class="btn btn-round btn-icon btn-sm btn-default" type="button" data-toggle="modal" data-target="#myModal3" onclick="edit( 'rec<%= cur.brand_id %>' )">
+                                                                <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                            </button>
+                                                        </div>&nbsp
+                                                        <div class="">
+                                                            <button class="btn btn-round btn-icon btn-sm btn-danger" type="button" onclick="del_rec( <%= cur.brand_id %> )">
+                                                                <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                            </button>   
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <% }) %>                             
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="delete_form" method="POST" action="/admin/maintenance/brand/delete">
+                                                <input type="hidden" id="id" name="id">
+                                            </form>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Add Brand</h5>
+                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                    </button>
+                                </div>
+                                <form id="add_form" method="POST" action="/admin/maintenance/brand">
+                                <div class="modal-body">
+                                    <fieldset>
+                                        <div class="row">
+                                            <% if( !fform ) { %>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Brand</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" name="brand" id="brand" class="form-control" placeholder="Brand">
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">                                                    
+                                                    <label class="col-md-12 control-label">Unit Type</label>
+                                                    <div class="col-md-3">
+                                                        <select class="selectpicker" name="types" id="types" data-style="btn btn-info btn-round" multiple title="Unit Type" data-size="7">
+                                                                <option disabled> Multiple Options</option>
+                                                            <% unit_types.forEach( cur => { %>
+                                                                <option value="<%= cur.unittype_id %>"><%= cur.unittype_desc %></option>
+                                                            <% }) %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } else { %>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Brand</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" name="brand" id="brand" class="form-control" placeholder="Brand">
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">                                                    
+                                                    <label class="col-md-12 control-label">Unit Type</label>
+                                                    <div class="col-md-3">
+                                                        <select class="selectpicker" name="types" id="types" data-style="btn btn-info btn-round" multiple title="Unit Type" data-size="7">
+                                                                <option disabled> Multiple Options</option>
+                                                            <% unit_types.forEach( cur => { %>
+                                                                <option value="<%= cur.unittype_id %>"><%= cur.unittype_desc %></option>
+                                                            <% }) %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% } %>    
+                                        </div>
+                                    </fieldset>
+                                    <hr>
+                                </div>
+                                <div class="modal-footer">
+                                    <button id='addButton' type="submit" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit Brand</h5>
+                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                    </button>
+                                </div>
+                                <form id="edit_form" action="/admin/maintenance/brand/edit" method="POST">
+                                <input type="hidden" name="id" id="id">
+                                <div class="modal-body">
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">Brand</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" name="brand" id="brand" class="form-control" placeholder="Brand">
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">                                                    
+                                                    <label class="col-md-12 control-label">Unit Type</label>
+                                                    <div class="col-md-3">
+                                                        <select class="selectpicker" name="types" id="types" data-style="btn btn-info btn-round" multiple title="Unit Type" data-size="7">
+                                                                <option disabled> Multiple Options</option>
+                                                            <% unit_types.forEach( cur => { %>
+                                                                <option id="d<%= cur.unittype_id %>" value="<%= cur.unittype_id %>"><%= cur.unittype_desc %></option>
+                                                            <% }) %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <hr>
+                                <div class="modal-footer">
+                                    <button type="submit" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Modal -->
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <% include templates/functions %>
+    <script>
+        aj = new XMLHttpRequest()
+
+        function edit( par ) {
+            p = document.getElementById( par )
+            pch = p.children
+            ef = document.getElementById( "edit_form" )
+            el = ef.elements
+
+            el.id.value = pch.id.innerHTML
+            el.brand.value = pch.brand.innerHTML
+            console.log( "ANOTHER RECORD")
+            for( x = 2; x < pch.length; x ++ ) {
+                ch = pch[x].children[0].children[0]
+                if( !el.types.children[ ch.id ] ) {
+                    console.log( "FAILED:", ch.id )
+                    continue                    
+                } else {
+                    console.log( "SUCCESS:", ch.id )
+                    if( ch.type == "checkbox" ) {
+                        console.log( "SUCCESS 2")
+                        el.types.children[ ch.id ].selected = false
+                        if( ch.checked == true ) {
+                            console.log( "SUCCESS 3")
+                            el.types.children[ ch.id ].selected = true
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+<script>    
+        var $this = $(this)
+        $('#maintenance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#maintenance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#maintenance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesMaintenance.collapse').addClass('show');
+        
+        $('#brand').addClass('active');
+</script>
+<script>
+    <% console.log( "Front end", fform ) %>
+    <% if( Object.keys( fform ).length > 1 ) { %>
+            document.getElementById( "addbutton" ).click()
+            swal({ title: "Warning!",
+                   text: "<%= fdesc %>",
+                   timer: 2000,
+                   type: 'warning',
+                   showConfirmButton: false
+                }).catch(swal.noop)
+        <% } else { %>
+            <% if( added == 1 ) { %>
+                swal({
+                    title: "Brand Successfully Added!",
+                    // text: "added!",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "success"
+                }).catch(swal.noop)
+            <% } else if( deleted == 1 ) { %>
+                swal({
+                    title: "Brand Successfully Deleted!",
+                    // text: "added!",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "success"
+                }).catch(swal.noop)
+            <% } else if( deleted == 2 ) { %>
+                swal({ title: "Warning!",
+                   text: "<%= fdesc %>",
+                   timer: 2000,
+                   type: 'warning',
+                   showConfirmButton: false
+                }).catch(swal.noop)
+            <% } else if( edited == 1 ) { %>
+                swal({
+                    title: "Brand Successfully Edited!",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "success"
+                }).catch(swal.noop)
+            <% } %>
+        <% } %>
+        function del_rec( par ){
+             swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn btn-success' ,
+                    cancelButtonClass: 'btn btn-danger',
+                    confirmButtonText: 'Yes, delete it!',
+                    buttonsStyling: false
+                }).then(function() {
+                    document.getElementById( "delete_form" ).elements.id.value = par
+                    document.getElementById( "delete_form" ).submit()
+                }).catch(swal.noop);
+
+        }
+</script>

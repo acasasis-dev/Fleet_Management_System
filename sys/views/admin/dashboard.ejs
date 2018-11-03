@@ -1,0 +1,155 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+            </div> 
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h5 class="card-category">Auto Supplies</h5>
+                                <h4 class="card-title">Stocks</h4>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                                        <i class="now-ui-icons loader_gear"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>Product ID</th>
+                                            <th>Description</th>
+                                            <th>Quantity</th>
+                                    </thead>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Spark Plug</td>
+                                            <td><span class="badge badge-danger">Out of Stocks</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Distributor</td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>Piston</td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>Oil</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>Interior</td>
+                                            <td>5</td>
+                                        </tr>
+                                    </table>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h5 class="card-category">Upcoming Events</h5>
+                                <h4 class="card-title"></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th>Time</th>
+                                        </thead>
+                                        <tr>
+                                            <td>03/27/2018</td>
+                                            <td>Meeting</td>
+                                            <td>4:00PM</td>
+                                        <tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="now-ui-icons ui-2_time-alarm"></i>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-category">Offenses And Penalties</h5>
+                            <h4 class="card-title"></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead class=" text-primary">
+                                  <th>ID</th>
+                                  <th>Name</th>
+                                  <th>Classification</th>
+                                  <th>Offense</th>
+                                  <th>Amount of Penalty</th>
+                                </thead>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Ang Casasis</td>
+                                    <td>Boundary</td>
+                                    <td>3rd</td>
+                                    <td>P5,000.00</td>
+                                </tr>
+                              </table>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+        
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+<script>
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+    });
+</script>
+
+</html>

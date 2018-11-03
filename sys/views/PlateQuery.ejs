@@ -1,0 +1,55 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Unit Plate</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                                <div class="card-body">
+                                     <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">
+                                            <th>Plate Number</th>
+                                            <th>Unit Type</th>
+                                            <th>Plate Expiration</th>
+                                        </thead>
+                                        <tbody id="data">
+                                            <% for( x = 0; x < records.length; x ++ ) { %>
+                                            <tr>
+                                                <td><%= records[x].unitplate_no %></td>
+                                                <td><%= records[x].unittype_desc %></td>
+                                                <td><%= records[x].unit_plate_expiration.toDateString() %></td>
+                                            </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                    </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#query').addClass('active');
+        if($this.hasClass('show')) {
+            $('#query.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#query.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesQueries.collapse').addClass('show');
+        
+        $('#plateexpiration').addClass('active');
+    })
+</script>

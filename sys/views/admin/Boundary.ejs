@@ -1,0 +1,96 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <p align="right">
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal1">
+                                                            <i class="now-ui-icons ui-1_simple-add">Add</i>
+                                                    </button>
+                                                    </p>
+                                                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Boundary</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">
+                                                                            <label for="inputSched" class="col-lg-10 control-label">Schedule</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputSched" placeholder="Schedule">
+                                                                            </div></br>
+                                                                            <div class="col-lg-10 control-label">
+		                                    	                            <div class="form-group">
+		                                        	                        <label>Boundary Type</label>
+		                                        	                        <select class="form-control">
+			                                                                <option disabled="" selected=""></option>
+			                                                                <option>Fixed</option>
+			                                                                <option>Short</option>
+                                                                            </select>
+		                                    	                            </div>
+                                                                            </div></br> 
+                                                                            <label for="inputAmount" class="col-lg-10 control-label">Amount</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="number" class="form-control" id="inputAmount" placeholder="Amount">
+                                                                            </div></br>
+                                                                    </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary"> Submit </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>Driver</th>
+                                                <th>Trip Type</th>
+                                                <th>Date</th>
+                                                <th>Boundary Type</th>
+                                                <th>Boundary</th>
+                                                <th>Submitted</th>
+                                                <th>Balance</th>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+
+</html>

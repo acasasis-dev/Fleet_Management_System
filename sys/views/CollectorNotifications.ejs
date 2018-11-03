@@ -1,0 +1,55 @@
+<% include collector/templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Notifications</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    
+                                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">                                            
+                                            <th>Description</th>
+                                            <th>Date</th>
+                                        </thead>
+                                        <% for( x = 0; x < records.length; x ++ ) { %>
+                                        <tr>
+                                            <td><%= records[x].cn_desc %></td>
+                                            <td><%= records[x].for_date.toLocaleString() %></td>
+                                        </tr>
+                                        <% } %>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#remittance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#remittance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#remittance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesRemittance.collapse').addClass('show');
+        
+        $('#bound').addClass('active');
+    })
+</script>

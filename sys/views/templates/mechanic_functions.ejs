@@ -1,0 +1,29 @@
+<script>
+    aj = new XMLHttpRequest()
+
+    function check_proc() {
+        aj.onreadystatechange = () => {
+            if( aj.readyState == 4 ) {
+                res = aj.responseText.split( ", " )
+                console.log( res )
+                if( res.length > 1 ) {
+                    if( res[0] == "dispatch" )
+                        nowuiDashboard.showSidebarMessage( "NEW DISPATCH INSPECTION FOR DATE: " + res[1] )
+                    else if( res[0] == "arrival" )
+                        nowuiDashboard.showSidebarMessage( "NEW ARRIVAL INSPECTION FOR DATE: " + res[1] )
+                    else if( res[0] == "repair" )
+                        nowuiDashboard.showSidebarMessage( "NEW REPAIR PENDING: " + res[1] )
+                }
+            }
+        }
+
+        aj.open( "GET", "/mechanic/check" )
+        aj.send()
+    }
+
+    function check() {
+        aj.open( "GET", "/mechanic" )
+        aj.send()
+        setInterval( check_proc, 1000 )
+    }
+</script>

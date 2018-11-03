@@ -1,0 +1,122 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h2 class="title"></h2>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>Name</th>
+                                            <th>Classification</th>
+                                            <th>Offense</th>
+                                            <th>Amount of Penalty</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <% offense_records.forEach( cur => { %>
+                                        <tr id="r<%= cur.offense_rec_id %>">
+                                            <td id="id" hidden><%= cur.offense_rec_id %></td>
+                                            <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                                            <td><%= cur.offensecat_desc %></td>
+                                            <% if( cur.offense_no == 1 || cur.offense_no == 5 ) { %>
+                                                <td>1st Offense</td>
+                                            <% } else if( cur.offense_no == 2 || cur.offense_no == 6 ) { %>
+                                                <td>2nd Offense</td>
+                                            <% } else if( cur.offense_no == 3 || cur.offense_no == 7 ) { %>
+                                                <td>3rd Offense</td>
+                                            <% } else { %>
+                                                <td>Final Offense</td>
+                                            <% } %>
+                                            <td id="amount" hidden><%= cur.penalty_amount %></td>
+                                            <td>P<%= cur.penalty_amount %></td>
+                                            <td><%= cur.for_date.toDateString() %></td>
+                                            <td>
+                                                <div class="row">
+                                                    <% console.log( cur.penalty_id ) %>
+                                                    <% if( cur.penalty_id >= 5 && cur.penalty_id <= 8 ) { %>
+                                                    <div class="">
+                                                        <button class="btn btn-round btn-icon btn-sm btn-default" type="button" data-toggle="modal" data-target="#myModal1" onclick="edit( 'r<%= cur.offense_rec_id %>', 'edit_form' )">
+                                                        <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                        </button>
+                                                    </div>
+                                                    <% } else { %>
+                                                    <div class="">
+                                                        <form method="POST" action="/admin/offenses_and_penalties/revert">
+                                                            <input type="hidden" name="id" value="<%= cur.offense_rec_id %>">
+                                                            <input type="hidden" name="pid" value="<%= cur.penalty_id %>">
+                                                            <button class="btn btn-round btn-icon btn-sm btn-default" type="submit">
+                                                            <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    <% } %>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% }) %>      
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+    
+                </div>
+            </footer>
+        </div>
+    </div>
+    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Edit Amount</h5>
+                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                        </button>
+                </div>
+                <form id="edit_form" method="POST" action="/admin/offenses_and_penalties" enctype="multipart/form-data">
+                <input type="hidden" name="id" id="id">
+                <div class="modal-body">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-lg-12 control-label">Amount</label>
+                                    <div class="col-md-64">
+                                        <input type="text" class="form-control" name="amount" id="amount">
+                                    </div>
+                                </div>
+                            </div>
+                        </center>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                </div>
+                </form>
+            </div>                                                            
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#offensesandpenalties').addClass('active');
+    })
+</script>
+<% include templates/functions %>

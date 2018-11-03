@@ -1,0 +1,155 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+
+<div class="panel-header">
+<div class="header text-center">
+    <h1 class="title">Schedule</h1>
+</div>
+</div>
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-12 col-md-6">
+                <div class="card card-chart">
+                    <div class="card-header">
+                        <h4 class="card-title"></h4>
+                    <div class="row">
+                    <div class="col-lg-6">
+                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                Shift
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="Dropdown">
+                            <a class="dropdown-item" href="#">Morning Shift</a>
+                            <a class="dropdown-item" href="#">Afternoon Shift</a>
+                            <a class="dropdown-item" href="#">Wholeday Shift</a>
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <button class="btn btn-default dropdown-toggle" style="float:right" data-toggle="dropdown">
+                            Unit Type
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="Dropdown">
+                            <a class="dropdown-item" href="#">Jeep</a>
+                            <a class="dropdown-item" href="#">Taxi</a>
+                            <a class="dropdown-item" href="#">Bus</a>
+                            <a class="dropdown-item" href="#">UV</a>
+                            <a class="dropdown-item" href="#">FX</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>Routes</th>
+                            <th>Unit</th>
+                            <th>Driver</th>
+                            <th>Action</th>
+                        </thead>
+                        <% schedules.forEach( cur => { %>
+                        <tr>
+                            <td><%= cur.route_from + " - " + cur.route_to %></td>
+                            <td><%= cur.unitplate_no %></td>
+                            <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                            <td>
+                                <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal5">
+                                    <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                </button>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </table>
+                <form method="POST" action="/admin/schedule/view/send">
+                    <input type="hidden" name="date" value="<%= sched_date %>">
+                    <button type="submit" class="btn btn-primary" style="float:right">
+                        Submit
+                    </button>
+                </form>
+                </div>
+            </div>
+            <div class="card-footer">
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Edit Driver</h5>
+                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                    </button>
+            </div>
+            <form id="edit_form" method="POST" action="" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <fieldset>
+                    <center>
+                        <h5></h5>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="inputDate" class="col-lg-10 control-label">Driver</label>
+                                    <div class="col-lg-10">
+                                        <select name="reliever">
+                                            <% relievers.forEach( cur => { %>
+                                                <option value="<%= cur.driver_id %>"><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></option>
+                                            <% }) %>
+                                        </select>
+                                    </div></br>
+                            </div>
+                        </div>
+                    </center>
+                </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" style="margin-left:80%" onclick="check( 'edit_form' )"> Submit </button>
+                    </div>
+                    </form>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+                    <!-- End of Modal -->
+</div>
+</div>
+</body>
+<!--   Core JS Files   -->
+<script src="../../assets/js/core/jquery.min.js"></script>
+<script src="../../assets/js/core/popper.min.js"></script>
+<script src="../../assets/js/core/bootstrap.min.js"></script>
+<script src="../../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="../../assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="../../assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../../assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="../../assets/demo/demo.js"></script>
+<script>
+    $(document).ready(function() {
+// Javascript method's body can be found in assets/js/demos.js
+    demo.initDashboardPageCharts();
+});
+</script>
+<script src="/assets/js/plugins/bootstrap-switch.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+// the body of this function is in assets/js/now-ui-kit.js
+    nowuiKit.initSliders();
+});
+
+function scrollToDownload() {
+
+    if ($('.section-download').length != 0) {
+        $("html, body").animate({
+    scrollTop: $('.section-download').offset().top
+        }, 1000);
+}
+}
+</script>
+
+</html>

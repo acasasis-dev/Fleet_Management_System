@@ -1,0 +1,109 @@
+<% include templates/dispatchersidebar %>
+<% include templates/footer %>
+<% include templates/topbar %>
+        
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Schedule</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <select id="shift" class="form-control" onchange="filter()">
+                                            <option value="All" selected="">Shift</option>
+                                            <option value="Morning">Morning Shift</option>
+                                            <option value="Afternoon">Afternoon Shift</option>
+                                            <option value="Wholeday">Wholeday Shift</option>
+                                        </select>
+                                    </div> 
+                                    <div class="col-lg-3">
+                                        <select id="utype" class="form-control" onchange="filter()">
+                                            <option value="All" selected="">All Unit Types</option>
+                                            <option value="Bus">Bus</option>
+                                            <option value="FX">FX</option>
+                                            <option value="Jeep">Jeep</option>
+                                            <option value="UV">UV</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            <div class="card-body">
+                                <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">
+                                            <th>Routes</th>
+                                            <th>Unit</th>
+                                            <th>Driver</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <% dispatches.forEach( cur => { %>
+                                        <tr>
+                                            <td><%= cur.route_from + " - " + cur.route_to %></td>
+                                            <td><%= cur.unitplate_no %></td>
+                                            <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                                            <td>
+                                                <% if( !cur.time_dispatched ) { %>
+                                                <form method="POST" action="/dispatcher/dispatch">
+                                                    <input type="hidden" name="id" value="<%= cur.sched_id %>">
+                                                    <button class="btn btn-round btn-success" type="submit" data-toggle="modal" data-target="#myModal3">
+                                                        Dispatch 
+                                                    </button>
+                                                </form>
+                                                <% } else { %>
+                                                    <span class="badge badge-success">Dispatched</span>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+            <!-- <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="https://www.creative-tim.com">
+                                    Creative Tim
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://presentation.creative-tim.com">
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://blog.creative-tim.com">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>, Designed by
+                        <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
+                        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+                    </div>
+                </div>
+            </footer> -->
+        </div>
+    </div>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#dispatch').addClass('active');
+    })
+    </script>
+</body>

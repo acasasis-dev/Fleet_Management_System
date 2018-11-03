@@ -1,0 +1,231 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Boundary Reports</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12"> 
+                        <div class="card">
+                            <div class="card-header">    
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-info" onclick="javascript: window.location = '/admin/reports/boundary?view=1'">Daily</button>
+                                    <button type="button" class="btn btn-info" onclick="javascript: window.location = '/admin/reports/boundary?view=2'">Weekly</button>
+                                    <button type="button" class="btn btn-info" onclick="javascript: window.location = '/admin/reports/boundary?view=3'">Monthly</button>
+                                    <button type="button" class="btn btn-info" onclick="javascript: window.location = '/admin/reports/boundary?view=4'">Yearly</button>
+                                    <% if( view == 1 ) { %>
+                                    <div class="col-lg-5">
+                                        From: <input type="date" id="from" class="form-control" style="float:right; margin-left:50px;" onchange="filt()"><br>
+                                        To: <input type="date" id="to" class="form-control" style="float:right; margin-left:50px;" onchange="filt()">
+                                    </div>
+                                    <% } %>                                  
+                                    <a href="/assets/outputs/report.xlsx" style="float: right" download>Download Report</a>
+                                    </button>
+                                </div>                                                
+                                <div class="card-body">
+                                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">
+                                            <% if( view == 1 ) { %>
+                                                <% date_view = "Date" %>
+                                            <% } else if( view == 2 ) { %>
+                                                <% date_view = "Week" %>
+                                            <% } else if( view == 3 ) { %>
+                                                <% date_view = "Month" %>
+                                            <% } else { %>
+                                                <% date_view = "Year" } %>
+                                            <th><%= date_view %></th>
+                                            <th>Unit Type</th>
+                                            <th>Boundary Amount</th>
+                                            <th>Amount Collected</th>
+                                            <th>Balance</th>
+                                        </thead>
+                                        <tbody id="data">
+                                            <% records.forEach( cur => { %>
+                                            <tr id="r">
+                                                <td id="dorig" hidden><%= cur.dorig %></td>
+                                                <td><%= cur.for_date %></td>
+                                                <td><%= cur.unittype_desc %></td>
+                                                <td id="amount"><%= cur.amount %></td>
+                                                <td id="paid"><%= cur.collected %></td>
+                                                <td id="balance"><%= cur.balance %></td>
+                                            </tr>
+                                            <% }) %>
+                                            <tr>
+                                                <td><b>Total<b></td>
+                                                <td></td>
+                                                <td><b id="tamount"><b></td>
+                                                <td><b id="tpaid"><b></td>
+                                                <td><b id="tbalance"><b></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>                                        
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.min.js" ></script>
+<!-- Chart JS -->
+<script src="../assets/js/plugins/chartjs.min.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc --><script src="../assets/js/now-ui-dashboard.min69ea.js?v=1.1.2" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="../assets/demo/demo.js"></script>
+<script>
+    d = document.getElementById( "data" ).children
+        console.log( d )
+        otamount = 0
+        otpaid = 0
+        otbalance = 0
+        for( x = 0; x < d.length; x ++ ) {
+            y = d[x].children
+            if( y.amount )
+                otamount += Number( y.amount.innerHTML )
+            if( y.paid )
+                otpaid += Number( y.paid.innerHTML )
+            if( y.balance )
+                otbalance += Number( y.balance.innerHTML )
+        }
+
+        document.getElementById( "tamount" ).innerHTML = otamount
+        document.getElementById( "tpaid" ).innerHTML = otpaid
+        document.getElementById( "tbalance" ).innerHTML = otbalance
+
+        function filt() {
+            f = document.getElementById( "from" ).value
+            t = document.getElementById( "to" ).value
+
+            if( f && t ) {
+                console.log( "OPTION 1" )
+                for( x = 0; x < d.length; x ++ ) {
+                    y = d[x].children
+                    if( !( new Date( new Date( y.dorig.innerHTML ).toLocaleDateString() ) >= new Date( new Date( f ).toLocaleDateString() ) && new Date( new Date( y.dorig.innerHTML ).toLocaleDateString() ) <= new Date( new Date( t ).toLocaleDateString() ) ) ) {
+                        d[x].hidden = true
+                    } else {
+                        d[x].hidden = false
+                    }
+                }                
+            } else if( f && !t ){
+                console.log( "OPTION 2" )
+                for( x = 0; x < d.length; x ++ ) {
+                    y = d[x].children
+                    console.log( new Date( y.dorig.innerHTML ) >= new Date( f ) )
+                    console.log( y.dorig.innerHTML, f )
+                    if( new Date( new Date( y.dorig.innerHTML ).toLocaleDateString() ) >= new Date( new Date( f ).toLocaleDateString() ) ) {
+                        d[x].hidden = false
+                    } else {
+                        d[x].hidden = true
+                    }
+                }
+            } else {
+                console.log( "OPTION 3" )
+                for( x = 0; x < d.length; x ++ ) {
+                    y = d[x].children
+                    if( !( new Date( new Date( y.dorig.innerHTML ).toLocaleDateString() ) <= new Date( new Date( t ).toLocaleDateString() ) ) ) {
+                        d[x].hidden = true
+                    } else {
+                        d[x].hidden = false
+                    }
+                }
+            }
+        }
+  $(document).ready(function(){
+    // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
+    demo.initChartPageCharts();
+  });
+ctx = document.getElementById('lineChartExampleWithNumbersAndGrid').getContext("2d");
+
+      gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+      gradientStroke.addColorStop(0, '#18ce0f');
+      gradientStroke.addColorStop(1, chartColor);
+
+      gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+      gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+      gradientFill.addColorStop(1, hexToRGB('#18ce0f',0.4));
+
+      myChart = new Chart(ctx, {
+          type: 'line',
+          responsive: true,
+          data: {
+              labels: ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"],
+              datasets: [{
+                  label: "Bus",
+                  borderColor: "#18ce0f",
+                  pointBorderColor: "#FFF",
+                  pointBackgroundColor: "#18ce0f",
+                  pointBorderWidth: 2,
+                  pointHoverRadius: 4,
+                  pointHoverBorderWidth: 1,
+                  pointRadius: 4,
+                  fill: true,
+                  backgroundColor: gradientFill,
+                  borderWidth: 2,
+                  data: [10, 20, 30, 40, 50, 60, 70, 80]
+              },
+                {
+                  label: "Jeep",
+                  borderColor: "#555",
+                  pointBorderColor: "#000",
+                  pointBackgroundColor: "555",
+                  pointBorderWidth: 2,
+                  pointHoverRadius: 4,
+                  pointHoverBorderWidth: 1,
+                  pointRadius: 4,
+                  fill: true,
+                  backgroundColor: gradientFill,
+                  borderWidth: 2,
+                  data: [100, 25, 35, 45, 55, 65, 75, 85]
+              },{
+                  label: "Taxi",
+                  borderColor: "#555",
+                  pointBorderColor: "#000",
+                  pointBackgroundColor: "555",
+                  pointBorderWidth: 2,
+                  pointHoverRadius: 4,
+                  pointHoverBorderWidth: 1,
+                  pointRadius: 4,
+                  fill: true,
+                  backgroundColor: gradientFill,
+                  borderWidth: 2,
+                  data: [200, 125, 135, 45, 55, 65, 75, 85]
+              },{
+                  label: "UV",
+                  borderColor: "#555",
+                  pointBorderColor: "#000",
+                  pointBackgroundColor: "555",
+                  pointBorderWidth: 2,
+                  pointHoverRadius: 4,
+                  pointHoverBorderWidth: 1,
+                  pointRadius: 4,
+                  fill: true,
+                  backgroundColor: gradientFill,
+                  borderWidth: 2,
+                  data: [100, 25, 35, 45, 55, 65, 75, 85]
+              },{
+                  label: "FX",
+                  borderColor: "#",
+                  pointBorderColor: "#000",
+                  pointBackgroundColor: "555",
+                  pointBorderWidth: 2,
+                  pointHoverRadius: 4,
+                  pointHoverBorderWidth: 1,
+                  pointRadius: 4,
+                  fill: true,
+                  backgroundColor: gradientFill,
+                  borderWidth: 2,
+                  data: [100, 25, 35, 45, 55, 65, 75, 85]
+              }]
+          },
+          options: gradientChartOptionsConfigurationWithNumbersAndGrid
+      });        
+      </script>
+</body>

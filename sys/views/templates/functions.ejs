@@ -1,0 +1,49 @@
+<script>
+	function unit_filter() {
+		f = document.getElementById( "utype" ).value
+		data = document.getElementById( "data" ).children
+
+		for( x = 0; x < data.length; x ++ ) {
+			if( f == "All" || data[x].children.utype.innerHTML == f ) {
+				if( data[x].hasAttribute( "hidden" ) )
+					data[x].removeAttribute( "hidden" )
+			} else {
+					data[x].setAttribute( "hidden", "true" )
+			}
+		}
+	}
+
+	function sync_filter() {
+		f = document.getElementById( "sctype" ).value
+		g = document.getElementById( "utype" ).value
+		data = document.getElementById( "data" ).children
+
+		console.log( "Sched Type:", f, ", Unit Type:", g )
+		for( x = 0; x < data.length; x ++ ) {
+			console.log( data[x].children.utype.innerHTML, data[x].children.sctype.innerHTML )
+			if( 
+				( f == "All" && g == "All" ) || 
+				( data[x].children.utype.innerHTML == g && data[x].children.sctype.innerHTML == f ) ||
+				( data[x].children.utype.innerHTML == g && f == "All" ) ||
+				( g == "All" && data[x].children.sctype.innerHTML == f )
+			) {
+				if( data[x].hasAttribute( "hidden" ) )
+					data[x].removeAttribute( "hidden" )
+			} else {
+				data[x].setAttribute( "hidden", "true" )
+			}
+		}
+	}
+
+	function edit( p1, p2 ) {
+		f = document.getElementById( p1 ).childNodes
+		e = document.getElementById( p2 ).elements
+
+		for( x = 0; x < f.length; x ++ ) {
+			if( f[x].id ) {
+				if( e[ f[x].id ] )
+					e[ f[x].id ].value = f[x].innerHTML
+			}
+		}
+	}
+</script>

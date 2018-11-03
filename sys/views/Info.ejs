@@ -1,0 +1,142 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                                    <p align="right">
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal1">
+                                                            <i class="now-ui-icons ui-1_simple-add"> Add Jeepney</i>
+                                                    </button>
+                                                    </p>
+                                                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Add a Jeepney</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">
+                                                                            <label for="inputPlate" class="col-lg-10 control-label">Plate Number</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputPlate" placeholder="Plate Number">
+                                                                            </div></br>
+                                                                            <label for="inputRoute" class="col-lg-10 control-label">Route</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputRoute" placeholder="Route">
+                                                                            </div></br>
+                                                                            <label for="inputModel" class="col-lg-10 control-label">Model</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputModel" placeholder="Model">
+                                                                            </div></br>
+                                                                            <label for="inputYear" class="col-lg-10 control-label">Year Acquired</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputYear" placeholder="Year Acquired">
+                                                                            </div></br>
+                                                                    </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary"> Submit </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>Plate Number</th>
+                                                <th>Route</th>
+                                                <th>Model</th>
+                                                <th>Year Acquired</th>
+                                                <th>Action</th>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                            <i class="now-ui-icons design_bullet-list-67"></i> 
+                                                    </button>
+                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Edit a Unit</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">
+                                                                            <label for="inputPlate" class="col-lg-10 control-label">Plate Number</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputPlate" placeholder="Plate Number">
+                                                                            </div></br>
+                                                                            <label for="inputRoute" class="col-lg-10 control-label">Route</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputRoute" placeholder="Route">
+                                                                            </div></br>
+                                                                            <label for="inputModel" class="col-lg-10 control-label">Model</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputModel" placeholder="Model">
+                                                                            </div></br>
+                                                                            <label for="inputYear" class="col-lg-10 control-label">Year Acquired</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputYear" placeholder="Year Acquired">
+                                                                            </div></br>
+                                                                    </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary"> Submit </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal3">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+
+</html>

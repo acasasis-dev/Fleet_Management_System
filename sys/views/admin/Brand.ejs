@@ -1,0 +1,219 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Brand</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <button class="btn btn-primary" style="float:right" type="button" data-toggle="modal" data-target="#myModal1">
+                                    Add Brand
+                                </button>
+                                <div class="card-body">
+                                    <div class="table-responsive">                                    
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>Brand</th>
+                                                <% unit_types.forEach( cur => { %>
+                                                <th><%= cur.unittype_desc %></th>
+                                                <% }) %>
+                                                <th>Action</th>
+                                            </thead>
+                                            <% brands.forEach( cur => { %>
+                                                <% b_val = cur %>
+                                                <% b_cur = brand_unit_types[ cur.brand_id ]? brand_unit_types[ cur.brand_id ]: [] %>
+                                            <tr id="rec<%= cur.brand_id %>">
+                                                <td id="brand"><%= cur.brand_desc %></td>
+                                                
+                                                <% unit_types.forEach( cur => { %>
+                                                    <% if( b_cur.indexOf( cur.unittype_id ) == -1 ) { %>
+                                                        <td>
+                                                            <div class="checkbox">
+                                                                <input id="d<%= cur.unittype_id %>" type="checkbox" disabled>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    <% } else { %>
+                                                        <td>
+                                                            <div class="checkbox">
+                                                                <input id="d<%= cur.unittype_id %>" type="checkbox" disabled checked>
+                                                                <label>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    <% } %>
+                                                <% }) %>
+                                                <td>
+                                                    <button class="btn btn-default" type="button" data-toggle="modal" data-target="#myModal3" onclick="editf( 'rec<%= cur.unittype_id %>' )">
+                                                        <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                    </button>
+                                                    <button class="btn btn-danger" type="button">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <% }) %>                              
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Add Brand</h5>
+                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                    </button>
+                                </div>
+                                <form id="add_form" action="#">
+                                <div class="modal-body">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <center>
+                                                <label class="col-lg-2 control-label">Brand</label>
+                                                <div class="col-lg-7">
+                                                    <input type="text" class="form-control" id="brand" placeholder="Brand">
+                                                </div></br>
+                                            </center>
+                                            <div class="row">
+                                                <label class="col-lg-12 control-label"><center>Unit Type</center></label>
+                                                <% unit_types.forEach( cur => { %>
+                                                    <div class="col-lg-3">
+                                                        <div class="checkbox">
+                                                            <input id="checkbox<%= cur.unittype_id %>" type="checkbox">
+                                                            <label for="checkbox<%= cur.unittype_id %>">
+                                                                <%= cur.unittype_desc %>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                <% }) %>
+                                            </div>
+                                            <hr>
+                                    </div>
+                                    </fieldset>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="add_brand()" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit Brand</h5>
+                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                    </button>
+                                </div>
+                                <form id="edit_form" action="/admin/maintenance/brand/edit" method="POST">
+                                <div class="modal-body">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <center>
+                                                <label class="col-lg-2 control-label">Brand</label>
+                                                <div class="col-lg-7">
+                                                    <input type="text" class="form-control" id="brand" placeholder="Brand">
+                                                </div></br>
+                                            </center>
+                                            <div class="row">
+                                                <label class="col-lg-12 control-label"><center>Unit Type</center></label>
+                                                    <% unit_types.forEach( cur => { %>
+                                                    <div class="col-lg-3">
+                                                        <div class="checkbox">
+                                                            <input id="ch<%= cur.unittype_id %>" type="checkbox">
+                                                            <label for="ch<%= cur.unittype_id %>">
+                                                                <%= cur.unittype_desc %>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <% }) %>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <hr>
+                                <div class="modal-footer">
+                                    <button type="button" onclick="add_brand()" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Modal -->
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        aj = new XMLHttpRequest()
+
+        function add_brand() {
+            t = document.getElementById( "types" )
+            arr = t.getElementsByTagName( "input" )
+            brand = document.getElementById( "brand" ).value
+            n = []
+
+            for( x = 0; x < arr.length; x ++ ) {
+                if( arr[x].checked )
+                    n.push( arr[x].value )
+            }
+
+            aj.onreadystatechange = () => {
+                if( aj.readyState == 4 ) {
+                    window.location.reload()
+                }
+            }
+
+            aj.open( "POST", "/admin/maintenance/brand" )
+            aj.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" )
+            send = ""
+            n.forEach( cur => {
+                send += cur + ";"
+            })
+            aj.send( "data=" + brand + "," + send )
+        }
+
+        function editf( par ) {
+            p = document.getElementById( par )
+            pch = p.children
+            ef = document.getElementById( "edit_form" )
+            el = ef.elements
+
+            for( x = 1; x <= 4; x ++ ) {
+
+            }
+        }
+    </script>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+
+</html>

@@ -1,0 +1,54 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Repair Reports per Brand Type</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">    
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-info" onclick="javascript: window.location = '/admin/reports/repair_per_brand?view=1'">Weekly</button>
+                                    <button type="button" class="btn btn-info" onclick="javascript: window.location = '/admin/reports/repair_per_brand?view=2'">Monthly</button>
+                                    <button type="button" class="btn btn-info" onclick="javascript: window.location = '/admin/reports/repair_per_brand?view=3'">Yearly</button>
+                                    <a href="/assets/outputs/report.xlsx" style="float: right" download>Download Report</a>
+                                </div>                                                
+                                <div class="card-body">
+                                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">
+                                            <% if( view == 1 ) { %>
+                                                <% date = "Week" %>
+                                            <% } else if( view == 2 ) { %>
+                                                <% date = "Month" %> 
+                                            <% } else { %>
+                                                <% date = "Year" } %>
+                                            <th><%= date %></th>
+                                            <th>Unit Type</th>
+                                            <th>No. of Repair(s)</th>
+                                        </thead>
+                                        <tbody id="data">
+                                            <% records.forEach( cur => { %>
+                                            <tr>
+                                                <td><%= cur.for_date %></td>
+                                                <td><%= cur.brand_desc %></td>
+                                                <td><%= cur.repair_count %></td>
+                                            </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,105 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>Shift</th>
+                                                <th>Start</th>
+                                                <th>End</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <% sched_types.forEach( cur => { %>
+                                            <tr id="r<%= cur.sctype_id %>">
+                                                <td id="id" hidden><%= cur.sctype_id %></td>
+                                                <td><%= cur.sctype_desc + " Shift" %></td>
+                                                <td><%= cur.sctype_from %></td>
+                                                <td><%= cur.sctype_to %></td>
+                                                <td id="start" hidden><%= cur.orig_from %></td>
+                                                <td id="end" hidden><%= cur.orig_to %></td>
+                                                <td>
+                                                    <button class="btn btn-default" type="button"data-toggle="modal" data-target="#myModal1" onclick="edit( 'r<%= cur.sctype_id %>', 'edit_form' )">
+                                                            <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                    </button>             
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit Shift</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" method="POST" action="/admin/utilities/triphour">
+                                    <input type="hidden" id="id" name="id">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Start</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="time" class="form-control" id="start" name="start" placeholder="From">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">End</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="time" class="form-control" id="end" name="end" placeholder="From">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <% include templates/functions %>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+
+</html>

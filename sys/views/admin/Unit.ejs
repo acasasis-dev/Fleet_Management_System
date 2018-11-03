@@ -1,0 +1,549 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Unit</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <button class="btn btn-primary" style="float:right" type="button"data-toggle="modal" data-target="#myModal1">
+                                    Add Unit
+                                </button>
+                                <div class="col-lg-6">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                            Unit Type
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="Dropdown">
+                                        <a class="dropdown-header">Unit Type</a>  
+                                        <a class="dropdown-item" href="#">All Unit Type</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Bus</a>
+                                        <a class="dropdown-item" href="#">FX</a>
+                                        <a class="dropdown-item" href="#">Jeepney</a>
+                                        <a class="dropdown-item" href="#">Taxi</a>
+                                        <a class="dropdown-item" href="#">UV</a>
+                                    </div> 
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="text-primary">
+                                                <th>Unit Type</th>   
+                                                <th>Plate Number</th>                                       
+                                                <th>Route</th>
+                                                <th>Coding</th>
+                                                <th>Route Expiration</th>
+                                                <th><center>Action</center></th>
+                                            </thead>
+                                                <% units.forEach( cur => { %>
+                                                <tr id="rec<%= cur.unit_id %>">
+                                                    <td><%= cur.unittype_desc %></td>
+                                                    <td><%= cur.unitplate_no %></td>
+                                                    <td><%= cur.route_from + " - " + cur.route_to %></td>
+                                                    <td><%= cur.unit_coding %></td>
+                                                    <td><%= cur.unitroute_expiration.toDateString() %></td>
+                                                    <td id="chassino" hidden><%= cur.unitchassi_no %></td>
+                                                    <td id="engineno" hidden><%= cur.unitengine_no %></td> 
+                                                    <td id="bodyno" hidden><%= cur.unitbody_no %></td>
+                                                    <td id="capt" hidden><%= cur.unit_capacity %></td>
+                                                    <td id="rreg" hidden><%= cur.unitroute_registered.toDateString() %></td>
+                                                    <td>
+                                                        <center>
+                                                        <button class="btn btn-info" type="button"data-toggle="modal" data-target="#myModal2" onclick="expand_info( '<%= "rec" + cur.unit_id %>')">
+                                                            <i class="now-ui-icons design_bullet-list-67"></i> 
+                                                        </button>
+                                                        <button class="btn btn-default" type="button"data-toggle="modal" data-target="#myModal3">
+                                                            <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                        </button>
+                                                        <button class="btn btn-danger" type="button"data-toggle="modal">
+                                                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                        </button>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <!-- Modal  -->
+                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Add a Unit</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="add_form" method="POST" action="/admin/maintenance/unit">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Unit Type</label>
+                                                        <div class="col-md-12">
+                                                            <select id="utype" name="utype" class="form-control" onchange="typedef( 'add_form' )">
+                                                                <option disabled="" selected=""></option>
+                                                                <% unit_types.forEach( cur => { %>
+                                                                <option value="<%= cur.unittype_id %>"><%= cur.unittype_desc %></option>
+                                                                <% }) %>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Brand</label>
+                                                        <div class="col-md-12">
+                                                            <select id="brand" name="brand" class="form-control">
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Model</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="model" class="form-control" placeholder="Model">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Max Capacity</label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" name="maxcap" class="form-control" placeholder="">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <center>
+                                                <label class="col-lg-10 control-label">Numbers</label>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Plate Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="plateno" class="form-control" placeholder="Plate Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Chassi Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="chassino" class="form-control" placeholder="Chassi Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Body Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="bodyno" class="form-control" placeholder="Body Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Engine Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="engineno" class="form-control" placeholder="Engine Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <center>
+                                                <label class="col-lg-10 control-label">Route</label>
+                                                <div class="col-lg-12">
+                                                    <select name="route" class="form-control">
+                                                        <option disabled="" selected=""></option>
+                                                        <% routes.forEach( cur => { %>
+                                                        <option value="<%= cur.route_id %>"><%= cur.route_from + " - " + cur.route_to %></option>
+                                                        <% }) %>
+                                                    </select>
+                                                </div></br>
+                                                <label class="col-lg-10 control-label">Route Registered</label>
+                                                <div class="col-lg-12">
+                                                    <input name="rreg" type="date" class="form-control" placeholder="Route Registered">
+                                                </div></br>
+                                            </center>
+                                            <hr>
+                                            <center>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Boundary</label>
+                                                        <div class="checkbox">
+                                                            <input id="checkbox1" type="checkbox">
+                                                            <label for="checkbox1">
+                                                                Set Default
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Morning Shift</label>
+                                                        <div class="col-md-12">
+                                                            <input name="mbound" type="number" class="form-control" placeholder="">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Afternoon Shift</label>
+                                                        <div class="col-md-12">
+                                                            <input name="abound" type="number" class="form-control" placeholder="">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Wholeday</label>
+                                                        <div class="col-md-12">
+                                                            <input name="wdbound" type="number" class="form-control" placeholder="">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                    </div>
+                                </form>
+                            </div>                                                            
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Unit Information</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="infos">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <center>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Chassi Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" class="form-control" id="chassino" placeholder="Chassi Number" disabled>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Engine Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" class="form-control" id="engineno" placeholder="Engine Number" disabled>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Body Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" class="form-control" id="bodyno" placeholder="Body Number" disabled>
+                                                        </div></br>
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                            </center>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Max Capacity</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="number" class="form-control" id="capt" placeholder="Max Capacity" disabled>
+                                                        </div></br>
+                                                    </div>
+                                                </div>    
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Route Registered</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" class="form-control" id="rreg" placeholder="Chassi Number" disabled>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                        </fieldset>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit Unit Information</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" method="POST" action="/admin/maintenance/unit/edit" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Unit Type</label>
+                                                        <div class="col-md-12">
+                                                            <select id="utype" name="utype" class="form-control" onchange="typedef( 'edit_form' )">
+                                                                <option disabled="" selected=""></option>
+                                                                <% unit_types.forEach( cur => { %>
+                                                                <option value="<%= cur.unittype_id %>"><%= cur.unittype_desc %></option>
+                                                                <% }) %>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Brand</label>
+                                                        <div class="col-md-12">
+                                                            <select id="brand" name="brand" class="form-control">
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Model</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" name="model" class="form-control" placeholder="Model">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Max Capacity</label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" name="maxcap" class="form-control" placeholder="">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <center>
+                                                <label class="col-lg-10 control-label">Numbers</label>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Plate Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="plateno" class="form-control" placeholder="Plate Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Chassi Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="chassino" class="form-control" placeholder="Chassi Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Body Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="bodyno" class="form-control" placeholder="Body Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Engine Number</label>
+                                                        <div class="col-lg-12">
+                                                            <input type="text" name="engineno" class="form-control" placeholder="Engine Number">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <center>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-md-12 control-label">Routes</label>
+                                                            <div class="col-md-12">
+                                                                <select id="" name="route" class="form-control">
+                                                                    <option disabled="" selected=""></option>
+                                                                    <% routes.forEach( cur => { %>
+                                                                    <option value="<%= cur.route_id %>"><%= cur.route_from + " - " + cur.route_to %></option>
+                                                                <% }) %>
+                                                            </select>
+                                                            </div></br>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="col-md-12 control-label">Route Registered</label>
+                                                            <div class="col-md-12">
+                                                                <input type="date" name="rreg" type="date" class="form-control" placeholder="">
+                                                            </div></br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </center>
+                                            <hr>
+                                            <center>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Boundary</label>
+                                                        <div class="checkbox">
+                                                            <input id="checkbox1" type="checkbox">
+                                                            <label for="checkbox1">
+                                                                Set Default
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </center>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Morning Shift</label>
+                                                        <div class="col-md-12">
+                                                            <input name="mbound" type="number" class="form-control" placeholder="">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Afternoon Shift</label>
+                                                        <div class="col-md-12">
+                                                            <input name="abound" type="number" class="form-control" placeholder="">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">Wholeday</label>
+                                                        <div class="col-md-12">
+                                                            <input name="wdbound" type="number" class="form-control" placeholder="">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" style="margin-left:80%" class="btn btn-primary"> Submit </button>
+                                    </div>
+                                </form>
+                                        </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- End Modal  -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        ajax = new XMLHttpRequest()
+
+        function typedef( par ) {
+            p = document.getElementById( par )
+            el = p.elements
+            ut = el.utype
+            b = el.brand
+            b.innerHTML = ""
+
+            ajax.onreadystatechange = () => {
+                if( ajax.readyState == 4 ) {
+                    res = ajax.responseText.split( ";" )
+                    res.forEach( cur => {
+                        cur = cur.split( ", " )
+                        b.innerHTML += '<option value="' + cur[0] + '">' + cur[1] + '</option>'
+                    })
+                }
+            }
+
+            ajax.open( "GET", "/admin/maintenance/unit/typedef?utype=" + ut.value )
+            ajax.send()
+        }
+
+        function expand_info( par ) {
+            p = document.getElementById( par )
+            f = document.getElementById( "infos" )
+            el = f.elements
+
+            el.chassino.value = p.children.chassino.innerHTML
+            el.engineno.value = p.children.engineno.innerHTML
+            el.bodyno.value = p.children.bodyno.innerHTML
+            el.capt.value = p.children.capt.innerHTML
+            el.rreg.value = p.children.rreg.innerHTML
+        }
+    </script>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+<script src="/assets/js/plugins/bootstrap-switch.js"></script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        // the body of this function is in assets/js/now-ui-kit.js
+        nowuiKit.initSliders();
+    });
+
+    function scrollToDownload() {
+
+        if ($('.section-download').length != 0) {
+            $("html, body").animate({
+                scrollTop: $('.section-download').offset().top
+            }, 1000);
+        }
+    }
+</script> 
+
+</html>

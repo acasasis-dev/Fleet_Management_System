@@ -1,0 +1,108 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+           <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Coding</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class=" text-primary">
+                                                <th>Number</th>
+                                                <th>Coding Day</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <% codings.forEach( cur => { %>
+                                            <tr id="r<%= cur.unit_id %>">
+                                                <td id="id" hidden><%= cur.unit_id %></td>
+                                                <td><%= cur.unitplate_no %></td>
+                                                <td id="coding"><%= cur.unit_coding %></td>
+                                                <td>
+                                                    <button class="btn btn-default" type="button"data-toggle="modal" data-target="#myModal1" onclick="edit( 'r<%= cur.unit_id %>', 'edit_form' )">
+                                                            <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modal  -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Edit Coding</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form id="edit_form" method="POST" action="/admin/utilities/coding">
+                                    <input type="hidden" id="id" name="id">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-lg-12 control-label">Day</label>
+                                                    <div class="col-lg-12">
+                                                        <select class="form-control" id="coding" name="coding">
+                                                            <option value="Monday">Monday</option>
+                                                            <option value="Tuesday">Tuesday</option>
+                                                            <option value="Wednesday">Wednesday</option>
+                                                            <option value="Thursday">Thursday</option>
+                                                            <option value="Friday">Friday</option>
+                                                            <option value="Saturday">Saturday</option>
+                                                            <option value="Sunday">Sunday</option>
+                                                        </select>
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                        </div>                                            
+                                </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                    </div>
+                                    </form>
+                                </div>                                                            
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal  -->
+                                
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <% include templates/functions %>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+
+</html>

@@ -1,0 +1,112 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Penalty Records</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4><% include templates/unit_filter %>
+                            <div class="card-body">
+                                 <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead class=" text-primary">
+                                            <th>Date</th>
+                                            <th>Driver</th>
+                                            <th>Amount</th>
+                                            <th>Paid</th>
+                                            <th>Balance</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <% penalty_records.forEach( cur => { %>
+                                         <tr id="r<%= cur.offense_rec_id %>">
+                                            <td><%= cur.for_date.toDateString() %></td>
+                                            <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                                            <td><%= cur.penalty_amount %></td>
+                                            <td><%= cur.paid %></td>
+                                            <td id="balance"><%= cur.balance %></td>
+                                            <td>
+                                                <% if( cur.balance != 0 ) { %>
+                                                <button class="btn btn-round btn-icon btn-default" type="button" data-toggle="modal" data-target="#myModal1" onclick="put_id( <%= cur.offense_rec_id %>, 'collect_form' ); paid_limit( 'r<%= cur.offense_rec_id %>' )">
+                                                    <i class="now-ui-icons shopping_delivery-fast"></i>
+                                                </button>
+                                                <% } else { %>
+                                                <span class="badge badge-success">Fully Paid</span>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    </table>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-content">
+                                <form id="collect_form" method="POST" action="/collector/records/penalty">
+                                    <input type="hidden" id="id" name="id">
+                                    <div class="modal-header">
+                                        <h5>Amount Collected</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>                                
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="col-lg-12 control-label">
+                                                <div class="form-group">
+                                                    <label>Amount</label>
+                                                        <input class="form-control" type="number" step="0.01" id="amount" name="amount">
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" style="margin-left:70%" class="btn btn-primary btn-fill pull-right"> Submit </button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+    <script>
+        function put_id( p1, p2 ) {
+            document.getElementById( p2 ).elements.id.value = p1
+        }
+
+        function paid_limit( par ) {
+            rec = document.getElementById( par ).children
+            f = document.getElementById( "collect_form" ).elements
+            console.log( rec.balance )            
+
+            f.amount.setAttribute( "max", rec.balance.innerHTML )
+            console.log( f.amount )
+        }
+    </script>
+</body>
+
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#recs').addClass('active');
+        if($this.hasClass('show')) {
+            $('#recs.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#recs.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesRecords.collapse').addClass('show');
+        
+        $('#penrecs').addClass('active');
+    })
+</script>

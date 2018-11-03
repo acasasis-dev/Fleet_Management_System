@@ -1,0 +1,180 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Auto Supply</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+                            <div class="card-header">
+                                    <button class="btn btn-primary" style="float:right" type="button" data-toggle="modal" data-target="#myModal1">
+                                        Add Auto Supply
+                                    </button>
+                            <div class="card-body ">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            
+                                            <th>Description</th>
+                                            <th>Action</th>
+                                        </thead>
+                                         <% rend2.forEach( cur => { %>                                            
+                                            <tr>
+                                                
+                                                
+                                                <td id="desc"><%= cur.supdesc %></td> 
+                                            <td>
+                                                <button class="btn btn-default" type="button"data-toggle="modal" data-target="#myModal2">
+                                                    <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                </button>
+                                                    <button class="btn btn-danger" type="button"data-toggle="modal" data-target="#myModal3">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form method="POST" action="/admin/maintenance/autosupply">
+                                    <div class="modal-header">
+                                        <h5>Add Auto Supply</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="col-lg-12 control-label">
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                        <select name="catid" class="form-control" id="type" name="dtype">
+                                                            <% rend.forEach( cur => { %>
+                                                            <option name="catid" value="<%= cur.catid %>"><%= cur.catdesc %></option>
+                                                            <% }) %>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-10 control-label">Description</label>
+                                                <div class="col-lg-12">
+                                                    <input name="supdesc"type="text" class="form-control" placeholder="Description">
+                                                </div></br>  
+                                            </div>
+                                            <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" style="margin-left:80%" class="btn btn-primary btn-fill pull-right"> Submit </button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <form method="POST" action="/admin/maintenance/autosupply">
+                                    <div class="modal-header">
+                                        <h5>Edit Auto Supply</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-lg-10 control-label">Description</label>
+                                                <div class="col-lg-12">
+                                                    <input type="text" class="form-control" placeholder="Description">
+                                                </div></br>  
+                                            </div>
+                                            <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" style="margin-left:80%" class="btn btn-primary btn-fill pull-right"> Submit </button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <!-- End of Modal -->
+            <footer class="footer">
+                <div class="container-fluid">    
+                </div>
+            </footer>
+            </div>
+    </div>
+
+    <script language="javascript">
+        function edit( str ) {
+            ch = document.getElementById( str ).children
+            el = document.getElementById( "edit_form" ).elements
+
+            el[ "id" ].value = ch[ "id" ].innerHTML
+            el[ "desc" ].value = ch[ "desc" ].innerHTML
+            if( Number( ch[ "quant" ].innerHTML ) )                
+                el[ "quant" ].value = ch[ "quant" ].innerHTML
+            else {
+                st = ch[ "quant" ].innerHTML.split( " " )[0]
+                if( Number( st ) )
+                    el[ "quant" ].value = st
+                else
+                    el[ "quant" ].value = 0        
+            }
+            el[ "price" ].value = ch[ "price" ].innerHTML.split( " " )[1]
+        }
+
+        function del( id ) {
+            var form = document.createElement( "form" )
+            form.setAttribute( "method", "post" )
+            form.setAttribute( "action", "/admin/maintenance/stocks/delete" )
+            var inp = document.createElement( "input" )
+            inp.setAttribute( "type", "hidden" )
+            inp.setAttribute( "name", "id" )
+            inp.setAttribute( "value", id )
+            form.appendChild( inp )
+            document.body.appendChild( form )
+            form.submit()
+        }
+    </script>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+<script>
+    $(document).ready(function() {
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initGoogleMaps();
+    });
+</script>
+
+</html>

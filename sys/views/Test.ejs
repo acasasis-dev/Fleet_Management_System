@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<title>Test Real Time Notification</title>
+	</head>
+	<body onload="ccheck()">
+		<b>STATUS: </b>
+		<b id="status">UPDATED</b>
+		<div>
+			<b>UPDATED DATA: </b>
+			<b id="updated_data"><%= data %></b>
+		</div>
+
+		<br/>
+		<form id="add_form">
+			<input type="text" id="idata">
+			<button type="button" onclick="pdata()">Submit</button>
+		</form>
+
+		<script>
+			ajax = new XMLHttpRequest()
+
+			function pdata() {
+				data = document.getElementById( "add_form" ).elements.idata
+
+				ajax.open( "POST", "/admin/notifs/add" )
+				ajax.setRequestHeader( "Content-type", "application/x-www-form-urlencoded" )
+				ajax.send( "data=" + data.value )
+
+				data.value = ""
+			}
+
+			function check() {
+				ajax.onreadystatechange = () => {
+					if( ajax.readyState == 4 ) {
+						d = ajax.responseText
+						if( d.split( "; " ).length > 1 ) {
+							document.getElementById( "status" ).innerHTML = "NEW DATA RECEIVED"
+							document.getElementById( "updated_data" ).innerHTML = d.split( "; " )[1]
+						}
+					}
+				}
+
+				ajax.open( "GET", "/admin/notifs/check" )
+				ajax.send()				
+			}
+
+			function ccheck() {
+				setInterval( check, 1000 )
+			}
+		</script>
+	</body>
+</html>

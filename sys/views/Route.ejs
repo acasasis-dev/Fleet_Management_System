@@ -1,0 +1,276 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+
+            <!-- End Navbar -->
+           <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Route</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                    <button id="addbutton" class="btn btn-primary" style="float:right" type="button"data-toggle="modal" data-target="#myModal1">
+                                        Add Route
+                                    </button>
+                            <div class="card-body">
+                                <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class=" text-primary">
+                                        <th>From</th>
+                                        <th>To</th> 
+                                        <th>Action</th>
+                                    </thead>
+                                    <% routes.forEach( cur => { %>
+                                    <tr id="r<%= cur.route_id %>">
+                                        <td id="rfrom"><%- cur.route_from %></td>
+                                        <td id="rto"><%- cur.route_to %></td>
+                                        <td>
+                                            <button class="btn btn-round btn-icon btn-sm btn-default" type="button" data-toggle="modal" data-target="#myModal2" onclick="edit_rec( 'r<%= cur.route_id %>' )">
+                                                    <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                            </button>
+                                            <button class="btn btn-round btn-icon btn-sm btn-danger" id="deletebutton" type="button" onclick="del_rec( 'r<%= cur.route_id %>' )">
+                                                <i class="now-ui-icons ui-1_simple-remove"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Modal  -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5>Add Route</h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                     <form id="add_form" method="POST" action="/admin/maintenance/route"> 
+                                    <div class="modal-body">
+                                        <fieldset>
+                                        <div class="row">
+                                            <% if( !fform ) { %>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">From</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" id="rfrom" name="rfrom" class="form-control">
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">To</label>
+                                                    <div class="col-md-12">                                                        
+                                                        <input type="text" id="rto" name="rto" class="form-control">
+                                                    </div>
+                                                </div></br>
+                                            </div>
+                                            <% } else { %>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">From</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" id="rfrom" name="rfrom" class="form-control" value="<%= fform.rfrom %>">
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-md-12 control-label">To</label>
+                                                    <div class="col-md-12">                                                        
+                                                        <input type="text" id="rto" name="rto" class="form-control" value="<%= fform.rto %>">
+                                                    </div>
+                                                </div></br>
+                                            </div>
+                                            <% } %>
+                                        </div>
+                                        <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" id='addroute' class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                    </div>
+                                    </form>
+                                </div>                                                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit Route</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" method="POST" action="/admin/maintenance/route/edit">
+                                    <input type="hidden" name="id">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">From</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="rfrom" name="rfrom" class="form-control">
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label class="col-md-12 control-label">To</label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="rto" name="rto" class="form-control">
+                                                        </div>
+                                                    </div></br>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Modal  -->
+                                
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        <% console.log( fform ) %>
+        <% if( Object.keys( fform ).length > 1 ) { %>
+            document.getElementById( "addbutton" ).click()
+            swal({ title: "Warning!",
+                   text: "<%= fdesc %>",
+                   timer: 2000,
+                   type: 'warning',
+                   showConfirmButton: false
+                }).catch(swal.noop)
+        <% } else { %>
+            <% if( added == 1 ) { %>
+                swal({
+                    title: "Route successfully added!",
+                    // text: "added!",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "success"
+                }).catch(swal.noop)
+            <% } else if( deleted == 1 ) { %>
+                swal({
+                    title: "Route Successfully Deleted!",
+                    // text: "added!",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "success"
+                }).catch(swal.noop)
+            <% } else if( deleted == 2 ) { %>
+                swal({ title: "Warning!",
+                   text: "<%= fdesc %>",
+                   timer: 2000,
+                   type: 'warning',
+                   showConfirmButton: false
+                }).catch(swal.noop)
+            <% } else if( edited == 1 ) { %>
+                swal({
+                    title: "Route Successfully Edited!",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "success"
+                }).catch(swal.noop)
+            <% } %>
+        <% } %>
+
+        function edit_rec( par ) {
+            id = par.split( "r" )[1]
+            rec = document.getElementById( par )
+            recc = rec.children
+            ef = document.getElementById( "edit_form" )
+            efel = ef.elements
+            efel.id.value = id
+
+            efel.rfrom.value = recc.rfrom.innerHTML
+            efel.rto.value = recc.rto.innerHTML
+            efel.distance.value = recc.distance.innerHTML
+        }
+
+        function del_rec( par ) {
+            
+            swal({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn btn-success' ,
+                    cancelButtonClass: 'btn btn-danger',
+                    confirmButtonText: 'Yes, delete it!',
+                    buttonsStyling: false
+                }).then(function() {
+                    del_rec_confirmed( par )
+                  
+                }).catch(swal.noop);
+
+        }
+
+        function del_rec_confirmed( par ) {
+            id = par.split( "r" )[1]
+            var form = document.createElement( "form" )
+            form.setAttribute( "method", "post" )
+            form.setAttribute( "action", "/admin/maintenance/route/delete" )
+            var inp = document.createElement( "input" )
+            inp.setAttribute( "type", "hidden" )
+            inp.setAttribute( "name", "id" )
+            inp.setAttribute( "value", id )
+            form.appendChild( inp )
+            document.body.appendChild( form )
+            form.submit()
+        }
+    </script>
+</body>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#maintenance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#maintenance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#maintenance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesMaintenance.collapse').addClass('show');
+        
+        $('#route').addClass('active');
+})
+     if(type == 'success-message'){
+        swal({
+            title: "Good job!",
+            text: "You clicked the button!",
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            type: "success"
+        }).catch(swal.noop);
+     }
+</script>
+<script>
+    // $('#addroute').click(function(){
+    //         $.post('/admin/maintenance/route').done(data=>{
+    //             routefrom:$('#rfrom').val(),
+    //             routeto:('#rto').val()
+    //         })
+    //     })
+</script>

@@ -1,0 +1,274 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+        <div class="panel-header panel-header-sm">
+        </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row"> 
+                                <h2 class="title">&nbsp Driver Information</h2>
+                                    <div class="form-check" style="float:right">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" id="sccb"/>
+                                            <span class="form-check-sign"></span>
+                                            Edit
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form id="expand_info" method="POST" action="/admin/maintenance/driverinfo">
+                                    <input type="hidden" name="driver" value="<%= driver %>">
+                                    <% console.log( driver_info ) %>
+                                    <% driver_info.forEach( cur => { %>
+                                    <center>
+                                    <h5>Basic Information</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" id="fname" name="fname" disabled="" value="<%= cur.driver_fn %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Middle Name</label>
+                                                <input type="text" id="mname" name="mname" class="form-control" disabled="" value="<%= cur.driver_mn %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" id="lname" name="lname"  class="form-control" disabled="" value="<%= cur.driver_ln %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Birthday</label>                                                
+                                                <% ms = new Date( cur.driver_bday ) %>
+                                                <% year = ms.getFullYear() %>
+                                                <% month = ms.getMonth() + 1 %>
+                                                <% month = month < 10? "0" + month: month %>
+                                                <% day = ms.getDate() %>
+                                                <% day = day < 10? "0" + day: day %>
+                                                <% bday = year + "-" + month + "-" + day %>
+                                                <input type="date" id="bday" name="bday" class="form-control" disabled="" value="<%= bday %>" onchange="calc_age()">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label>Age</label>
+                                                <% age = Math.round( Math.round( ( new Date().getTime() - new Date( cur.driver_bday ).getTime() ) / ( 1000 * 60 * 60 * 24 ) ) / 365 ); console.log( age ) %>
+                                                <input type="number" id="age" name="age" class="form-control" disabled="" value="<%= age %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <select id="gender" name="gender" class="form-control" disabled="">
+                                                    <% [ "Male", "Female" ].forEach( s => { %>
+                                                        <% if( s == cur.driver_sex ) { %>
+                                                            <option value="<%= cur.driver_sex %>" selected><%= cur.driver_sex %></option>
+                                                        <% } else { %>
+                                                            <option value="<%= s %>"><%= s %></option>
+                                                        <% } %>
+                                                    <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                <input type="text" id="address" name="address" class="form-control" disabled="" value="<%= cur.driver_address %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Contact Number</label>
+                                                <input type="text" id="contact" name="contact" class="form-control" disabled="" value="<%= cur.driver_contact %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <center>
+                                    <h5>License Details</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>License Number</label>
+                                                <input type="text" id="license" name="license" class="form-control" disabled="" value="<%= cur.driver_license %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>License Expiration</label>
+                                                <% ms = new Date( cur.driver_licexp ) %>
+                                                <% year = ms.getFullYear() %>
+                                                <% month = ms.getMonth() + 1 %>
+                                                <% month = month < 10? "0" + month: month %>
+                                                <% day = ms.getDate() %>
+                                                <% day = day < 10? "0" + day: day %>
+                                                <% licexp = year + "-" + month + "-" + day %>
+                                                <input type="date" id="licexp" name="licexp" class="form-control"disabled="" value="<%= licexp %>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <center>
+                                    <h5>Unit and Driver Details</h5>
+                                    </center>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Driver Type</label>
+                                                <select id="dtype" name="dtype" class="form-control" disabled="">
+                                                <% driver_types.forEach( d => { %>
+                                                    <% if( d.driver_type_id == cur.driver_type_id ) { %>
+                                                        <option value="<%= cur.driver_type_id %>" selected><%= cur.driver_type_desc %></option>
+                                                    <% } else { %>
+                                                        <option value="<%= d.driver_type_id %>"><%= d.driver_type_desc %></option>
+                                                    <% } %>
+                                                <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Plate Number</label>
+                                                <select id="uid" name="uid" class="form-control" disabled="">
+                                                    <option value="<%= cur.unit_id %>" selected><%= cur.unitplate_no %></option>
+                                                <% units.forEach( u => { %>
+                                                    <option value="<%= u.unit_id %>"><%= u.unitplate_no %></option>
+                                                <% }) %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <center>
+                                    <% }) %>
+                                    <button id="submit" type="submit" style="float:right" class="btn btn-info" disabled="">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-user">
+                            <div class="image">
+                                <!-- <img src="/assets/img//bg5.jpg" alt="..."> -->
+                            </div>
+                            <div class="card-body">
+                                <div class="author">
+                                    <a href="#">
+                                        <img class="" src="/assets/img/KP.jpg" alt="...">
+                                        <h5 class="title"></h5>
+                                    </a>
+                                    <p class="description">
+                                      
+                                    </p>
+                                </div>
+                                <p class="description text-center">
+                                    
+                                </p>
+                            </div>
+                            <!-- <hr>
+                            <div class="button-container">
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    
+    <% include templates/functions %>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#sccb').click(function(){
+            if (this.checked) {
+                $('#fname').removeAttr("disabled");
+                $('#mname').removeAttr("disabled");
+                $('#lname').removeAttr("disabled");
+                $('#bday').removeAttr("disabled");
+                $('#gender').removeAttr("disabled");
+                $('#address').removeAttr("disabled");
+                $('#contact').removeAttr("disabled");
+                $('#license').removeAttr("disabled");
+                $('#licexp').removeAttr("disabled");
+                $('#restriction').removeAttr("disabled");
+                $('#dtype').removeAttr("disabled");
+                $('#uid').removeAttr("disabled");
+                $('#plateexpiration').removeAttr("disabled");
+                $('#submit').removeAttr("disabled");
+            } else {
+                $('#fname').attr("disabled", true);
+                $('#mname').attr("disabled", true);
+                $('#lname').attr("disabled", true);
+                $('#bday').attr("disabled", true);
+                $('#gender').attr("disabled", true);
+                $('#address').attr("disabled", true);
+                $('#contact').attr("disabled", true);
+                $('#license').attr("disabled", true);
+                $('#licexp').attr("disabled", true);
+                $('#restriction').attr("disabled", true);
+                $('#dtype').attr("disabled", true);
+                $('#uid').attr("disabled", true);
+                $('#plateexpiration').attr("disabled", true);
+                $('#submit').attr("disabled", true);
+            }
+        });
+    });
+
+    function calc_age() {
+        el = document.getElementById( "expand_info" ).elements
+        age = Math.round( Math.round( ( new Date().getTime() - new Date( el.bday.value ).getTime() ) / ( 1000 * 60 * 60 * 24 ) ) / 365 )
+        el.age.value = age
+    }
+</script>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#maintenance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#maintenance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#maintenance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesMaintenance.collapse').addClass('show');
+        
+        $('#driver').addClass('active');
+    })
+</script>
+<script>
+    <%if( edited == 1 ) { %>
+        document.getElementById( "sccb" ).click()
+        swal({
+            title: "Driver Successfully Edited!",
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            type: "success"
+        }).catch(swal.noop)
+        <% } %>
+</script>
+</body>

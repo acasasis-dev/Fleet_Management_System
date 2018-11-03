@@ -1,0 +1,394 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+            <!--End navbar  -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h2 class="title"></h2>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                                    <p align="right">
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal1">
+                                                            <i class="now-ui-icons ui-1_simple-add"> Add Mechanic</i>
+                                                    </button>
+                                                    </p>
+                                                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Add a Mechanic</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST" action="/admin/maintenance/mechanic">
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">                      
+                                                                            <label for="inputFName" class="col-lg-10 control-label">First</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input name="fname" type="text" class="form-control" id="inputFName" placeholder="First Name">
+                                                                            </div></br>
+                                                                            <label for="inputMName" class="col-lg-10 control-label">Middle</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input name="mname" type="text" class="form-control" id="inputMName" placeholder="Middle Name">
+                                                                            </div></br>
+                                                                            <label for="inputLName" class="col-lg-10 control-label">Last</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input name="lname" type="text" class="form-control" id="inputLName" placeholder="Last Name">
+                                                                            </div></br>
+                                                                            <label for="inputAddress" class="col-lg-10 control-label">Address</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input name="waddress" type="text" class="form-control" id="inputAddress" placeholder="Address">
+                                                                            </div></br>
+                                                                            <label for="inputContact" class="col-lg-10 control-label">Contact</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input name="wcont" type="number" class="form-control" id="inputContact" placeholder="Contact Number">
+                                                                            </div></br>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-primary"> Submit </button>
+                                                                </div>
+                                                                </form>
+                                                            </div>                                                            
+                                                        </div>
+                                                    </div>
+                                <h4 class="card-title"></h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Action</th>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Jun Dela Cruz</td>
+                                                <td>09876173121</td>
+                                                <td>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                             <i class="now-ui-icons design_bullet-list-67"></i>
+                                                    </button>
+                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Add a Mechanic</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">
+                                                                            <label for="inputFName" class="col-lg-10 control-label">First</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputFName" placeholder="First Name">
+                                                                            </div></br>
+                                                                            <label for="inputMName" class="col-lg-10 control-label">Middle</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputMName" placeholder="Middle Name">
+                                                                            </div></br>
+                                                                            <label for="inputLName" class="col-lg-10 control-label">Last</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputLName" placeholder="Last Name">
+                                                                            </div></br>
+                                                                            <label for="inputContact" class="col-lg-10 control-label">Contact</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="number" class="form-control" id="inputContact" placeholder="Contact Number">
+                                                                            </div></br>
+                                                                            <label for="inputBirthdate" class="col-lg-10 control-label">Birthdate</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="date" class="form-control" id="inputBirthdate" placeholder="Birthdate">
+                                                                            </div></br>
+                                                                            <label for="inputGender" class="col-lg-10 control-label">Gender</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputGender" placeholder="Gender">
+                                                                            </div></br>
+                                                                    </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-info btn-fill pull-right"> Submit </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                                </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Cardo Dalisay</td>
+                                                <td>09221674833</td>
+                                                <td>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                             <i class="now-ui-icons design_bullet-list-67"></i>
+                                                    </button>
+                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Add a Mechanic</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">
+                                                                            <label for="inputFName" class="col-lg-10 control-label">First</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputFName" placeholder="First Name">
+                                                                            </div></br>
+                                                                            <label for="inputMName" class="col-lg-10 control-label">Middle</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputMName" placeholder="Middle Name">
+                                                                            </div></br>
+                                                                            <label for="inputLName" class="col-lg-10 control-label">Last</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputLName" placeholder="Last Name">
+                                                                            </div></br>
+                                                                            <label for="inputContact" class="col-lg-10 control-label">Contact</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="number" class="form-control" id="inputContact" placeholder="Contact Number">
+                                                                            </div></br>
+                                                                            <label for="inputBirthdate" class="col-lg-10 control-label">Birthdate</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="date" class="form-control" id="inputBirthdate" placeholder="Birthdate">
+                                                                            </div></br>
+                                                                            <label for="inputGender" class="col-lg-10 control-label">Gender</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputGender" placeholder="Gender">
+                                                                            </div></br>
+                                                                    </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-info btn-fill pull-right"> Submit </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                                </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Thomas Morato</td>
+                                                <td>0928574621</td>
+                                                <td>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                             <i class="now-ui-icons design_bullet-list-67"></i>
+                                                    </button>
+                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Add a Mechanic</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">
+                                                                            <label for="inputFName" class="col-lg-10 control-label">First</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputFName" placeholder="First Name">
+                                                                            </div></br>
+                                                                            <label for="inputMName" class="col-lg-10 control-label">Middle</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputMName" placeholder="Middle Name">
+                                                                            </div></br>
+                                                                            <label for="inputLName" class="col-lg-10 control-label">Last</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputLName" placeholder="Last Name">
+                                                                            </div></br>
+                                                                            <label for="inputContact" class="col-lg-10 control-label">Contact</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="number" class="form-control" id="inputContact" placeholder="Contact Number">
+                                                                            </div></br>
+                                                                            <label for="inputBirthdate" class="col-lg-10 control-label">Birthdate</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="date" class="form-control" id="inputBirthdate" placeholder="Birthdate">
+                                                                            </div></br>
+                                                                            <label for="inputGender" class="col-lg-10 control-label">Gender</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputGender" placeholder="Gender">
+                                                                            </div></br>
+                                                                    </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-info btn-fill pull-right"> Submit </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                                </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Jose Mercado</td>
+                                                <td>091234768212</td>
+                                                <td>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                             <i class="now-ui-icons design_bullet-list-67"></i>
+                                                    </button>
+                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Add a Mechanic</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">
+                                                                            <label for="inputFName" class="col-lg-10 control-label">First</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputFName" placeholder="First Name">
+                                                                            </div></br>
+                                                                            <label for="inputMName" class="col-lg-10 control-label">Middle</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputMName" placeholder="Middle Name">
+                                                                            </div></br>
+                                                                            <label for="inputLName" class="col-lg-10 control-label">Last</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputLName" placeholder="Last Name">
+                                                                            </div></br>
+                                                                            <label for="inputContact" class="col-lg-10 control-label">Contact</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="number" class="form-control" id="inputContact" placeholder="Contact Number">
+                                                                            </div></br>
+                                                                            <label for="inputBirthdate" class="col-lg-10 control-label">Birthdate</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="date" class="form-control" id="inputBirthdate" placeholder="Birthdate">
+                                                                            </div></br>
+                                                                            <label for="inputGender" class="col-lg-10 control-label">Gender</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputGender" placeholder="Gender">
+                                                                            </div></br>
+                                                                    </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-info btn-fill pull-right"> Submit </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                                </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Ambo Go</td>
+                                                <td>09845263371</td>
+                                                <td>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                             <i class="now-ui-icons design_bullet-list-67"></i>
+                                                    </button>
+                                                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5>Add a Mechanic</h5>
+                                                                    <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <fieldset>
+                                                                        <div class="form-group">
+                                                                            <label for="inputFName" class="col-lg-10 control-label">First</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputFName" placeholder="First Name">
+                                                                            </div></br>
+                                                                            <label for="inputMName" class="col-lg-10 control-label">Middle</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputMName" placeholder="Middle Name">
+                                                                            </div></br>
+                                                                            <label for="inputLName" class="col-lg-10 control-label">Last</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputLName" placeholder="Last Name">
+                                                                            </div></br>
+                                                                            <label for="inputContact" class="col-lg-10 control-label">Contact</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="number" class="form-control" id="inputContact" placeholder="Contact Number">
+                                                                            </div></br>
+                                                                            <label for="inputBirthdate" class="col-lg-10 control-label">Birthdate</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="date" class="form-control" id="inputBirthdate" placeholder="Birthdate">
+                                                                            </div></br>
+                                                                            <label for="inputGender" class="col-lg-10 control-label">Gender</label>
+                                                                            <div class="col-lg-10">
+                                                                                <input type="text" class="form-control" id="inputGender" placeholder="Gender">
+                                                                            </div></br>
+                                                                    </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-info btn-fill pull-right"> Submit </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button"data-toggle="modal" data-target="#myModal2">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                                </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+    
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="/assets/js/core/jquery.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<script src="/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!--  Google Maps Plugin    -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="/assets/js/plugins/chartjs.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="/assets/js/plugins/bootstrap-notify.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="/assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="/assets/demo/demo.js"></script>
+
+</html>

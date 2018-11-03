@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link  sizes="76x76" href="/assets/img/matt-logo.png">
+    <link rel="icon" type="image/png" href="/assets/img/matt logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Fleet Management System</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+         <!-- Fonts and icons     -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">   -->
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome-free-5.2.0-web/css/fontawesome.min">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+     <link href="/assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+    <link href="/assets/css/now-ui-dashboard.min69ea.css" rel="stylesheet" />
+     <link href="/assets/css/now-ui-kit.css?v=1.0.1" rel="stylesheet" />  
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/assets/demo/demo.css" rel="stylesheet" />
+    <link href="/assets/css/fullcalendar.min.css" rel="stylesheet" />
+    <link href="/assets/css/schedule.css" rel="stylesheet" />
+
+    <link href="/assets/css/use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <script>
+        ax = new XMLHttpRequest()
+
+        function check() {
+            ax.onreadystatechange = () => {
+                if( ax.readyState == 4 ) {
+                    if( Number( ax.responseText ) > 0 )
+                        document.getElementById( "ucount" ).innerHTML = ax.responseText
+                }
+            }
+
+            ax.open( "GET", "/admin/notifs/check" )
+            ax.send()
+        }
+
+        function check_notifs() {
+            setInterval( check, 1000 )
+        }        
+    </script>
+</head>
+
+<body class="" onload="check_notifs()">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="white">
+            <div class="logo">
+                <a href="#" class="simple-text logo-normal">
+                    <img src="/assets/img/matt logo.png" alt="Rounded Image" class="rounded" style="width:20%; height:20%;">
+                    Vehicle
+                </a>
+            <div class="navbar-minimize">
+                <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round">
+                    <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
+                    <i class="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini"></i>
+                </button>
+            </div>
+            </div>
+
+
+
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li id="dashboard">
+                        <a href="/admin">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li id="notif">
+                        <a href="/admin/notifs">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Notifications &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span id="ucount" class="badge bg-theme" style="color: white"></span></p>
+                        </a>
+                    </li>
+                    <li id="maintenance">
+                        <a data-toggle="collapse" href="#pagesMaintenance" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons ui-2_settings-90"></i>                  
+                                <p>Maintenance<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesMaintenance">
+                            <ul class="nav">                       
+                                <li id="unittype">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/unittype">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit Type
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="route">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/route">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Route
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="brand">  
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/brand">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Brand
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="unit">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/unit">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="driver">
+                                    <span class="sidebar-mini-icon"></span>
+                                    <a href="/admin/maintenance/driver?dtype=1">
+                                        <i> > </i>
+                                        <span class="sidebar-normal">
+                                            Driver
+                                        </span>
+                                    </a>
+                                </li>
+                                <li id="staff">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/staff">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                            Staff
+                                            </span>
+                                        </a>
+                                </li>
+                                <!-- <li id="boundary">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/boundary">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                            Boundary
+                                            </span>
+                                        </a>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="schedule">
+                        <a href="/admin/schedule">
+                            <i class="now-ui-icons ui-1_calendar-60"></i>
+                            <p>Schedule</p>
+                        </a>
+                    </li>
+                    <li id="inspection">
+                        <a data-toggle="collapse" href="#pagesInspection" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons education_glasses"></i>    
+                            <p>Inspection Reports<b class="caret"></b></p>
+                        </a>
+                        <div class="collapse" id="pagesInspection">
+                            <ul class="nav">                       
+                                <li id="dispatch">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/reports/inspections/dispatch">
+                                            <i> > </i>                     
+                                            <span class="sidebar-normal">
+                                                Dispatch
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="arrival">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/reports/inspections/arrival">
+                                            <i> > </i>                     
+                                            <span class="sidebar-normal">
+                                                Arrival
+                                            </span>
+                                        </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" href="#pagesCollection" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons business_bank"></i>    
+                            <p>Collection<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesCollection">
+                            <ul class="nav">                       
+                                <li id="boundarycollection">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/collection/boundary">
+                                            <i> > </i>                     
+                                            <span class="sidebar-normal">
+                                                Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="penaltycollection">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/collection/penalty">
+                                            <i> > </i>
+                                        <span class="sidebar-normal">
+                                            Penalty
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="repair">
+                        <a href="/admin/repair">
+                            <i class="now-ui-icons loader_gear"></i>
+                            <p>Repair</p>
+                        </a>
+                    </li>
+                    <li id="offensesandpenalties">
+                        <a href="/admin/offenses_and_penalties">
+                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <p>Offenses and Penalties</p>
+                        </a>                    
+                    <li id="remittance">
+                        <a data-toggle="collapse" href="#pagesRemittance" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons business_money-coins"></i>                  
+                                <p>Remittance<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesRemittance">
+                            <ul class="nav">                       
+                                <li id="bound">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/remittance/boundary">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="pen">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/remittance/penalty">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Penalty
+                                            </span>
+                                        </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- <li id="schedrent">
+                        <a href="/admin/renting">
+                            <i class="now-ui-icons shopping_delivery-fast"></i>
+                            <p>Renting</p>
+                        </a>
+                    </li> -->
+                    <!-- <li id="staffass">
+                        <a href="/admin/staffass">
+                            <i class="now-ui-icons files_paper"></i>
+                            <p>Staff Assignment</p>
+                        </a>
+                    </li> -->
+                    <li id="reports">
+                        <a data-toggle="collapse" href="#pagesReports" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons files_single-copy-04"></i>                  
+                                <p>Reports<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesReports">
+                            <ul class="nav">                       
+                                <li id="bound">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/reports/boundary?view=1">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="pen">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/reports/driver_boundary?view=1">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Driver Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="pen">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/reports/repair?view=1">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Repair Per Unit Type
+                                            </span>
+                                        </a>
+                                </li>                                
+                                <li id="pen">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/reports/repair_per_brand?view=1">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Repair Per Brand
+                                            </span>
+                                        </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- <li id="unitmaintenance">
+                        <a href="/admin/unitmaintenance">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Unit Maintenance</p>
+                        </a>
+                    </li> -->
+                    <li id="query">
+                        <a data-toggle="collapse" href="#pagesQueries" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons files_single-copy-04"></i>                  
+                                <p>Queries<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesQueries">
+                            <ul class="nav">                       
+                                <li id="unitwarranty">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/queries/">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit Warranty
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="plateexpiration">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/queries/unit_plate_expiration">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit Plate Expiration
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="routeexpiration">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/queries/unit_route_expiration">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit Route Expiration
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="licenseexpiration">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/queries/driver_license_expiration">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Driver License Expiration
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="unitperroute">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/queries/unit_per_route">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit per Route
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="unitpertype">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/queries/unit_per_type">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit per Unit Type
+                                            </span>
+                                        </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="utilities">
+                        <a data-toggle="collapse" href="#pagesUtilities" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons business_bank"></i>    
+                            <p>Utilities<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesUtilities">
+                            <ul class="nav">                       
+                                <li id="min">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/utilities/minimum">
+                                            <i>> </i>                     
+                                            <span class="sidebar-normal">
+                                                Unit Types Minimum
+                                            </span>
+                                        </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    

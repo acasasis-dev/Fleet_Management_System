@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link  sizes="76x76" href="/assets/img/matt-logo.png">
+    <link rel="icon" type="image/png" href="/assets/img/matt logo.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Fleet Management System</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+         <!-- Fonts and icons     -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">   -->
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="/assets/css/fontawesome-free-5.2.0-web/css/fontawesome.min">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+     <link href="/assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+    <link href="/assets/css/now-ui-dashboard.min69ea.css" rel="stylesheet" />
+     <!-- <link href="/assets/css/now-ui-kit.css?v=1.0.1" rel="stylesheet" />   -->
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="/assets/demo/demo.css" rel="stylesheet" />
+    <link href="/assets/css/fullcalendar.min.css" rel="stylesheet" />
+    <link href="/assets/css/schedule.css" rel="stylesheet" />
+
+    <link href="/assets/css/use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+</head>
+
+<body class="">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="white">
+            <div class="logo">
+                <a href="#" class="simple-text logo-normal">
+                    <img src="/assets/img/matt logo.png" alt="Rounded Image" class="rounded" style="width:20%; height:20%;">
+                    Vehicle
+                </a>
+            <div class="navbar-minimize">
+                <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round">
+                    <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
+                    <i class="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini"></i>
+                </button>
+            </div>
+            </div>
+
+
+
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="/admin">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li id="maintenance">
+                        <a data-toggle="collapse" href="#pagesMaintenance" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons ui-2_settings-90"></i>                  
+                                <p>Maintenance<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesMaintenance">
+                            <ul class="nav">                       
+                                <li id="unittype">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/unittype">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit Type
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="route">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/route">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Route
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="unit">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/unit">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Unit
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="brand">  
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/brand">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Brand
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="driver">
+                                    <span class="sidebar-mini-icon"></span>
+                                    <a href="/admin/maintenance/driver?dtype=1">
+                                        <i> > </i>
+                                        <span class="sidebar-normal">
+                                            Driver
+                                        </span>
+                                    </a>
+                                </li>
+                                <li id="staff">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/staff">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                            Staff
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="boundary">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/maintenance/boundary">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                            Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="schedule">
+                        <a href="/admin/schedule">
+                            <i class="now-ui-icons files_paper"></i>
+                            <p>Schedule</p>
+                        </a>
+                    </li>
+                    <li id="inspection">
+                        <a data-toggle="collapse" href="#pagesInspection" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons education_glasses"></i>    
+                            <p>Inspection Reports<b class="caret"></b></p>
+                        </a>
+                        <div class="collapse" id="pagesInspection">
+                            <ul class="nav">                       
+                                <li id="dispatch">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/reports/inspections/dispatch">
+                                            <i> > </i>                     
+                                            <span class="sidebar-normal">
+                                                Dispatch
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="arrival">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/reports/inspections/arrival">
+                                            <i> > </i>                     
+                                            <span class="sidebar-normal">
+                                                Arrival
+                                            </span>
+                                        </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a data-toggle="collapse" href="#pagesCollection" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons business_bank"></i>    
+                            <p>Collection<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesCollection">
+                            <ul class="nav">                       
+                                <li>
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/collection/boundary">
+                                            <i> > </i>                     
+                                            <span class="sidebar-normal">
+                                                Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                                <li>
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/collection/penalty">
+                                            <i> > </i>
+                                        <span class="sidebar-normal">
+                                            Penalty
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="repair">
+                        <a href="/admin/repair">
+                            <i class="now-ui-icons loader_gear"></i>
+                            <p>Repair</p>
+                        </a>
+                    </li>
+                    <li id="offensesandpenalties">
+                        <a href="/admin/offenses_and_penalties">
+                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <p>Offenses and Penalties</p>
+                        </a>
+                    </li> 
+                       <!-- <li id="utilities">
+                        <a data-toggle="collapse" href="#pagesUtilities" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons design_vector"></i>                  
+                                <p>Utilities<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesUtilities">
+                            <ul class="nav">                       
+                                <li id="triphour">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/utilities/triphour">
+                                            <i class="now-ui-icons ui-2_time-alarm"></i>
+                                            <span class="sidebar-normal">
+                                                Trip Hour
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="coding">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/utilities/coding">
+                                            <i class="now-ui-icons ui-2_time-alarm"></i>
+                                            <span class="sidebar-normal">
+                                                Coding
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="offandpen">
+                                    <span class="sidebar-mini-icon"></span>
+                                    <a href="/admin/utilities/offenses_and_penalties">
+                                        <i class="now-ui-icons ui-2_settings-90"></i>
+                                        <span class="sidebar-normal">
+                                            Offenses and Penalties
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li> -->
+                    <li id="remittance">
+                        <a data-toggle="collapse" href="#pagesRemittance" class="collapsed" aria-expanded="false">                         
+                            <i class="now-ui-icons business_money-coins"></i>                  
+                                <p>Remittance<b class="caret"></b></p>
+                        </a>    
+                        <div class="collapse" id="pagesRemittance">
+                            <ul class="nav">                       
+                                <li id="bound">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/remittance/boundary">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Boundary
+                                            </span>
+                                        </a>
+                                </li>
+                                <li id="pen">
+                                    <span class="sidebar-mini-icon"></span>
+                                        <a href="/admin/remittance/penalty">
+                                            <i> > </i>
+                                            <span class="sidebar-normal">
+                                                Penalty
+                                            </span>
+                                        </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li id="schedrent">
+                        <a href="/admin/renting">
+                            <i class="now-ui-icons shopping_delivery-fast"></i>
+                            <p>Renting</p>
+                        </a>
+                    </li>
+                    <li id="staffass">
+                        <a href="/admin/staffass">
+                            <i class="now-ui-icons files_paper"></i>
+                            <p>Staff Assignment</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+        <a href="#" data-toggle="dropdown">
+        <i class="fa fa-cog fa-2x"> </i>
+        </a>
+        <ul class="dropdown-menu">
+			<li class="header-title"> Sidebar Background</li>
+            <li class="adjustments-line">
+                <a href="javascript:void(0)" class="switch-trigger background-color">
+                    <div class="badge-colors text-center">
+						<span class="badge filter badge-yellow" id="yellow" data-color="yellow"></span>
+                        <span class="badge filter badge-blue" id="blue" data-color="blue"></span>
+                        <span class="badge filter badge-green" id="green" data-color="green"></span>
+                        <span class="badge filter badge-orange active" id="orange" data-color="orange"></span>
+                        <span class="badge filter badge-red" id="red" data-color="red"></span>
+                        <span class="badge filter badge-white" id="white" data-color="white"></span>
+                    </div>
+                    <div class="clearfix"></div>
+                </a>
+            </li>
+
+            
+            <li class="header-title">
+                Sidebar Mini
+            </li>
+            <li class="adjustments-line">
+
+              <div class="togglebutton switch-sidebar-mini">
+                <span class="label-switch">OFF</span>
+                <input type="checkbox" name="checkbox" checked class="bootstrap-switch"
+                  data-on-label=""
+                  data-off-label=""
+                  />
+                <span class="label-switch label-right">ON</span>
+              </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+
+<% include templates/topbar %>
+<% include templates/footer %>
+
+<!-- End navbar   -->
+<div class="panel-header">
+    <div class="header text-center">
+        <h1 class="title">Driver</h1>
+    </div>
+</div>
+    <div class="content"><div class="col-md-10 mr-auto ml-auto">
+        <div class="wizard-container">
+            <div class="card card-wizard" data-color="primary" id="wizardProfile">
+                <form id="add_form" method="POST" action="/admin/maintenance/driver" enctype="multipart/form-data">
+        <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+
+                <div class="card-header text-center" data-background-color="orange">
+                    <h3 class="card-title">
+                       Add Driver information
+                    </h3>
+                  
+                    <h3 class="description">This information will let us know more about you.</h5>
+                      <div class="wizard-navigation">
+                          <ul class="nav nav-pills">
+                              <li class="nav-item">
+                                  <a class="nav-link active" href="#basicinfo" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
+                                    <i class="now-ui-icons users_circle-08"></i>
+                                    Basic Information
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="#license" data-toggle="tab" data-toggle="tab" role="tab" aria-controls="account" aria-selected="false">
+                                    <i class="now-ui-icons ui-1_settings-gear-63"></i>
+                                    License
+                                  </a>
+                              </li>
+                              <li class="nav-item">
+                                  <a class="nav-link" href="#assignment" data-toggle="tab" data-toggle="tab" role="tab" aria-controls="address" aria-selected="false">
+                                    <i class="now-ui-icons ui-1_email-85"></i>
+                                    Assignment
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
+                </div>
+                <form id="add_form" method="POST" action="/admin/maintenance/driver" enctype="multipart/form-data">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div class="tab-pane show active" id="basicinfo">
+                          <h5 class="info-text">Basic Information</h5>
+                          <div class="row justify-content-center">
+                                <div class="col-sm-4">
+                                    <div class="picture-container">
+                                        <div class="picture">
+                                            <img src="../../assets/img/default-avatar.png" class="picture-src" id="wizardPicturePreview" title=""/>
+                                            <input type="file" id="wizard-picture">
+                                        </div>
+                                        <h6 class="description">Choose Picture</h6>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-md-12 control-label">First Name*</label>
+                                    <div class="input-group form-control-lg">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                            <i class="now-ui-icons users_circle-08"></i>
+                                          </div>
+                                        </div>
+                                        <input type="text" id="fname" name="fname" class="form-control" placeholder="First Name (required)" name="fname" required>
+                                    </div>
+                                    <label class="col-md-12 control-label">Middle Name</label>
+                                    <div class="input-group form-control-lg">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                            <i class="now-ui-icons users_circle-08"></i>
+                                          </div>
+                                        </div>
+                                        <input type="text" id="mname" name="mname" class="form-control" placeholder="Middle Name " name="mname">
+                                    </div>
+                                    <label class="col-md-12 control-label">Last Name*</label>
+                                    <div class="input-group form-control-lg">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">
+                                            <i class="now-ui-icons text_caps-small"></i>
+                                          </div>
+                                        </div>
+                                        <input type="text" id="lname" name="lname" placeholder="Last Name (required)" class="form-control" name="lname" required/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 mt-3">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label class="col-md-12 control-label">Birthday*</label>
+                                            <div class="input-group form-control-lg">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="now-ui-icons text_caps-small"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="date" id="bday" name="bday" class="form-control" placeholder="Matt Pogi" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-md-12 control-label">Address*</label>
+                                            <div class="input-group form-control-lg">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="now-ui-icons text_caps-small"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="text" id="address" name="address" placeholder="Address (required)" class="form-control" name="address" required/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10 mt-3">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label class="col-md-12 control-label">Contact Number*</label>
+                                            <div class="input-group form-control-lg">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="now-ui-icons text_caps-small"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="number" id="contact" name="contact" class="form-control" placeholder="Contact Number" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-md-12 control-label">Gender</label>
+                                            <div class="row">
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" name="gender" type="radio" name="Male" id="radio1" value="option1" checked>
+                                                        <span class="form-check-sign"></span>
+                                                        Male
+                                                    </label>
+                                                </div>
+                                                <div class="form-check form-check-radio">
+                                                    <label class="form-check-label">
+                                                        <input class="form-check-input" name="gender" type="radio" name="Female" id="radio2" value="option2">
+                                                        <span class="form-check-sign"></span>
+                                                        Female
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="license">
+                            <h5 class="info-text"> License Information</h5>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 mt-3">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label class="col-md-12 control-label">License Number*</label>
+                                            <div class="input-group form-control-lg">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="now-ui-icons text_caps-small"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="number" id="license" name="license" class="form-control" placeholder="License Number" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label class="col-md-12 control-label">License Registered*</label>
+                                            <div class="input-group form-control-lg">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                        <i class="now-ui-icons text_caps-small"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="date" id="licreg" name="licreg" class="form-control" placeholder="License Registered" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="assignment">
+                            <h5 class="info-text"> Driver Type and Unit Assignment</h5>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-10 mt-3">
+                                    <label class="col-md-12 control-label">Driver Type</label>
+                                    <div class="radio">
+                                        <input type="radio" name="dtype" id="unitname2" value="1" checked="" onclick="showHideUnitInfo()">
+                                        <label for="unitname2">
+                                            Regular
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <input type="radio" name="dtype" id="unitname1" value="2" onclick="showHideUnitInfo()">
+                                        <label for="unitname1">
+                                            Reliever
+                                        </label>
+                                    </div>
+                                        <div class="">
+                                            <center>
+                                            <fieldset id="unitinfo"><h5>Unit</h5>
+                                                <div class="col-md-12" >
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Unit Type</label>
+                                                        <div class="col-lg-12">
+                                                            <select id="utype" class="form-control" onchange="udef( 'add_form' )">
+                                                                <option disabled="" selected=""></option>
+                                                                <% unit_types.forEach( cur => { %>
+                                                                    <option value="<%= cur.unittype_id %>"><%= cur.unittype_desc %></option>
+                                                                <% }) %>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Route</label>
+                                                        <div class="col-lg-12">
+                                                            <select id="route" class="form-control" onchange="udef( 'add_form' )">
+                                                                <option disabled="" selected=""></option>
+                                                                <% routes.forEach( cur => { %>
+                                                                    <option value="<%= cur.route_id %>"><%= cur.route_from + " - " + cur.route_to %></option>
+                                                                <% }) %>
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="inputUnitType" class="col-lg-12 control-label">Unit</label>
+                                                        <div class="col-lg-12">
+                                                            <select name="unit" id="unit" class="form-control">
+                                                            </select>
+                                                        </div></br>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            </center>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <div class="card-footer">
+                    <div class="pull-right">
+                        <input type='button' class='btn btn-next btn-fill btn-rose btn-wd' name='next' value='Next' />
+                        <input type='button' class='btn btn-finish btn-fill btn-rose btn-wd' name='finish' value='Finish' />
+                    </div>
+
+                    <div class="pull-left">
+                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </form>
+        </div>
+    </div> <!-- wizard container -->
+</div>
+
+            <footer class="footer">
+                <div class="container-fluid">
+    
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script language="javascript">
+        ajax = new XMLHttpRequest()
+
+        function genpass() {
+            p = document.getElementById( "password" )
+            p.value = ""
+            alp = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            alpl = alp.length - 1
+            ret = ""
+
+            for( x = 0; x < 15; x ++ ) {
+                ret += alp[ Math.round( Math.random() * alpl ) ]
+            }
+
+            p.value = ret
+        }
+
+
+        function udef( par ) {
+            p = document.getElementById( par )
+            el = p.elements
+            ut = el.utype
+            r = el.route
+            u = el.unit
+            u.innerHTML = ""
+
+            ajax.onreadystatechange = () => {
+                if( ajax.readyState == 4 ) {
+                    res = ajax.responseText
+                    if( res ) {
+                        console.log( res )
+                        res = res.split( ";" )
+
+                        res.forEach( cur => {
+                            cur = cur.split( ", " )
+                            u.innerHTML += "<option value=\"" + cur[0] + "\">" + cur[1] + "</option>"
+                        })
+                    }
+                }
+            }
+
+            ajax.open( "GET", "/admin/maintenance/driver/unitdef?utype=" + ut.value + "&route=" + r.value )
+            ajax.send()
+        }
+
+        function check( form ) {
+            f = document.getElementById( form )
+            cont = f.elements[ "contact" ].value
+
+            if( cont.length == 11 && cont[0] == "0" && Number( cont.substr( 1, 10 ) ) )
+                f.submit()
+            else
+                document.getElementById( "error" ).innerHTML = "Must be a 11-digit number"
+        }
+
+        function flip() {
+            p = document.getElementById( "password" )
+            f = document.getElementById( "flipb" )
+
+            if( f.innerHTML == "Show" ) {
+                p.setAttribute( "type", "text" )
+                f.innerHTML = "Hide"
+            } else {
+                p.setAttribute( "type", "password" )
+                f.innerHTML = "Show"
+            }
+        }
+
+        function edit( str ) {
+            ch = document.getElementById( str ).children
+            el = document.getElementById( "edit_form" ).elements
+
+            el[ "id" ].value = ch[ "id" ].innerHTML
+            el[ "fname" ].value = ch[ "fname" ].innerHTML
+            el[ "mname" ].value = ch[ "mname" ].innerHTML
+            el[ "lname" ].value = ch[ "lname" ].innerHTML
+            if( ch[ "gender" ].innerHTML != "N/A" ) {
+                if( ch[ "gender" ].innerHTML == "Male" )
+                    el[ "gender" ][0].selected = true
+                else
+                    el[ "gender" ][1].selected = true
+            }
+            else
+                el[ "gender" ].value = ""
+            el[ "license" ].value = ch[ "license" ].innerHTML
+            el[ "address" ].value = ch[ "address" ].innerHTML
+            if( ch[ "type" ].innerHTML == "Reliever" )
+                el[ "type" ][0].selected = true
+            else
+                el[ "type" ][1].selected = true
+            el[ "contact" ].value = ch[ "contact" ].innerHTML
+        };
+
+        function del( id ) {
+            var form = document.createElement( "form" )
+            form.setAttribute( "method", "post" )
+            form.setAttribute( "action", "/admin/maintenance/driver/delete" )
+            var inp = document.createElement( "input" )
+            inp.setAttribute( "type", "hidden" )
+            inp.setAttribute( "name", "id" )
+            inp.setAttribute( "value", id )
+            form.appendChild( inp )
+            document.body.appendChild( form )
+            form.submit()
+        }
+
+        function expand_info( par ) {
+            p = document.getElementById( par )
+            pch = p.children
+            i = document.getElementById( "infos" )
+            iel = i.elements
+
+            i.bday.value = pch.bday.innerHTML
+            i.contact.value = pch.contact.innerHTML
+            i.sex.value = pch.sex.innerHTML
+            i.address.value = pch.address.innerHTML
+            i.licreg.value = pch.licreg.innerHTML
+            i.utype.value = pch.utype.innerHTML
+            i.route.value = pch.route.innerHTML
+            i.plateno.value = pch.plateno.innerHTML
+
+        }
+
+        function redr( par ) {
+            d = document.getElementById( par ).value
+            window.location = "/admin/maintenance/driver?dtype=" + d            
+        }
+    </script>
+</body>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#maintenance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#maintenance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#maintenance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesMaintenance.collapse').addClass('show');
+        
+        $('#driver').addClass('active');
+    })
+</script>
+<script>
+    function showHideUnitInfo() {
+        if(document.getElementById('unitname1').checked) {
+            document.getElementById('unitinfo').style.display='none';
+        }
+        else if(document.getElementById('unitname2') ) {
+            document.getElementById('unitinfo').style.display='block';
+        }
+    }
+</script>
+<script>
+  $(document).ready(function(){
+    // Initialise the wizard
+    demo.initNowUiWizard();
+    setTimeout(function(){
+      $('.card.card-wizard').addClass('active');
+    },600);
+  });
+</script>

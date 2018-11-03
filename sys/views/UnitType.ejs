@@ -1,0 +1,229 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %> 
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Unit Type</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card"> 
+                            <div class="card-header">
+                                <button id="addbutton" class="btn btn-primary" style="float:right" type="button"data-toggle="modal" data-target="#myModal1">
+                                        Add a Unit Type
+                                    </button>
+                                <div class="card-body">
+                                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead class=" text-primary">
+                                                <th>Unit Type</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <% unit_types.forEach( cur => { %>
+                                            <tr id="r<%= cur.unittype_id %>">                                                
+                                                <td id="desc"><%= cur.unittype_desc %></td>
+                                                <td id="id" hidden><%= cur.unittype_id %></td>  
+                                                <% if( cur.unittype_status == "0" ) { %>
+                                                    <td><span class="badge badge-danger">Inactive</span></td>
+                                                <% } else { %>
+                                                    <td><span class="badge badge-success">Active</span></td>
+                                                <% } %>
+                                                <td>
+                                                    <div class="form-group">
+                                                        <div class="col-lg-12">
+                                                        <% if( cur.unittype_status == "0" ) { %>
+                                                        <input type="checkbox" name="checkbox" id="<%= "checkb" + cur.unittype_id %>" class="bootstrap-switch" onchange="conf( this.id, 1 )"/>
+                                                        <% } else { %>
+                                                        <input type="checkbox" name="checkbox" id="<%= "checkb" + cur.unittype_id %>" class="bootstrap-switch" onchange="conf( this.id, 0 )"/ checked>    
+                                                        <% } %> 
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class="">
+                                                            <button class="btn btn-round btn-icon btn-sm btn-default" type="button" data-toggle="modal" data-target="#myModal2" onclick="edit( 'r<%= cur.unittype_id %>', 'edit_form' )">
+                                                            <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                            </button>
+                                                        </div>&nbsp
+                                                        <div class="">
+                                                            <form method="POST" action="/admin/maintenance/unittype/delete">
+                                                                <input type="hidden" name="id" value="<%= cur.unittype_id %>">
+                                                                <button class="btn btn-round btn-icon btn-sm btn-danger" id="deletebutton" type="submit">
+                                                                    <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                                </button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal  -->
+                    <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Add a Unit Type</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="add_form" method="POST" action="/admin/maintenance/unit">
+                                <div class="modal-body">
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-lg-12 control-label">Name</label>
+                                                    <div class="col-md-64">
+                                                        <input type="text" class="form-control" name="desc">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="col-lg-12 control-label">Minimum</label>
+                                                    <div class="col-md-64">
+                                                        <input type="text" class="form-control" name="minimum">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <!-- </div> -->
+                                        </center>
+                                    </fieldset>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                </div>
+                                </form>
+                            </div>                                                            
+                        </div>
+                    </div>
+                    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5>Edit</h5>
+                                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                        </button>
+                                </div>
+                                <form id="edit_form" method="POST" action="/admin/maintenance/unittype/edit" enctype="multipart/form-data">
+                                    <input type="hidden" id="id" name="id">
+                                    <div class="modal-body">
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-12 control-label">Name</label>
+                                                        <div class="col-md-64">
+                                                            <input type="text" class="form-control" id="desc" name="desc">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" style="margin-left:80%"> Submit </button>
+                                    </div>
+                                </form>
+                                        </fieldset>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5></h5>
+                                            <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                                            </button>
+                                    </div>
+                                    <form id="edit_form" method="POST" action="/admin/maintenance/driver/edit" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <fieldset>
+                                                <center>
+                                                <h5 class="text-warning">WARNING!</h5>
+                                                <p class="">Are you sure you want to dispatch?</p>
+                                                </center>
+                                            </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-success" >Yes</button>
+                                            <button type="button" class="btn btn-warning">No</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- End Modal  -->
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script>
+        function conf( par, val ) {
+            p = document.getElementById( par )
+            console.log( par )
+
+            if( window.confirm( "Are you sure?" ) ) {
+                window.location = "/admin/maintenance/unittype/change?id=" + par + "&to=" + val
+                console.log( "OK" )
+            }
+            else {
+                console.log( "CANCELED" )
+                if( p.checked ) {
+                    console.log( "TRUE" )
+                    p.checked = ""
+                }
+                else {
+                    console.log( "FALSE" )
+                    p.checked = "true"
+                }
+            }
+        }
+        if( p.checked(swal({
+                title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                    confirmButtonText: 'Yes, delete it!',
+                    buttonsStyling: false
+            })) ) {
+                window.location = "/admin/maintenance/unittype/change?id=" + par + "&to=" + val
+                console.log( "OK" )
+            }
+    </script>
+</body>
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#maintenance').addClass('active');
+        if($this.hasClass('show')) {
+            $('#maintenance.collapse').slideDown('slow','swing').removeClass('show')
+        }
+        else{
+            $('#maintenance.collapse').slideUp('slow','swing').addClass('show')
+        }
+        $('#pagesMaintenance.collapse').addClass('show');
+        
+        $('#unittype').addClass('active');
+    })
+</script>
+<% include templates/functions %>

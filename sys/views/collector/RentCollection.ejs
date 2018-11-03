@@ -1,0 +1,166 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Rent Collection</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h4 class="card-title"></h4>
+                                <div class="row"> 
+                                    <div class="col-lg-5">
+                                        <select class="col-md-5 form-control" style="float:left">
+                                            <option value="" disabled selected>Unit Type</option>
+                                            <option value="">2</option>
+                                            <option> value=""3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="text-primary">
+                                            <th>Renter</th>
+                                            <th>Plate Number</th>
+                                            <th>Driver</th>
+                                            <th>Amount</th>
+                                            <th>Amount Collected</th>
+                                            <th>Action</th>
+                                        </thead>
+                                        <tbody id="data">
+                                            <tr>
+                                                <td>Jerevon Carreon</td>
+                                                <td>PSD 5123</td>
+                                                <td>Angelito Casasis</td>
+                                                <td>2000</td>
+                                                <td>0</td>
+                                                <td>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-info" type="button"data-toggle="modal" data-target="#myModal3">
+                                                            <i class="now-ui-icons design_bullet-list-67"></i> 
+                                                        </button>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-default" type="button"data-toggle="modal" data-target="#myModal4">
+                                                        <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                    </button>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-danger" type="button">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Piolo Sales</td>
+                                                <td>PSQ 5712</td>
+                                                <td>Kristofer Hebrew</td>
+                                                <td>1000</td>
+                                                <td>0</td>
+                                                <td>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-info" type="button"data-toggle="modal" data-target="#myModal3">
+                                                            <i class="now-ui-icons design_bullet-list-67"></i> 
+                                                        </button>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-default" type="button"data-toggle="modal" data-target="#myModal4">
+                                                        <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                    </button>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-danger" type="button">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Roberto Zulueta</td>
+                                                <td>RZT 1272</td>
+                                                <td>Vince Ortega</td>
+                                                <td>1500</td>
+                                                <td>0</td>
+                                                <td>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-info" type="button"data-toggle="modal" data-target="#myModal3">
+                                                            <i class="now-ui-icons design_bullet-list-67"></i> 
+                                                        </button>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-default" type="button"data-toggle="modal" data-target="#myModal4">
+                                                        <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                    </button>
+                                                    <button class="btn btn-round btn-icon btn-sm btn-danger" type="button">
+                                                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+                                        <tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    </div>
+
+
+    
+    <!-- Modal -->
+        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Collect Amount</h5>
+                        <button style="background: transparent; border:none;" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria=-hidden="true" class="now-ui-icons ui-1_simple-remove"></span>
+                        </button>
+                    </div>
+                    <form id="paid_form" method="POST" action="/collector/collections/boundary">
+                    <input type="hidden" id="id" name="id">
+                    <div class="modal-body">
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <label class="col-lg-12 control-label">Amount Collected</label>
+                                        <div class="col-lg-12">
+                                            <input type="number" step="0.01" class="form-control" name="amount" placeholder="Amount">
+                                        </div></br>
+                                    </div>
+                                </div>
+                            <hr>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" style="margin-left:80%" class="btn btn-primary"> Print</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <!-- End of Modal -->
+    <script>
+        function put_id( p1, p2 ) {
+            id = document.getElementById( p1 ).children.id
+            document.getElementById( p2 ).elements.id.value = id.innerHTML
+        }
+
+        function calculate() {
+            d = document.getElementById( "data" ).children
+            t = document.getElementById( "total_amount" )
+            total = 0
+
+            for( x = 0; x < d.length; x ++ ) {
+                total += Number( d[x].children.paid.innerHTML )
+            }
+
+            t.innerHTML = "P" + total
+        }
+    </script>
+</body>
+
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        
+        $('#rent').addClass('active');
+    })
+</script>

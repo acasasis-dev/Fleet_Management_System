@@ -1,0 +1,84 @@
+<% include templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header">
+                <div class="header text-center">
+                    <h1 class="title">Unit Maintenance</h1>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                    <% include templates/unit_filter %>
+                                        <!-- <a href="/admin/maintenance/rent">
+                                            <button type="button" class="btn btn-info">For Rent</button>
+                                        </a>
+                                        <a href="/admin/maintenance/unit">
+                                            <button type="button" class="btn btn-info active" >For Byahe</button>
+                                        </a> -->
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <button class="btn btn-primary" style="float:right" type="button"data-toggle="modal" data-target="#myModal">
+                                            Add Unit
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    
+                                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <thead class=" text-primary">
+                                                <th>Unit Type</th>
+                                                <th>Plate Number</th>
+                                                <th>Route</th>
+                                                <th>Coding</th>
+                                                <th>Plate Expiration</th>
+                                                <th>Route Expiration</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody id="data">
+                                                <tr id="">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>
+                                                         <button class="btn btn-round btn-icon btn-sm btn-default" onclick="
+                                                        javascript: window.location = '/admin/unitmaintenance/schedule'" >
+                                                            <i class="now-ui-icons design-2_ruler-pencil"></i> 
+                                                        </button> 
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal  -->
+                        
+                    <!-- End Modal  -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                </div>
+            </footer>
+        </div>
+    </div>
+    <% include templates/functions %>
+</body>
+
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        $('#unitmaintenace').addClass('active');
+    })
+</script>

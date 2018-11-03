@@ -1,0 +1,56 @@
+<% include collector/templates/sidebar %>
+<% include templates/topbar %>
+<% include templates/footer %>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+            </div> 
+            <div class="content">
+                <div class="row">                   
+                  <div class="col-md-12">
+                      <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-category">Offenses And Penalties</h5>
+                            <h4 class="card-title"></h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                              <table class="table">
+                                <thead class=" text-primary">
+                                        <th>Name</th>
+                                        <th>Classification</th>
+                                        <th>Offense</th>
+                                        <th>Amount of Penalty</th>
+                                    </thead>
+                                    <tbody>
+                                    <% records.forEach( cur => { %>
+                                    <tr>
+                                        <td hidden></td>
+                                        <td><%= cur.driver_ln + ", " + cur.driver_fn + " " + cur.driver_mn %></td>
+                                        <td><%= cur.offensecat_desc %></td>
+                                        <td><%= cur.offense_no %></td>
+                                        <td><%= cur.penalty_amount %></td>
+                                    </tr>
+                                    <% }) %>
+                              </table>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+        
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function(){
+        var $this = $(this)
+        
+        $('#dash').addClass('active');
+    })
+</script>
